@@ -1,1 +1,2 @@
-# BuddingGameDev2022WinterTeamSquidward
+# Budding Game Dev 2022 Winter
+# Team 28 - Squidward
