@@ -30,6 +30,9 @@ namespace TeamSquidward.Eric
         private void Start()
         {
             currentSize = startingSize;
+            this.transform.localScale = new Vector3(currentSize, currentSize, currentSize);
+
+
             SheepCamera.gameObject.transform.SetParent(null);
             SheepCamera.transform.Rotate(90, 0, 0);
         }
@@ -57,7 +60,7 @@ namespace TeamSquidward.Eric
         {
             currentSize = startingSize + (foodEaten * foodMultiplier);
 
-            SheepCamera.m_Lens.OrthographicSize = 10 + currentSize;
+            SheepCamera.m_Lens.OrthographicSize = 10 + (2*currentSize);
 
             this.transform.localScale = new Vector3(currentSize,currentSize,currentSize);
         }
