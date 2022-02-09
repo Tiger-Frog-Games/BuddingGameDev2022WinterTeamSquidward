@@ -1,5 +1,51 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &639361393
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 639361394}
+  - component: {fileID: 639361395}
+  m_Layer: 7
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &639361394
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639361393}
+  m_LocalRotation: {x: 0.69351995, y: 0.13794968, z: -0.13794968, w: 0.69351995}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 78, y: 78, z: 43.8}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1906823550383396886}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 90, y: 22.5, z: 0}
+--- !u!64 &639361395
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639361393}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2853601763015143716, guid: 67cbf3cef5a8ffa429632e1c5a56e50c, type: 3}
 --- !u!1 &178186244439179081
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,7 +159,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1906823550228565796}
   m_LocalRotation: {x: -0, y: -8.4703295e-22, z: -1.0456217e-29, w: 1}
-  m_LocalPosition: {x: 0.00000035762787, y: 10, z: -10}
+  m_LocalPosition: {x: 0.00000047683716, y: 10, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -170,7 +216,6 @@ GameObject:
   - component: {fileID: 1906823550383396886}
   - component: {fileID: 1906823550383396888}
   - component: {fileID: 1906823550383396887}
-  - component: {fileID: 5173204186016080207}
   m_Layer: 7
   m_Name: Sheep
   m_TagString: Untagged
@@ -192,6 +237,7 @@ Transform:
   m_Children:
   - {fileID: 1906823550228565797}
   - {fileID: 1906823551624337337}
+  - {fileID: 639361394}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -224,23 +270,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SheepCamera: {fileID: 1906823550228565794}
-  foodEaten: 0
+  OnHourChange: {fileID: 11400000, guid: 9c23afd5aadbbcd459d9916b75702e5e, type: 2}
+  OnMinChange: {fileID: 11400000, guid: daa9472ece108124aa7cb997509eee9b, type: 2}
+  startingStress: 0
+  maxStress: 100
+  chancePercentMinStressRaise: 5
+  stressRaisePerMin: 10
+  stressRaisedOnRockHit: 5
+  startingMud: 0
+  maxMud: 100
   startingSize: 1
-  foodMultiplier: 0.1
---- !u!136 &5173204186016080207
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1906823550383396890}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.78
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  startingFoodEaten: 0
+  foodMultiplier: 2
 --- !u!1 &1906823551624337336
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,7 +307,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1906823551624337336}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0.6, z: 0}
+  m_LocalPosition: {x: 0, y: 0.111, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

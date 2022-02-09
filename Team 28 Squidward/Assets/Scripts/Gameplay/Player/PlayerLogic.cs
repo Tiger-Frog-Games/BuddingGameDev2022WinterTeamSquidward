@@ -38,7 +38,7 @@ namespace TeamSquidward.Eric
 
         private void onSheepOutOfRange(GameObject obj, Sensor sens)
         {
-            if ( currentAnimalPushing != null && obj.gameObject == currentAnimalPushing.gameObject )
+            if ( currentAnimalPushing != null && obj.transform.parent?.gameObject == currentAnimalPushing.gameObject )
             {
                 currentAnimalPushing.removeActiveCamera();
                 currentAnimalPushing = null;

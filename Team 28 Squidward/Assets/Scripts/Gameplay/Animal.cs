@@ -13,15 +13,44 @@ namespace TeamSquidward.Eric
         private CinemachineVirtualCamera SheepCamera;
 
         [SerializeField]
-        private float foodEaten;
+        private EventChannelSOInt OnHourChange;
+        [SerializeField]
+        private EventChannelSOInt OnMinChange;
 
+        [Header("Stats")]
+        private bool isStressedOut;
+        private float currentStress;
+        private bool isTooMuddy;
+        private float currentMud;
+        private bool isThirsty;
+        private float currentThirst;
+        private float currentSize;
+        private float currentFoodEaten;
+        [Header("Tuning")]
+        [SerializeField]
+        private float startingStress = 0;
+        [SerializeField ,Tooltip ("When current stress reaches max stress trigger stress event")]
+        private float maxStress = 100;
+        [SerializeField]
+        private float chancePercentMinStressRaise = 5;
+        [SerializeField]
+        private float stressRaisePerMin = 10;
+        [SerializeField]
+        private float stressRaisedOnRockHit = 5;
+        [SerializeField]
+        private float startingMud = 0;
+        [SerializeField, Tooltip("When current mud reaches max mud trigger mud event")]
+        private float maxMud = 100;
+        [SerializeField]
+        private float startingThirst = 0;
+        [SerializeField, Tooltip("When current thirst reaches max thirst trigger thirst event")]
+        private float maxThirst = 100;
         [SerializeField]
         private float startingSize = 1;
         [SerializeField]
+        private float startingFoodEaten = 0;
+        [SerializeField]
         private float foodMultiplier = .1f;
-
-
-        private float currentSize;
 
         #endregion
 
@@ -29,14 +58,33 @@ namespace TeamSquidward.Eric
 
         private void Start()
         {
-            currentSize = startingSize;
-            this.transform.localScale = new Vector3(currentSize, currentSize, currentSize);
-
-
             SheepCamera.gameObject.transform.SetParent(null);
             SheepCamera.transform.Rotate(90, 0, 0);
+
+            setUpInitialStats();
         }
 
+        private void OnEnable()
+        {
+            OnHourChange.OnEvent += OnHourChangeEvent;
+            OnMinChange.OnEvent += OnMinChangeEvent;
+        }
+
+        private void OnDisable()
+        {
+            OnHourChange.OnEvent -= OnHourChangeEvent;
+            OnMinChange.OnEvent -= OnMinChangeEvent;
+        }
+
+        private void setUpInitialStats()
+        {
+            currentStress = startingStress;
+            currentMud = startingMud;
+            currentSize = startingSize;
+            this.transform.localScale = new Vector3(currentSize, currentSize, currentSize);
+            currentFoodEaten = startingFoodEaten;
+        }
+   
         private void OnTriggerEnter(Collider other)
         {
             if ( other.TryGetComponent<FoodPickup>(out FoodPickup eatingFood) )
@@ -51,18 +99,20 @@ namespace TeamSquidward.Eric
 
         private void eatFood( FoodPickup foodIn )
         {
-            foodEaten += foodIn.getFoodValue();
+            currentFoodEaten += foodIn.getFoodValue();
             changeSize();
             foodIn.eatFood();
         }
 
         private void changeSize()
         {
-            currentSize = startingSize + (foodEaten * foodMultiplier);
-
+            //todo diminishing return on food eaten on size
+            currentSize = startingSize + (currentFoodEaten * foodMultiplier);
+            //todo smoother ratio 
             SheepCamera.m_Lens.OrthographicSize = 10 + (2*currentSize);
 
             this.transform.localScale = new Vector3(currentSize,currentSize,currentSize);
+            //todo update player sheep detecotor?
         }
 
         public void setActiveCamera()
@@ -75,6 +125,15 @@ namespace TeamSquidward.Eric
             SheepCamera.Priority = 0;
         }
 
+        private void OnHourChangeEvent(int h)
+        {
+
+        }
+
+        private void OnMinChangeEvent(int m)
+        {
+
+        }
 
         #endregion
     }
