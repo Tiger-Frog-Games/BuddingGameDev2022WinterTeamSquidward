@@ -169,7 +169,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.368, y: 1}
+    m_SensorSize: {x: 1.2852852, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -447,41 +447,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8872802768255300737, guid: 3f98b74a0b3567c40bcaea8edc5ea359, type: 3}
   m_PrefabInstance: {fileID: 1945519858}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &693411295 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8872802768255300743, guid: 3f98b74a0b3567c40bcaea8edc5ea359, type: 3}
-  m_PrefabInstance: {fileID: 1114175731}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &693411296
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 693411295}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c940edaac4d7eda4695e286c3b778ce5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
-  FoodValue: 1
---- !u!54 &693411297
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 693411295}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!4 &693411300 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8872802768255300737, guid: 3f98b74a0b3567c40bcaea8edc5ea359, type: 3}
@@ -687,10 +652,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1105440863}
     m_Modifications:
-    - target: {fileID: 8872802768255300736, guid: 3f98b74a0b3567c40bcaea8edc5ea359, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8872802768255300737, guid: 3f98b74a0b3567c40bcaea8edc5ea359, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -735,29 +696,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8872802768255300742, guid: 3f98b74a0b3567c40bcaea8edc5ea359, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 3b9c9e866760da74d9ce27fc7a42fad5, type: 3}
-    - target: {fileID: 8872802768255300742, guid: 3f98b74a0b3567c40bcaea8edc5ea359, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8872802768255300742, guid: 3f98b74a0b3567c40bcaea8edc5ea359, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8872802768255300742, guid: 3f98b74a0b3567c40bcaea8edc5ea359, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8872802768255300743, guid: 3f98b74a0b3567c40bcaea8edc5ea359, type: 3}
       propertyPath: m_Name
       value: Basic Food (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8872802768255300743, guid: 3f98b74a0b3567c40bcaea8edc5ea359, type: 3}
-      propertyPath: m_Layer
-      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f98b74a0b3567c40bcaea8edc5ea359, type: 3}
@@ -1622,6 +1563,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 639361394, guid: 31b89fe3acf043d42868dca9096c01f3, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 91.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1906823550228565797, guid: 31b89fe3acf043d42868dca9096c01f3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.00000047683716
+      objectReference: {fileID: 0}
     - target: {fileID: 1906823550383396886, guid: 31b89fe3acf043d42868dca9096c01f3, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -1665,6 +1614,10 @@ PrefabInstance:
     - target: {fileID: 1906823550383396886, guid: 31b89fe3acf043d42868dca9096c01f3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1906823550383396887, guid: 31b89fe3acf043d42868dca9096c01f3, type: 3}
+      propertyPath: foodMultiplier
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1906823550383396890, guid: 31b89fe3acf043d42868dca9096c01f3, type: 3}
       propertyPath: m_Name

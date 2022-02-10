@@ -111,7 +111,7 @@ namespace TeamSquidward.Eric
             //todo smoother ratio 
             SheepCamera.m_Lens.OrthographicSize = 10 + (2*currentSize);
 
-            this.transform.localScale = new Vector3(currentSize,currentSize,currentSize);
+            this.transform.localScale = new Vector3(currentSize, 1, currentSize);
             //todo update player sheep detecotor?
         }
 

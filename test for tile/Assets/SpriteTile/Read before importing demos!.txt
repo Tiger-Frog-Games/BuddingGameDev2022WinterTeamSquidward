@@ -1,0 +1,1 @@
+Please see page 1 of the SpriteTile Documentation file for instructions on successfully importing the SpriteTileDemos package, since there are a couple of manual steps involved.

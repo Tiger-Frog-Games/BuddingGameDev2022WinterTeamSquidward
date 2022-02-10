@@ -1,0 +1,89 @@
+This document contains update notes, which you should read if you're upgrading from a previous version.
+
+SpriteTile 3.0:
+
+The default for true color when using Tile.SetColor is true now, so if you were not setting Tile.UseTrueColor before, you should use Tile.UseTrueColor (false). 
+
+----
+
+SpriteTile 2.13:
+
+MAKE SURE YOU ARE USING VERSION CONTROL OR AT LEAST HAVE A BACKUP OF YOUR PROJECT! Since Unity 5.2.2 allows it now, some files have been moved in order to consolidate things in the Assets/Plugins folder where possible. Follow these steps to upgrade a project that uses SpriteTile 2.12 or earlier to 2.13:
+
+1) Make sure the TileEditor window is closed, and import SpriteTile 2.13. Note that some of these steps will likely generate errors, which is fine. They are temporary and can be ignored. Make sure you do not click Play in Unity or use the TileEditor until you have finished all steps.
+2) Move the SpriteTile/Resources/TileManager file to the Plugins/SpriteTile/Resources folder.
+3) If using the dll, delete the Plugins/SpriteTile dll. If using source, delete the scripts in Plugins/SpriteTile.
+4) Delete the SpriteTile/Editor folder and the SpriteTile/Resources folder. Make sure you moved your TileManager file first so it doesn't get deleted!
+5) Find the Plugins/SpriteTile/Resources/TileManager file and click on it. The Script box will say "Missing (Mono Script)". If using the dll, fix this by opening Plugins/SpriteTile/Core/SpriteTile and dragging TileManager onto the Script box on the TileManager file. If using source, open Plugins/SpriteTile/Core and drag the TileManager script onto the Script box.
+6) Find the Plugins/SpriteTile/Resources/DefaultNonTransparent material. Click on it, and in the Shader drop-down menu, select Sprites/Default Non-Transparent. Repeat this for Plugins/SpriteTile/Resources/DiffuseNonTransparent, selecting the Sprites/Diffuse Non-Transparent shader.
+6) You're now done upgrading. You can go to the Console window and click the Clear button to remove any error messages. If these steps were followed correctly, there should be no permanent errors that don't clear.
+
+If you have saved standard groups saved with a previous version, it would be a good idea to load the groups and re-save them. This isn't necessary, but will have some benefits as described in the changelog.
+
+----
+
+SpriteTile 2.10:
+
+If your code used Int2.downRight, downLeft, upRight, or upLeft, note that the Y values are inverted, in order to be consistent with Int2.up and Int2.down. So if you used Int2.downRight, it should be changed to Int2.upRight. If you used Int2.upLeft, it should be changed to Int2.downLeft, and so on.
+
+----
+
+SpriteTile 2.8:
+
+If your code used Tile.GetMapPosition, it should be changed to Tile.WorldToMapPosition.
+
+If your code used Tile.GetWorldPosition, it should be changed to Tile.MapToWorldPosition.
+
+----
+
+SpriteTile 2.7:
+
+If using more than one layer, due to changes in Unity 5, sorting layer names are required rather than setting the ID. Since Unity has no way of querying the list of sorting layer names at runtime, this must be done manually by using the "Assets -> Set SpriteTile Sorting Layer Names" menu item in Unity. This only has to be done once after you add sorting layers in the "Tags and Layers" project setting, or if you rename any existing sorting layers.
+
+----
+
+SpriteTile 2.6:
+
+If you were using the O key to toggle the collider overlay in the TileEditor, you should use the C key instead.
+
+Empty tiles in standard groups won't overwrite existing tiles when pasted into the level. Hold shift when clicking if you want empty tiles to erase existing tiles.
+
+----
+
+SpriteTile 2.4:
+
+Tile.SetLayerColor has been removed. You can use Tile.SetColorBlock instead (using Tile.GetMapSize for the upper bounds).
+
+----
+
+SpriteTile 2.2:
+
+The level layer order has been reversed, in order to be consistent with Unity's layer order. That is, layer 0 is now the bottom layer instead of the top layer, and higher layer numbers are on top of lower layer numbers. For saved level files with more than one layer, you should load them into the TileEditor, rearrange the layers as necessary with the layer up/down buttons, and re-save them. Layers referred to in code should be changed appropriately.
+
+----
+
+SpriteTile 2.0:
+
+The Editor and Resources folders have been moved to a SpriteTile folder for better organization. So when upgrading, remove the Assets/Editor/TileEditor file since it will conflict with the new Assets/SpriteTile/Editor/TileEditor file.
+
+If you have an existing Assets/Resources/TileManager file, you must move that to Assets/SpriteTile/Resources/TileManager. Otherwise the TileEditor won't be able to find it. The TileManager file will also need to be updated to a newer format. Simply opening the TileEditor window will be enough to update it.
+
+Tile.SetCamera must be called before LoadLevel or NewLevel, instead of after, so your code needs to be updated accordingly.
+
+Tile.SetCamera now does what Tile.SetCameraAuto used to do, so SetCameraAuto has been removed, along with Tile.MoveCamera and Tile.SetCameraPosition. So, replace SetCameraAuto with SetCamera, and if you were using MoveCamera and SetCameraPosition, replace those with Transform.Translate and Transform.position, using the camera's transform.
+
+If you used Tile.SetLayerPosition, note that tile layer positions will now always be reset when loading a level or making a new level, even if the level size is the same.
+
+In the LevelData class, the tileSize property is now a Vector2 instead of a float, in order to support non-square tile grids. To continue using a square grid, just have the X and Y be the same value.
+
+Tile.GetTileSize now returns a Vector2 instead of a float (for the same reason as above, namely non-square tile grids).
+
+If you have any group files, you should update them in order to fix a potential issue with deleting tiles. To do this, first load the group file. Then for each group, click on "< Copy to Buffer", paste the group into the level, select the group in the level (draw a box around it), then click on "Replace with Selection". When you're done replacing all groups, save the groups.
+
+----
+
+SpriteTile 1.2:
+
+If you’re upgrading from SpriteTile 1.0 or 1.1 and have been using physics colliders, please note that the “collider” tile default no longer serves double duty as both the collider cell default and the way to activate physics colliders. Instead, it now only sets the collider cell default. There’s an additional “use physics collider” setting for each tile, which is the way to activate physics colliders.
+
+So you will need to go through your tile sets and activate “use physics collider” for any tiles that you want to generate physics colliders.
