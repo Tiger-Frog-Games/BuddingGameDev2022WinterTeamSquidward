@@ -60,7 +60,7 @@ namespace TeamSquidward.Eric
         {
             SheepCamera.gameObject.transform.SetParent(null);
             SheepCamera.transform.Rotate(90, 0, 0);
-
+            
             setUpInitialStats();
         }
 
