@@ -12,6 +12,9 @@ using UnityEngine;
         private CinemachineVirtualCamera SheepCamera;
 
         [SerializeField]
+        private SpriteRenderer SheepSprite;
+
+        [SerializeField]
         private EventChannelSOInt OnHourChange;
         [SerializeField]
         private EventChannelSOInt OnMinChange;
@@ -59,7 +62,7 @@ using UnityEngine;
         {
             SheepCamera.gameObject.transform.SetParent(null);
             SheepCamera.transform.Rotate(90, 0, 0);
-
+            
             setUpInitialStats();
         }
 
@@ -100,6 +103,9 @@ using UnityEngine;
         {
             currentFoodEaten += foodIn.getFoodValue();
             changeSize();
+
+            changeColor(foodIn.getFoodColor());
+            
             foodIn.eatFood();
         }
 
@@ -112,6 +118,11 @@ using UnityEngine;
 
             this.transform.localScale = new Vector3(currentSize, 1, currentSize);
             //todo update player sheep detecotor?
+        }
+
+        private void changeColor(Color newColor)
+        {
+            SheepSprite.color = Color.Lerp(SheepSprite.color, newColor, .1f );
         }
 
         public void setActiveCamera()

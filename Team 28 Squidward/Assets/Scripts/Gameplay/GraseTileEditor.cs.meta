@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 3fe526be19696ca45b6e70c1f9db474b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - m_PreviewGrid: {instanceID: 0}
+  - Any: {fileID: 2800000, guid: 9e6bd66245afdbd4e927df53fbd95ab8, type: 3}
+  - Water: {fileID: 2800000, guid: e1fb873bdfd7e914eafd3591fcbc3482, type: 3}
+  - Mud: {fileID: 2800000, guid: 1e0b251848fb12f45a11fcfbd77c5468, type: 3}
+  - Nothing: {fileID: 2800000, guid: e1448c807b46bac4eaa68505c2b179a4, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
