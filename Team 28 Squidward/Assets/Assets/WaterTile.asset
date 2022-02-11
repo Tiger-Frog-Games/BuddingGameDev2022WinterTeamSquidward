@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
   m_Name: WaterTile
   m_EditorClassIdentifier: 
-  m_AnimatedSprites: []
+  m_AnimatedSprites:
+  - {fileID: 5212014, guid: b0958a32220797d4e9d52518310086e0, type: 3}
+  - {fileID: -221376477, guid: b0958a32220797d4e9d52518310086e0, type: 3}
+  - {fileID: -2092510881, guid: b0958a32220797d4e9d52518310086e0, type: 3}
+  - {fileID: -1500026279, guid: b0958a32220797d4e9d52518310086e0, type: 3}
   m_MinSpeed: 1
   m_MaxSpeed: 1
   m_AnimationStartTime: 0
