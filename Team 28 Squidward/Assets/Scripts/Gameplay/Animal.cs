@@ -13,6 +13,9 @@ namespace TeamSquidward.Eric
         private CinemachineVirtualCamera SheepCamera;
 
         [SerializeField]
+        private SpriteRenderer SheepSprite;
+
+        [SerializeField]
         private EventChannelSOInt OnHourChange;
         [SerializeField]
         private EventChannelSOInt OnMinChange;
@@ -101,6 +104,9 @@ namespace TeamSquidward.Eric
         {
             currentFoodEaten += foodIn.getFoodValue();
             changeSize();
+
+            changeColor(foodIn.getFoodColor());
+            
             foodIn.eatFood();
         }
 
@@ -113,6 +119,11 @@ namespace TeamSquidward.Eric
 
             this.transform.localScale = new Vector3(currentSize, 1, currentSize);
             //todo update player sheep detecotor?
+        }
+
+        private void changeColor(Color newColor)
+        {
+            SheepSprite.color = Color.Lerp(SheepSprite.color, newColor, .1f );
         }
 
         public void setActiveCamera()

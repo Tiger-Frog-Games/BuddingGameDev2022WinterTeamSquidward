@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 8872802768255300737}
   - component: {fileID: 8872802768255300736}
   - component: {fileID: 8743198313707058941}
-  - component: {fileID: 693411297}
+  - component: {fileID: 2110910454}
   m_Layer: 8
   m_Name: Basic Food
   m_TagString: Untagged
@@ -144,9 +144,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c940edaac4d7eda4695e286c3b778ce5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: Grass
   sprite: {fileID: 9156109409546222184}
   FoodValue: 1
---- !u!54 &693411297
+  colorValue: {r: 0, g: 0.5566038, b: 0.11475213, a: 1}
+--- !u!54 &2110910454
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

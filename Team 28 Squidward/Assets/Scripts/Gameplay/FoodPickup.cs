@@ -8,6 +8,8 @@ namespace TeamSquidward.Eric
     public class FoodPickup : MonoBehaviour
     {
         #region Variables
+        [SerializeField]
+        private String Name;
 
         [SerializeField]
         private SpriteRenderer sprite;
@@ -17,6 +19,8 @@ namespace TeamSquidward.Eric
         /// </summary>
         [SerializeField]
         private float FoodValue;
+        [SerializeField]
+        private Color colorValue;
 
         #endregion
 
@@ -36,6 +40,10 @@ namespace TeamSquidward.Eric
         public float getFoodValue()
         {
             return FoodValue;
+        }
+        public Color getFoodColor()
+        {
+            return colorValue;
         }
 
         #endregion
