@@ -1,3 +1,4 @@
+using ECM2.Components;
 using Micosmo.SensorToolkit;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,6 +11,13 @@ namespace TeamSquidward.Eric
         #region Variables
 
         [SerializeField]
+        private Transform startPosition;
+        [SerializeField]
+        private SquidwardMovement squidMovement;
+        [SerializeField]
+        private CharacterMovement charMovement;
+
+        [SerializeField]
         private RangeSensor sheepDetector;
 
         private Animal currentAnimalPushing;
@@ -18,9 +26,31 @@ namespace TeamSquidward.Eric
 
         #region Unity Methods
 
+        private void Awake()
+        {
+            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+        }
+
+        private void OnDestroy()
+        {
+            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+        }
+
         private void Start()
         {
             sheepDetector.OnLostDetection.AddListener(onSheepOutOfRange);
+        }
+
+        private void OnGameStateChanged( GameState newGameState )
+        {
+            enabled = newGameState == GameState.Gameplay;
+            //squidMovement.enabled = newGameState == GameState.Gameplay;
+            charMovement.Pause(!(newGameState == GameState.Gameplay));
+
+            if (newGameState == GameState.Night)
+            {
+                this.transform.position = startPosition.position;
+            }
         }
 
         private void OnCollisionEnter(Collision collision)

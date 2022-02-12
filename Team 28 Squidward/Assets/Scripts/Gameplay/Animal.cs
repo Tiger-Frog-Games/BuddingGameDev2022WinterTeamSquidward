@@ -9,6 +9,8 @@ namespace TeamSquidward.Eric
     {
         #region Variables
 
+        private Rigidbody rb;
+
         [SerializeField]
         private CinemachineVirtualCamera SheepCamera;
 
@@ -63,7 +65,9 @@ namespace TeamSquidward.Eric
         {
             SheepCamera.gameObject.transform.SetParent(null);
             SheepCamera.transform.Rotate(90, 0, 0);
-            
+
+            rb = GetComponent<Rigidbody>();
+
             setUpInitialStats();
         }
 
@@ -77,6 +81,64 @@ namespace TeamSquidward.Eric
         {
             OnHourChange.OnEvent -= OnHourChangeEvent;
             OnMinChange.OnEvent -= OnMinChangeEvent;
+        }
+
+        private void Awake()
+        {
+            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+        }
+
+        private void OnDestroy()
+        {
+            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+        }
+
+        private Vector3 velocityBeforePause;
+        private Vector3 angluarVelocityBeforePause;
+
+        private void OnGameStateChanged(GameState newGameState)
+        {
+            enabled = newGameState == GameState.Gameplay;
+            if(newGameState == GameState.Gameplay)
+            {
+                rb.isKinematic = false;
+                if (velocityBeforePause != null)
+                {
+                    rb.velocity = velocityBeforePause;
+                }
+                else
+                {
+                    rb.velocity = Vector3.zero;
+                }
+
+                if (angluarVelocityBeforePause != null)
+                {
+                    rb.angularVelocity = angluarVelocityBeforePause;
+                }
+                else
+                {
+                    rb.angularVelocity = Vector3.zero;
+                }
+
+            }else if (newGameState == GameState.Night)
+            {
+                rb.isKinematic = true;
+                velocityBeforePause = Vector3.zero;
+                angluarVelocityBeforePause = Vector3.zero;
+                rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+            }
+            else if(newGameState == GameState.Paused)
+            {
+                velocityBeforePause = rb.velocity;
+                angluarVelocityBeforePause = rb.angularVelocity;
+
+                rb.isKinematic = true;
+
+                rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+            }
+            
         }
 
         private void setUpInitialStats()
