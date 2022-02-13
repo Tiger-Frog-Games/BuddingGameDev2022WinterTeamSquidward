@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 16271990}
   - component: {fileID: 16271989}
+  - component: {fileID: 16271991}
   m_Layer: 0
   m_Name: Player Camera VC
   m_TagString: Untagged
@@ -169,7 +170,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.4553102, y: 1}
+    m_SensorSize: {x: 1.454832, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -194,6 +195,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &16271991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 16271988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a8a05de0ac134f4f9d01bef6b9da077, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &57206682
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -521,7 +534,7 @@ GameObject:
   - component: {fileID: 274384556}
   - component: {fileID: 274384555}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Time Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -601,8 +614,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -88179,16 +88192,16 @@ MonoBehaviour:
   OnDetected:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1901201726}
-        m_TargetAssemblyTypeName: TeamSquidward.Eric.SheepPen, Assembly-CSharp
-        m_MethodName: FarmerInRange
-        m_Mode: 1
+      - m_Target: {fileID: 1901201725}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: SpawnSheep
           m_BoolArgument: 0
         m_CallState: 2
   OnLostDetection:
@@ -88295,6 +88308,64 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8872802768255300737, guid: 3f98b74a0b3567c40bcaea8edc5ea359, type: 3}
   m_PrefabInstance: {fileID: 677160064}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &679877228
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 679877230}
+  - component: {fileID: 679877229}
+  m_Layer: 0
+  m_Name: Time Manager Game Object
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &679877229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 679877228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deb08cda5b9601743b37666c65796287, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startHour: 6
+  startMin: 30
+  currentHour_InGame: 0
+  currentMin_InGame: 0
+  endHour: 22
+  endMin: 30
+  currentTime_RealTime: 0
+  currentTime_InGame: 0
+  gameRate: 100
+  hourChange: {fileID: 11400000, guid: 9c23afd5aadbbcd459d9916b75702e5e, type: 2}
+  minChange: {fileID: 11400000, guid: daa9472ece108124aa7cb997509eee9b, type: 2}
+  OnDayOverEvent: {fileID: 11400000, guid: 485f351b3597d0c44816fa568828e187, type: 2}
+  manuAnimator: {fileID: 752753618}
+  OnTimerReset: {fileID: 11400000, guid: 77e67c43176b53845bc518bf52aac04e, type: 2}
+--- !u!4 &679877230
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 679877228}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &693411300 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8872802768255300737, guid: 3f98b74a0b3567c40bcaea8edc5ea359, type: 3}
@@ -88314,7 +88385,6 @@ GameObject:
   - component: {fileID: 752753613}
   - component: {fileID: 752753617}
   - component: {fileID: 752753618}
-  - component: {fileID: 752753619}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -88424,6 +88494,13 @@ MonoBehaviour:
   menuAnimator: {fileID: 752753618}
   SheepMenuHolder: {fileID: 1168650992}
   ScreenGrayer: {fileID: 231884373}
+  LargeSheepImage: {fileID: 799599246}
+  Timer: {fileID: 1939794200}
+  OptionsMenu: {fileID: 1168650992}
+  RequestPanel: {fileID: 69899584}
+  OnDayStart: {fileID: 11400000, guid: 0a916302e8588a34081c3f2b3afb76e1, type: 2}
+  OnDayOver: {fileID: 11400000, guid: 485f351b3597d0c44816fa568828e187, type: 2}
+  OnNightTimeCleanUp: {fileID: 11400000, guid: 77e67c43176b53845bc518bf52aac04e, type: 2}
 --- !u!95 &752753618
 Animator:
   serializedVersion: 4
@@ -88444,58 +88521,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &752753619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 752753612}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f737e2f18d01cfa4897158031ba7474f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eventChannel: {fileID: 11400000, guid: 485f351b3597d0c44816fa568828e187, type: 2}
-  unityEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 752753618}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: OnDayOver
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 69899584}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 799599246}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
 --- !u!1 &772071287
 GameObject:
   m_ObjectHideFlags: 0
@@ -88607,7 +88632,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -249.9995}
+  m_AnchoredPosition: {x: 0, y: -249.99951}
   m_SizeDelta: {x: 1000, y: 1000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &799599248
@@ -88959,7 +88984,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 936222294}
         m_TargetAssemblyTypeName: TeamSquidward.Eric.EventChannelBroadcaster, Assembly-CSharp
-        m_MethodName: RaiseEvent
+        m_MethodName: BroadCastRaiseEvent
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -88967,6 +88992,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 752753618}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: OnDayOverFromMenu
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &936222296
@@ -89692,7 +89729,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -249.9994}
+  m_AnchoredPosition: {x: 0, y: -249.99939}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1168650995
@@ -89938,6 +89975,7 @@ GameObject:
   - component: {fileID: 1297222426}
   - component: {fileID: 1297222425}
   - component: {fileID: 1297222424}
+  - component: {fileID: 1297222428}
   m_Layer: 5
   m_Name: Button - Exit
   m_TagString: Untagged
@@ -90117,6 +90155,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1297222422}
   m_CullTransparentMesh: 1
+--- !u!114 &1297222428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1297222422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1297222426}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 752753618}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: OnNightTimeEventOver
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1433231056
 GameObject:
   m_ObjectHideFlags: 0
@@ -91084,6 +91178,7 @@ GameObject:
   - component: {fileID: 1939794201}
   - component: {fileID: 1939794203}
   - component: {fileID: 1939794202}
+  - component: {fileID: 1939794204}
   m_Layer: 5
   m_Name: Panel - Timer
   m_TagString: Untagged
@@ -91150,6 +91245,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1939794200}
   m_CullTransparentMesh: 1
+--- !u!114 &1939794204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1939794200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea2f2bf4aa0a92f47a34ee58fd8a7735, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TimerText: {fileID: 274384555}
+  HourEvent: {fileID: 11400000, guid: 9c23afd5aadbbcd459d9916b75702e5e, type: 2}
+  MinEvent: {fileID: 11400000, guid: daa9472ece108124aa7cb997509eee9b, type: 2}
 --- !u!1001 &1945519858
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -91414,6 +91524,31 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8872802768255300737, guid: 3f98b74a0b3567c40bcaea8edc5ea359, type: 3}
   m_PrefabInstance: {fileID: 2055686700}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2105069966 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2535576885582895111, guid: 9b458cac423a36c46beec7dd33a40db8, type: 3}
+  m_PrefabInstance: {fileID: 2535576885241486783}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2105069968
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105069966}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 180a4ccb10a209c40ac075c0aff3e675, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!4 &2110910457 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8872802768255300737, guid: 3f98b74a0b3567c40bcaea8edc5ea359, type: 3}
@@ -91577,6 +91712,10 @@ PrefabInstance:
       propertyPath: startPosition
       value: 
       objectReference: {fileID: 1193303217}
+    - target: {fileID: 2048433026, guid: 9b458cac423a36c46beec7dd33a40db8, type: 3}
+      propertyPath: OnNightCleanUp
+      value: 
+      objectReference: {fileID: 11400000, guid: 77e67c43176b53845bc518bf52aac04e, type: 2}
     - target: {fileID: 2535576885410793022, guid: 9b458cac423a36c46beec7dd33a40db8, type: 3}
       propertyPath: m_IsKinematic
       value: 0
@@ -91589,6 +91728,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCharacter
       objectReference: {fileID: 0}
+    - target: {fileID: 2535576885582895109, guid: 9b458cac423a36c46beec7dd33a40db8, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -598449168, guid: 1dfc434c87e799a409e5a084b55217d6, type: 3}
     - target: {fileID: 2535576885602110417, guid: 9b458cac423a36c46beec7dd33a40db8, type: 3}
       propertyPath: m_RootOrder
       value: 3

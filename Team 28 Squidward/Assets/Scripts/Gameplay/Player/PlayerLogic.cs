@@ -20,6 +20,9 @@ namespace TeamSquidward.Eric
         [SerializeField]
         private RangeSensor sheepDetector;
 
+        [SerializeField]
+        private EventChannelSO OnNightCleanUp;
+
         private Animal currentAnimalPushing;
 
         #endregion
@@ -29,11 +32,13 @@ namespace TeamSquidward.Eric
         private void Awake()
         {
             GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+            OnNightCleanUp.OnEvent += OnNightCleanUp_OnEvent;
         }
 
         private void OnDestroy()
         {
             GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+            OnNightCleanUp.OnEvent -= OnNightCleanUp_OnEvent;
         }
 
         private void Start()
@@ -41,16 +46,20 @@ namespace TeamSquidward.Eric
             sheepDetector.OnLostDetection.AddListener(onSheepOutOfRange);
         }
 
+        private void OnEnable()
+        {
+            OnNightCleanUp.OnEvent += OnNightCleanUp_OnEvent;
+        }
+
+        private void OnDisable()
+        {
+            OnNightCleanUp.OnEvent -= OnNightCleanUp_OnEvent;
+        }
         private void OnGameStateChanged( GameState newGameState )
         {
             enabled = newGameState == GameState.Gameplay;
             //squidMovement.enabled = newGameState == GameState.Gameplay;
             charMovement.Pause(!(newGameState == GameState.Gameplay));
-
-            if (newGameState == GameState.Night)
-            {
-                this.transform.position = startPosition.position;
-            }
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -75,6 +84,10 @@ namespace TeamSquidward.Eric
             }            
         }
 
+        private void OnNightCleanUp_OnEvent()
+        {
+            this.transform.position = startPosition.transform.position;
+        }
         #endregion
     }
 }

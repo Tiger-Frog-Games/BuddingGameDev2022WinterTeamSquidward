@@ -9,7 +9,7 @@ namespace TeamSquidward.Eric
         [SerializeField]
         private EventChannelSO eventChannel;
 
-        public void RaiseEvent()
+        public void BroadCastRaiseEvent()
         {
             eventChannel.RaiseEvent();
         }
