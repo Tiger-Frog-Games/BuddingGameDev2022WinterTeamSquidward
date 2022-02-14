@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 8743198313707058941}
   - component: {fileID: 2110910454}
   m_Layer: 8
-  m_Name: Basic Food
+  m_Name: Food - Oats
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

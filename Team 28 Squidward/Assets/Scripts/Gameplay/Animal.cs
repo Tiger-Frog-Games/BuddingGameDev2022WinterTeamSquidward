@@ -5,57 +5,51 @@ using UnityEngine;
 
 namespace TeamSquidward.Eric
 {
+    enum AnimalState { NORMAL, STRESSED, THIRSTY, MUDDY }
+    enum AnimalSize { NORMAL, BIG, BIGGER, CHONKY }
+
     public class Animal : MonoBehaviour
     {
         #region Variables
 
         private Rigidbody rb;
+        [SerializeField] private Animator animatorAnimal;
 
-        [SerializeField]
-        private CinemachineVirtualCamera SheepCamera;
+        [SerializeField] private CinemachineVirtualCamera SheepCamera;
 
-        [SerializeField]
-        private SpriteRenderer SheepSprite;
+        [SerializeField] private SpriteRenderer SheepBodyTexture;
+        [SerializeField] private GameObject SheepBody;
+        [SerializeField] private GameObject SheepCollider;
 
-        [SerializeField]
-        private EventChannelSOInt OnHourChange;
-        [SerializeField]
-        private EventChannelSOInt OnMinChange;
+        [Header("Events")]
+
+        [SerializeField] private EventChannelSO OnNightTimeCleanUp;
+        [SerializeField] private EventChannelSOInt OnHourChange;
+        [SerializeField] private EventChannelSOInt OnMinChange;
 
         [Header("Stats")]
-        private bool isStressedOut;
-        private float currentStress;
-        private bool isTooMuddy;
-        private float currentMud;
-        private bool isThirsty;
-        private float currentThirst;
-        private float currentSize;
-        private float currentFoodEaten;
+
+        [SerializeField] private string Name;
+
+        [SerializeField] public StatData StressData;
+        [SerializeField] public StatData MuddyData;
+        [SerializeField] public StatData ThirstData;
+        
+        private float currentFoodValue;
+
         [Header("Tuning")]
-        [SerializeField]
-        private float startingStress = 0;
-        [SerializeField ,Tooltip ("When current stress reaches max stress trigger stress event")]
-        private float maxStress = 100;
-        [SerializeField]
-        private float chancePercentMinStressRaise = 5;
-        [SerializeField]
-        private float stressRaisePerMin = 10;
-        [SerializeField]
-        private float stressRaisedOnRockHit = 5;
-        [SerializeField]
-        private float startingMud = 0;
-        [SerializeField, Tooltip("When current mud reaches max mud trigger mud event")]
-        private float maxMud = 100;
-        [SerializeField]
-        private float startingThirst = 0;
-        [SerializeField, Tooltip("When current thirst reaches max thirst trigger thirst event")]
-        private float maxThirst = 100;
-        [SerializeField]
-        private float startingSize = 1;
-        [SerializeField]
-        private float startingFoodEaten = 0;
-        [SerializeField]
-        private float foodMultiplier = .1f;
+        [SerializeField] private float chancePercentMinStressRaise = 5;
+        [SerializeField] private float stressRaisePerMin = 10;
+        [SerializeField] private float stressEventForce = 10;
+        [SerializeField] private float stressRaisedOnRockHit = 5;
+        [SerializeField] private float startingSize = 1;
+        private Vector3 targetSize;
+        
+        [SerializeField] private float sheepScaleSpeed =2;
+
+        [SerializeField] private float startingFoodValue = 1;
+        private int numberOfFoodEaten = 0;
+        [SerializeField] private float foodMultiplier = .1f;
 
         #endregion
 
@@ -68,29 +62,51 @@ namespace TeamSquidward.Eric
 
             rb = GetComponent<Rigidbody>();
 
-            setUpInitialStats();
+            resetStats();
+
+            currentFoodValue = startingFoodValue;
+            targetSize = new Vector3(currentFoodValue, currentFoodValue, 1);
+
+            
+        }
+
+        private void Update()
+        {
+            updateAnimator();
+
+            changeSize(Time.deltaTime);
         }
 
         private void OnEnable()
         {
             OnHourChange.OnEvent += OnHourChangeEvent;
             OnMinChange.OnEvent += OnMinChangeEvent;
+
+            StressData.OnMaxValueEvent += OnStressEvent;
+            ThirstData.OnMaxValueEvent += OnThirstEvent;
+            MuddyData.OnMaxValueEvent += OnMudEvent;
         }
 
         private void OnDisable()
         {
             OnHourChange.OnEvent -= OnHourChangeEvent;
             OnMinChange.OnEvent -= OnMinChangeEvent;
+
+            StressData.OnMaxValueEvent -= OnStressEvent;
+            ThirstData.OnMaxValueEvent -= OnThirstEvent;
+            MuddyData.OnMaxValueEvent -= OnMudEvent;
         }
 
         private void Awake()
         {
             GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+            OnNightTimeCleanUp.OnEvent += OnNightTimeCleanUpEvent;
         }
 
         private void OnDestroy()
         {
             GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+            OnNightTimeCleanUp.OnEvent -= OnNightTimeCleanUpEvent;
         }
 
         private Vector3 velocityBeforePause;
@@ -141,13 +157,11 @@ namespace TeamSquidward.Eric
             
         }
 
-        private void setUpInitialStats()
+        private void resetStats()
         {
-            currentStress = startingStress;
-            currentMud = startingMud;
-            currentSize = startingSize;
-            this.transform.localScale = new Vector3(currentSize, currentSize, currentSize);
-            currentFoodEaten = startingFoodEaten;
+            StressData.reset();
+            MuddyData.reset();
+            ThirstData.reset();
         }
    
         private void OnTriggerEnter(Collider other)
@@ -162,30 +176,46 @@ namespace TeamSquidward.Eric
 
         #region Methods
 
+        private void updateAnimator()
+        {
+            animatorAnimal.SetFloat("Speed", rb.velocity.magnitude);
+        }
+
         private void eatFood( FoodPickup foodIn )
         {
-            currentFoodEaten += foodIn.getFoodValue();
-            changeSize();
+            currentFoodValue += foodIn.getFoodValue() * foodMultiplier;
+            numberOfFoodEaten++;
+
+            ChangeTargetSize();
 
             changeColor(foodIn.getFoodColor());
             
             foodIn.eatFood();
         }
 
-        private void changeSize()
+        private void ChangeTargetSize()
         {
-            //todo diminishing return on food eaten on size
-            currentSize = startingSize + (currentFoodEaten * foodMultiplier);
-            //todo smoother ratio 
-            SheepCamera.m_Lens.OrthographicSize = 10 + (2*currentSize);
+            targetSize.x = currentFoodValue;
+            targetSize.y = currentFoodValue;
+        }
 
-            this.transform.localScale = new Vector3(currentSize, 1, currentSize);
+        private Vector3 ChangeSizeHelper = new Vector3();
+        private void changeSize(float deltaTime)
+        {       
+            SheepBody.gameObject.transform.localScale = Vector3.Lerp(SheepBody.gameObject.transform.localScale, targetSize, sheepScaleSpeed * deltaTime);
+            ChangeSizeHelper.x = targetSize.x;
+            ChangeSizeHelper.z = targetSize.y;
+
+            SheepCollider.gameObject.transform.localScale = Vector3.Lerp(SheepCollider.gameObject.transform.localScale, targetSize, sheepScaleSpeed * deltaTime);
+            
+            SheepCamera.m_Lens.OrthographicSize = 10 + (2 * SheepBody.gameObject.transform.localScale.x);
+
             //todo update player sheep detecotor?
         }
 
         private void changeColor(Color newColor)
         {
-            SheepSprite.color = Color.Lerp(SheepSprite.color, newColor, .1f );
+            SheepBodyTexture.color = Color.Lerp(SheepBodyTexture.color, newColor, .1f );
         }
 
         public void setActiveCamera()
@@ -204,6 +234,37 @@ namespace TeamSquidward.Eric
         }
 
         private void OnMinChangeEvent(int m)
+        {
+            if ( 1 == 1)
+            {
+                StressData.changeValue(stressRaisePerMin);
+            }
+        }
+
+        private void OnNightTimeCleanUpEvent()
+        {
+
+        }
+
+        private void OnStressEvent()
+        {
+            animatorAnimal.SetTrigger("StressEvent");
+        }
+
+        public void OnDoneSpinningAndReadyToLaunch()
+        {
+            float x = Random.Range(-1, 1);
+            float y = Random.Range(-1, 1);
+
+            rb.AddForce(new Vector3(stressEventForce * x, 0, stressEventForce * y));
+        }
+
+        private void OnThirstEvent()
+        {
+
+        }
+
+        private void OnMudEvent()
         {
 
         }

@@ -10,9 +10,11 @@ namespace TeamSquidward.Eric
         #region Variables
         [SerializeField]
         private InputActionAsset actions;
+        private InputAction openMenuButton;
+
         [SerializeField]
         private Animator menuAnimator;
-        private InputAction openMenuButton;
+        
 
         [SerializeField] private GameObject SheepMenuHolder;
         [SerializeField] private GameObject ScreenGrayer;

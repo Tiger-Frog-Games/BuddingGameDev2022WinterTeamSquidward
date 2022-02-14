@@ -3,12 +3,18 @@ using Micosmo.SensorToolkit;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace TeamSquidward.Eric
 {
     public class PlayerLogic : MonoBehaviour
     {
         #region Variables
+
+        [SerializeField]
+        private InputActionAsset actions;
+        private InputAction petButton;
+        private InputAction moveMent;
 
         [SerializeField]
         private Transform startPosition;
@@ -23,7 +29,11 @@ namespace TeamSquidward.Eric
         [SerializeField]
         private EventChannelSO OnNightCleanUp;
 
+        [SerializeField] private Animator farmerAnimation;
         private Animal currentAnimalPushing;
+
+        private bool holdingBrush;
+
 
         #endregion
 
@@ -33,12 +43,25 @@ namespace TeamSquidward.Eric
         {
             GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
             OnNightCleanUp.OnEvent += OnNightCleanUp_OnEvent;
+            
+            petButton = actions.FindAction("Pet");
+            if (petButton != null)
+            {
+                petButton.performed += OnPetSheepButtonPress;
+            }
+            moveMent = actions.FindAction("moveMent");
+
         }
 
         private void OnDestroy()
         {
             GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
             OnNightCleanUp.OnEvent -= OnNightCleanUp_OnEvent;
+
+            if (petButton != null)
+            {
+                petButton.performed -= OnPetSheepButtonPress;
+            }
         }
 
         private void Start()
@@ -49,11 +72,13 @@ namespace TeamSquidward.Eric
         private void OnEnable()
         {
             OnNightCleanUp.OnEvent += OnNightCleanUp_OnEvent;
+            petButton.Enable();
         }
 
         private void OnDisable()
         {
             OnNightCleanUp.OnEvent -= OnNightCleanUp_OnEvent;
+            petButton.Disable();
         }
         private void OnGameStateChanged( GameState newGameState )
         {
@@ -75,7 +100,7 @@ namespace TeamSquidward.Eric
 
         #region Methods
 
-        private void onSheepOutOfRange(GameObject obj, Sensor sens)
+        private void onSheepOutOfRange(GameObject obj, Micosmo.SensorToolkit.Sensor sens)
         {
             if ( currentAnimalPushing != null && obj.transform.parent?.gameObject == currentAnimalPushing.gameObject )
             {
@@ -88,6 +113,35 @@ namespace TeamSquidward.Eric
         {
             this.transform.position = startPosition.transform.position;
         }
+
+        private void OnPetSheepButtonPress(InputAction.CallbackContext obj)
+        {
+            if (currentAnimalPushing != null)
+            {
+                moveMent.Disable();
+                if (holdingBrush == false)
+                {
+                    //PET THE SHEEP
+                    farmerAnimation.SetTrigger("Petting");
+
+                }
+                else
+                {
+                    //brush the sheep
+                }
+            }
+        }
+
+        public void DonePettingSheep()
+        {
+            moveMent.Enable();
+        }
+
+        public void DoneBrushingSheep()
+        {
+            moveMent.Enable();
+        }
+
         #endregion
     }
 }
