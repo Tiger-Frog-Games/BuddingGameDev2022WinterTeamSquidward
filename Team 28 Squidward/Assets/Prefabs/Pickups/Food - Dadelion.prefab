@@ -73,8 +73,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3b9c9e866760da74d9ce27fc7a42fad5, type: 3}
-  m_Color: {r: 0.061807394, g: 1, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 43e7d40967647644e9642f7d2b40e3bb, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -144,10 +144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c940edaac4d7eda4695e286c3b778ce5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Grass
-  sprite: {fileID: 9156109409546222184}
+  foodType: 2
   FoodValue: 1
-  colorValue: {r: 0, g: 0.5566038, b: 0.11475213, a: 1}
 --- !u!54 &2110910454
 Rigidbody:
   m_ObjectHideFlags: 0

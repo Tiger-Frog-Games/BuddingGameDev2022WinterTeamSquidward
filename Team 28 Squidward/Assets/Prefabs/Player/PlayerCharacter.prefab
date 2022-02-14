@@ -237,11 +237,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcc101ab6b7b70d48ad02b31e930c205, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actions: {fileID: -944628639613478452, guid: c4cfb4c340609f1479a7adf971878a3e, type: 3}
   startPosition: {fileID: 0}
   squidMovement: {fileID: 2535576885410793153}
   charMovement: {fileID: 2535576885410793152}
   sheepDetector: {fileID: 2535576885128654179}
   OnNightCleanUp: {fileID: 11400000, guid: 77e67c43176b53845bc518bf52aac04e, type: 2}
+  farmerAnimation: {fileID: 2105069968}
 --- !u!1 &2535576885582895111
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,6 +255,7 @@ GameObject:
   - component: {fileID: 2535576885582895110}
   - component: {fileID: 2535576885582895109}
   - component: {fileID: 2105069968}
+  - component: {fileID: 2105069971}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -347,3 +350,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2105069971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2535576885582895111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 851b69f8b11ae4f4fad02533c668f1f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pl: {fileID: 2048433026}

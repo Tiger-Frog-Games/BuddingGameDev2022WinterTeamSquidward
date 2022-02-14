@@ -48,4 +48,13 @@ namespace TeamSquidward.Eric
 
     }
 
+
+    [Serializable]
+    public class foodColorData
+    {
+        public FOODTYPE type;
+        public float Value;
+        public Color color;
+    }
+
 }

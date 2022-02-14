@@ -16,18 +16,13 @@ namespace TeamSquidward.Eric
         private InputAction petButton;
         private InputAction moveMent;
 
-        [SerializeField]
-        private Transform startPosition;
-        [SerializeField]
-        private SquidwardMovement squidMovement;
-        [SerializeField]
-        private CharacterMovement charMovement;
+        [SerializeField] private Transform startPosition;
+        [SerializeField] private SquidwardMovement squidMovement;
+        [SerializeField] private CharacterMovement charMovement;
 
-        [SerializeField]
-        private RangeSensor sheepDetector;
+        [SerializeField] private RangeSensor sheepDetector;
 
-        [SerializeField]
-        private EventChannelSO OnNightCleanUp;
+        [SerializeField] private EventChannelSO OnNightCleanUp;
 
         [SerializeField] private Animator farmerAnimation;
         private Animal currentAnimalPushing;
@@ -66,7 +61,7 @@ namespace TeamSquidward.Eric
 
         private void Start()
         {
-            sheepDetector.OnLostDetection.AddListener(onSheepOutOfRange);
+            //sheepDetector.OnLostDetection.AddListener(onSheepOutOfRange);
         }
 
         private void OnEnable()
@@ -92,7 +87,7 @@ namespace TeamSquidward.Eric
             if (currentAnimalPushing == null && collision.gameObject.TryGetComponent<Animal>(out Animal animal))
             {
                 currentAnimalPushing = animal;
-                currentAnimalPushing.setActiveCamera();
+                currentAnimalPushing.setActiveCamera( this );
             }
         }
 
@@ -100,9 +95,11 @@ namespace TeamSquidward.Eric
 
         #region Methods
 
-        private void onSheepOutOfRange(GameObject obj, Micosmo.SensorToolkit.Sensor sens)
+        //called from animal when a sheep leaves the farmer's range
+        public void onSheepOutOfRange(Animal obj)
         {
-            if ( currentAnimalPushing != null && obj.transform.parent?.gameObject == currentAnimalPushing.gameObject )
+           
+            if ( currentAnimalPushing != null && obj == currentAnimalPushing )
             {
                 currentAnimalPushing.removeActiveCamera();
                 currentAnimalPushing = null;
@@ -123,7 +120,7 @@ namespace TeamSquidward.Eric
                 {
                     //PET THE SHEEP
                     farmerAnimation.SetTrigger("Petting");
-
+                    currentAnimalPushing.Pet();
                 }
                 else
                 {
@@ -142,6 +139,10 @@ namespace TeamSquidward.Eric
             moveMent.Enable();
         }
 
+        public void knockback(Vector3 sheepPosition)
+        {
+            squidMovement.knockBack(sheepPosition);
+        }
         #endregion
     }
 }

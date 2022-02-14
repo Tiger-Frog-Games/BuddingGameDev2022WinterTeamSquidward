@@ -13,6 +13,9 @@ namespace TeamSquidward.Eric
 
         [SerializeField] private Animator farmerAnimation;
         [SerializeField] private LayerMask sheepLayer;
+
+        [SerializeField] private float knockBackPower;
+
         private bool IsPushingSheep;
 
         private GameObject objectPushing;
@@ -48,6 +51,17 @@ namespace TeamSquidward.Eric
         {
             farmerAnimation.SetFloat("Speed", GetSpeed() );
             farmerAnimation.SetBool("IsPushingSheep", IsPushingSheep);
+        }
+
+        public void knockBack(Vector3 sheepLocation)
+        {
+            print((sheepLocation - this.transform.position) * knockBackPower);
+            
+            Vector3 knockBackAmount = (this.transform.position - sheepLocation) * knockBackPower;
+            knockBackAmount.z = 0;
+
+            this.LaunchCharacter(knockBackAmount);
+            //this.add
         }
 
         #endregion

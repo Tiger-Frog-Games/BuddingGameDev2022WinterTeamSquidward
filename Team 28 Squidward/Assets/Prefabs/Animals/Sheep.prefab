@@ -588,6 +588,79 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1332003206
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1332003207}
+  - component: {fileID: 1332003208}
+  m_Layer: 7
+  m_Name: Farmer Detector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1332003207
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1332003206}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1906823550383396886}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1332003208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1332003206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f00a8324cac4f1e84ad1644ec747516, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnDetected:
+    m_PersistentCalls:
+      m_Calls: []
+  OnLostDetection:
+    m_PersistentCalls:
+      m_Calls: []
+  signalFilter:
+    IgnoreList: []
+    EnableTagFilter: 0
+    AllowedTags: []
+    Sensor: {fileID: 0}
+  DetectionMode: 0
+  Shape: 0
+  Sphere:
+    Radius: 3
+  Box:
+    HalfExtents: {x: 0.5, y: 0.5, z: 0.5}
+  Capsule:
+    Radius: 0.5
+    Height: 1
+  DetectsOnLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  IgnoreTriggerColliders: 0
+  pulseRoutine:
+    Mode:
+      value: 2
+    Interval:
+      value: 1
 --- !u!1 &1339916154
 GameObject:
   m_ObjectHideFlags: 0
@@ -1213,6 +1286,7 @@ Transform:
   - {fileID: 1906823550228565797}
   - {fileID: 1906823551624337337}
   - {fileID: 6499442782971228578}
+  - {fileID: 1332003207}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1244,11 +1318,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42271d9c46243f34da69f3911675a81c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  farmerDetector: {fileID: 1332003208}
   animatorAnimal: {fileID: 213904343}
   SheepCamera: {fileID: 1906823550228565794}
   SheepBodyTexture: {fileID: 1339916156}
   SheepBody: {fileID: 62842689}
-  SheepCollider: {fileID: 639361393}
+  SheepCollider: {fileID: 5881777125276327487}
   OnNightTimeCleanUp: {fileID: 11400000, guid: 77e67c43176b53845bc518bf52aac04e, type: 2}
   OnHourChange: {fileID: 11400000, guid: 9c23afd5aadbbcd459d9916b75702e5e, type: 2}
   OnMinChange: {fileID: 11400000, guid: daa9472ece108124aa7cb997509eee9b, type: 2}
@@ -1268,14 +1343,38 @@ MonoBehaviour:
     max: 100
     start: 0
     current: 0
-  chancePercentMinStressRaise: 5
+  chancePercentMinStressRaise: 0.05
   stressRaisePerMin: 10
   stressEventForce: 1000
   stressRaisedOnRockHit: 5
-  startingSize: 1
   sheepScaleSpeed: 2
   startingFoodValue: 1
+  minPristineValue: 10
+  numberOfTotalFoodTillPristineEligable: 30
   foodMultiplier: 0.1
+  baseColor: {r: 1, g: 1, b: 1, a: 1}
+  foodColorValues:
+  - type: 0
+    Value: 0
+    color: {r: 1, g: 0.36320752, b: 0.36320752, a: 1}
+  - type: 1
+    Value: 0
+    color: {r: 1, g: 0.6674809, b: 0.25943398, a: 1}
+  - type: 2
+    Value: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+  - type: 3
+    Value: 0
+    color: {r: 0.5466938, g: 0.16509432, b: 1, a: 1}
+  - type: 4
+    Value: 0
+    color: {r: 0.95908654, g: 1, b: 0.1745283, a: 1}
+  - type: 5
+    Value: 0
+    color: {r: 1, g: 0.3726415, b: 0.7861766, a: 1}
+  - type: 6
+    Value: 0
+    color: {r: 0.2783019, g: 1, b: 0.48978215, a: 1}
 --- !u!1 &1906823551624337336
 GameObject:
   m_ObjectHideFlags: 0
@@ -1286,6 +1385,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1906823551624337337}
   - component: {fileID: 213904343}
+  - component: {fileID: 1276020699}
   m_Layer: 7
   m_Name: Visual
   m_TagString: Untagged
@@ -1331,6 +1431,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1276020699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906823551624337336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ef95d33aa9cd23488b2a54bec6781b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ani: {fileID: 1906823550383396887}
 --- !u!1 &5881777125276327487
 GameObject:
   m_ObjectHideFlags: 0

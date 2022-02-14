@@ -81,11 +81,7 @@ namespace TeamSquidward.Rat
         /// 
         /// </summary>
 
-        //set to -1 initially so the first broadcast goes out of 0;
-
-        private int alreadyBroadCastedMin = -1;
-        private int alreadyBroadCastedHour = -1;
-
+        
         private void Update()
         {
             //this sets the current time 

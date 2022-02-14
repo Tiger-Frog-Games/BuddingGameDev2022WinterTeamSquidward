@@ -2,6 +2,8 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using Micosmo.SensorToolkit;
 
 namespace TeamSquidward.Eric
 {
@@ -13,6 +15,9 @@ namespace TeamSquidward.Eric
         #region Variables
 
         private Rigidbody rb;
+        private PlayerLogic farmerInRange;
+
+        [SerializeField] private RangeSensor farmerDetector;
         [SerializeField] private Animator animatorAnimal;
 
         [SerializeField] private CinemachineVirtualCamera SheepCamera;
@@ -35,21 +40,35 @@ namespace TeamSquidward.Eric
         [SerializeField] public StatData MuddyData;
         [SerializeField] public StatData ThirstData;
         
-        private float currentFoodValue;
 
         [Header("Tuning")]
-        [SerializeField] private float chancePercentMinStressRaise = 5;
+
+        //Stress variables
+        private bool isStressed = false;
+        [SerializeField] private float chancePercentMinStressRaise = .05f;
         [SerializeField] private float stressRaisePerMin = 10;
         [SerializeField] private float stressEventForce = 10;
         [SerializeField] private float stressRaisedOnRockHit = 5;
-        [SerializeField] private float startingSize = 1;
+        [SerializeField] private float stressRemovedFromPetting = 20;
+
+
         private Vector3 targetSize;
         
         [SerializeField] private float sheepScaleSpeed =2;
-
+        private float currentFoodValue;
         [SerializeField] private float startingFoodValue = 1;
-        private int numberOfFoodEaten = 0;
+        [SerializeField] private float minPristineValue = 10;
+        [SerializeField] private float numberOfTotalFoodTillPristineEligable = 30;
         [SerializeField] private float foodMultiplier = .1f;
+
+
+        [SerializeField] private Color baseColor;
+        [SerializeField] private List<foodColorData> foodColorValues;
+
+        //task varibales
+        private bool isPristine = false;
+
+
 
         #endregion
 
@@ -63,6 +82,8 @@ namespace TeamSquidward.Eric
             rb = GetComponent<Rigidbody>();
 
             resetStats();
+
+            SheepBodyTexture.color = baseColor;
 
             currentFoodValue = startingFoodValue;
             targetSize = new Vector3(currentFoodValue, currentFoodValue, 1);
@@ -101,12 +122,16 @@ namespace TeamSquidward.Eric
         {
             GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
             OnNightTimeCleanUp.OnEvent += OnNightTimeCleanUpEvent;
+
+            farmerDetector.OnLostDetection.AddListener(OnFarmerLeaveRange);
         }
 
         private void OnDestroy()
         {
             GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
             OnNightTimeCleanUp.OnEvent -= OnNightTimeCleanUpEvent;
+
+            farmerDetector.OnLostDetection.RemoveListener(OnFarmerLeaveRange);
         }
 
         private Vector3 velocityBeforePause;
@@ -184,11 +209,19 @@ namespace TeamSquidward.Eric
         private void eatFood( FoodPickup foodIn )
         {
             currentFoodValue += foodIn.getFoodValue() * foodMultiplier;
-            numberOfFoodEaten++;
+            
+            FOODTYPE toAdd = foodIn.getFoodType();
+            foreach ( foodColorData foodData in foodColorValues)
+            {
+                if (foodData.type == toAdd)
+                {
+                    foodData.Value += foodIn.getFoodValue() * foodMultiplier;
+                    break;
+                }
+            }
 
+            changeColor();
             ChangeTargetSize();
-
-            changeColor(foodIn.getFoodColor());
             
             foodIn.eatFood();
         }
@@ -210,22 +243,85 @@ namespace TeamSquidward.Eric
             
             SheepCamera.m_Lens.OrthographicSize = 10 + (2 * SheepBody.gameObject.transform.localScale.x);
 
-            //todo update player sheep detecotor?
+            //be more clever about this?
+            farmerDetector.Sphere.Radius = targetSize.x * 3;
+            
         }
 
-        private void changeColor(Color newColor)
+        private void changeColor()
         {
-            SheepBodyTexture.color = Color.Lerp(SheepBodyTexture.color, newColor, .1f );
+            foodColorValues = foodColorValues.OrderByDescending(x => x.Value).ToList<foodColorData>();
+
+            //top three colors
+            foodColorData first = foodColorValues[0];
+            foodColorData second = foodColorValues[1];
+            foodColorData third = foodColorValues[2];
+
+            float totalColor = 0;
+            if (first.Value != 0)
+            {
+                totalColor += first.Value;
+            }
+            if (second.Value != 0)
+            {
+                totalColor += second.Value;
+            }
+            if (third.Value != 0)
+            {
+                totalColor += third.Value;
+            }
+
+            if (totalColor == 0)
+            {
+                SheepBodyTexture.color = baseColor;
+                return;
+            }
+
+            if (first.Value - second.Value >= minPristineValue)
+            {
+                SheepBodyTexture.color = first.color;
+                if (currentFoodValue > numberOfTotalFoodTillPristineEligable)
+                {
+                    print("What a pristine color sheep");
+                    isPristine = true;
+                }
+                else
+                {
+                    isPristine = false;
+                }
+            }
+            else
+            {
+                //print($"{first.Value / totalColor}-{second.Value / totalColor}-{third.Value / totalColor}");
+                SheepBodyTexture.color = baseColor;
+                SheepBodyTexture.color = Color.Lerp(SheepBodyTexture.color, first.color, (first.Value / totalColor));
+                SheepBodyTexture.color = Color.Lerp(SheepBodyTexture.color, second.color, (second.Value / totalColor));
+                SheepBodyTexture.color = Color.Lerp(SheepBodyTexture.color, third.color, (third.Value / totalColor));
+
+                isPristine = false;
+            }
+
+
         }
 
-        public void setActiveCamera()
+        public void OnFarmerLeaveRange(GameObject obj, Micosmo.SensorToolkit.Sensor sens)
+        {
+            if (obj.TryGetComponent<PlayerLogic>(out PlayerLogic farmer))
+            {
+                farmer.onSheepOutOfRange(this);
+            }
+        }
+
+        public void setActiveCamera(PlayerLogic farmerInRangeI)
         {
             SheepCamera.Priority = 10;
+            farmerInRange = farmerInRangeI;
         }
 
         public void removeActiveCamera()
         {
             SheepCamera.Priority = 0;
+            farmerInRange = null;
         }
 
         private void OnHourChangeEvent(int h)
@@ -235,7 +331,8 @@ namespace TeamSquidward.Eric
 
         private void OnMinChangeEvent(int m)
         {
-            if ( 1 == 1)
+            float r = Random.Range(0f, 1f);
+            if ( r < chancePercentMinStressRaise)
             {
                 StressData.changeValue(stressRaisePerMin);
             }
@@ -248,10 +345,21 @@ namespace TeamSquidward.Eric
 
         private void OnStressEvent()
         {
+            if (isStressed)
+            {
+                return;
+            }
             animatorAnimal.SetTrigger("StressEvent");
+            isStressed = true;
+            if (farmerInRange != null)
+            {
+                farmerInRange.knockback(this.transform.position);
+            }
+            
         }
 
-        public void OnDoneSpinningAndReadyToLaunch()
+
+        public void OnStressEventRollAnimationDone()
         {
             float x = Random.Range(-1, 1);
             float y = Random.Range(-1, 1);
@@ -267,6 +375,21 @@ namespace TeamSquidward.Eric
         private void OnMudEvent()
         {
 
+        }
+        
+        public void Pet()
+        {
+            animatorAnimal.SetTrigger("PetEvent");
+            
+            if (isStressed)
+            {
+                StressData.reset();
+                isStressed = false;
+            }
+            else
+            {
+                StressData.changeValue(-stressRemovedFromPetting);
+            }
         }
 
         #endregion
