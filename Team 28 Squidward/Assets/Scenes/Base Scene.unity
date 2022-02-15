@@ -91792,6 +91792,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 808843191, guid: 31b89fe3acf043d42868dca9096c01f3, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 808843191, guid: 31b89fe3acf043d42868dca9096c01f3, type: 3}
+      propertyPath: m_FlipY
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1332003208, guid: 31b89fe3acf043d42868dca9096c01f3, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -91851,6 +91859,22 @@ PrefabInstance:
     - target: {fileID: 1906823550383396890, guid: 31b89fe3acf043d42868dca9096c01f3, type: 3}
       propertyPath: m_Name
       value: Sheep
+      objectReference: {fileID: 0}
+    - target: {fileID: 1906823551624337337, guid: 31b89fe3acf043d42868dca9096c01f3, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1906823551624337337, guid: 31b89fe3acf043d42868dca9096c01f3, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1906823551624337337, guid: 31b89fe3acf043d42868dca9096c01f3, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1906823551624337337, guid: 31b89fe3acf043d42868dca9096c01f3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31b89fe3acf043d42868dca9096c01f3, type: 3}
