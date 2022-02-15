@@ -25,6 +25,7 @@ namespace TeamSquidward.Eric
         [SerializeField] private SpriteRenderer SheepBodyTexture;
         [SerializeField] private GameObject SheepBody;
         [SerializeField] private GameObject SheepCollider;
+        [SerializeField] private GameObject visualGameObject;
 
         [Header("Events")]
 
@@ -200,10 +201,28 @@ namespace TeamSquidward.Eric
         #endregion
 
         #region Methods
-
+        private bool isFacingRight = false;
         private void updateAnimator()
         {
+            
             animatorAnimal.SetFloat("Speed", rb.velocity.magnitude);
+
+            //print();
+
+            if (rb.velocity.x > .1)
+            {
+                Vector3 temp = visualGameObject.transform.localScale;
+                temp.x = 1;
+                visualGameObject.transform.localScale = temp;
+                isFacingRight = true;
+            }
+            if (rb.velocity.x < - .1)
+            {
+                Vector3 temp = visualGameObject.transform.localScale;
+                temp.x = -1;
+                visualGameObject.transform.localScale = temp;
+                isFacingRight = false;
+            }
         }
 
         private void eatFood( FoodPickup foodIn )

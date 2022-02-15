@@ -393,14 +393,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 639361393}
-  m_LocalRotation: {x: 0.69351995, y: 0.13794968, z: -0.13794968, w: 0.69351995}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 200.00002, y: 200, z: 91.49999}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6499442782971228578}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 22.5, z: 0}
+  m_Father: {fileID: 1906823550383396886}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!64 &639361395
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -414,7 +414,7 @@ MeshCollider:
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
-  m_Mesh: {fileID: 2853601763015143716, guid: 67cbf3cef5a8ffa429632e1c5a56e50c, type: 3}
+  m_Mesh: {fileID: -6506081673326329266, guid: f196f8203b88199478eb83493197958b, type: 3}
 --- !u!1 &808843189
 GameObject:
   m_ObjectHideFlags: 0
@@ -618,7 +618,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1906823550383396886}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1332003208
 MonoBehaviour:
@@ -1244,7 +1244,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.3884058, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1285,8 +1285,8 @@ Transform:
   m_Children:
   - {fileID: 1906823550228565797}
   - {fileID: 1906823551624337337}
-  - {fileID: 6499442782971228578}
   - {fileID: 1332003207}
+  - {fileID: 639361394}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1323,7 +1323,7 @@ MonoBehaviour:
   SheepCamera: {fileID: 1906823550228565794}
   SheepBodyTexture: {fileID: 1339916156}
   SheepBody: {fileID: 62842689}
-  SheepCollider: {fileID: 5881777125276327487}
+  SheepCollider: {fileID: 639361393}
   OnNightTimeCleanUp: {fileID: 11400000, guid: 77e67c43176b53845bc518bf52aac04e, type: 2}
   OnHourChange: {fileID: 11400000, guid: 9c23afd5aadbbcd459d9916b75702e5e, type: 2}
   OnMinChange: {fileID: 11400000, guid: daa9472ece108124aa7cb997509eee9b, type: 2}
@@ -1347,6 +1347,7 @@ MonoBehaviour:
   stressRaisePerMin: 10
   stressEventForce: 1000
   stressRaisedOnRockHit: 5
+  stressRemovedFromPetting: 20
   sheepScaleSpeed: 2
   startingFoodValue: 1
   minPristineValue: 10
@@ -1444,35 +1445,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ani: {fileID: 1906823550383396887}
---- !u!1 &5881777125276327487
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6499442782971228578}
-  m_Layer: 7
-  m_Name: ColliderScallerHelper
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6499442782971228578
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5881777125276327487}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 639361394}
-  m_Father: {fileID: 1906823550383396886}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
