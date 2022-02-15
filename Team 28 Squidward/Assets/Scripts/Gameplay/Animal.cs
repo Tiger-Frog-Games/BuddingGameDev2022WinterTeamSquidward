@@ -19,6 +19,8 @@ namespace TeamSquidward.Eric
 
         [SerializeField] private RangeSensor farmerDetector;
         [SerializeField] private Animator animatorAnimal;
+        [SerializeField] private SpriteRenderer bodySprite;
+        [SerializeField] private SpriteRenderer bodyOutlineSprite;
 
         [SerializeField] private CinemachineVirtualCamera SheepCamera;
 
@@ -52,6 +54,15 @@ namespace TeamSquidward.Eric
         [SerializeField] private float stressRaisedOnRockHit = 5;
         [SerializeField] private float stressRemovedFromPetting = 20;
 
+        [SerializeField] private float foodValueForStageTwo = 10;
+        [SerializeField] private float foodValueForStageThree = 20;
+        [SerializeField] private float foodValueForStageFour = 30;
+        [SerializeField] private Sprite stageTwoSprite;
+        [SerializeField] private Sprite stageTwoOutlineSprite;
+        [SerializeField] private Sprite stageThreeSprite;
+        [SerializeField] private Sprite stageThreeOutlineSprite;
+        [SerializeField] private Sprite stageFourSprite;
+        [SerializeField] private Sprite stageFourOutlineSprite;
 
         private Vector3 targetSize;
         
@@ -68,7 +79,7 @@ namespace TeamSquidward.Eric
 
         //task varibales
         private bool isPristine = false;
-
+        private int sizeForTasks = 1;
 
 
         #endregion
@@ -88,8 +99,9 @@ namespace TeamSquidward.Eric
 
             currentFoodValue = startingFoodValue;
             targetSize = new Vector3(currentFoodValue, currentFoodValue, 1);
+            changeBodySprite();
 
-            
+
         }
 
         private void Update()
@@ -180,7 +192,16 @@ namespace TeamSquidward.Eric
                 rb.velocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
             }
-            
+
+            if (newGameState == GameState.Gameplay)
+            {
+                animatorAnimal.speed = 1;
+            }
+            else
+            {
+                animatorAnimal.speed = 0;
+            }
+
         }
 
         private void resetStats()
@@ -201,12 +222,20 @@ namespace TeamSquidward.Eric
         #endregion
 
         #region Methods
-        private bool isFacingRight = false;
+        
         private void updateAnimator()
         {
             
             animatorAnimal.SetFloat("Speed", rb.velocity.magnitude);
-
+            if (currentSize < 5)
+            {
+                animatorAnimal.SetFloat("RollSpeed", 1);
+            }
+            else
+            {
+                animatorAnimal.SetFloat("RollSpeed", rb.velocity.magnitude / (2 * currentSize));
+            }
+            
             //print();
 
             if (rb.velocity.x > .1)
@@ -214,14 +243,14 @@ namespace TeamSquidward.Eric
                 Vector3 temp = visualGameObject.transform.localScale;
                 temp.x = 1;
                 visualGameObject.transform.localScale = temp;
-                isFacingRight = true;
+                
             }
             if (rb.velocity.x < - .1)
             {
                 Vector3 temp = visualGameObject.transform.localScale;
                 temp.x = -1;
                 visualGameObject.transform.localScale = temp;
-                isFacingRight = false;
+                
             }
         }
 
@@ -251,12 +280,14 @@ namespace TeamSquidward.Eric
             targetSize.y = currentFoodValue;
         }
 
-        private Vector3 ChangeSizeHelper = new Vector3();
+       // private Vector3 ChangeSizeHelper = new Vector3();\
+        private float currentSize;
         private void changeSize(float deltaTime)
         {       
+            currentSize = Vector3.Lerp(SheepBody.gameObject.transform.localScale, targetSize, sheepScaleSpeed * deltaTime).x;
             SheepBody.gameObject.transform.localScale = Vector3.Lerp(SheepBody.gameObject.transform.localScale, targetSize, sheepScaleSpeed * deltaTime);
-            ChangeSizeHelper.x = targetSize.x;
-            ChangeSizeHelper.z = targetSize.y;
+            //ChangeSizeHelper.x = targetSize.x;
+            //ChangeSizeHelper.z = targetSize.y;
 
             SheepCollider.gameObject.transform.localScale = Vector3.Lerp(SheepCollider.gameObject.transform.localScale, targetSize, sheepScaleSpeed * deltaTime);
             
@@ -264,7 +295,38 @@ namespace TeamSquidward.Eric
 
             //be more clever about this?
             farmerDetector.Sphere.Radius = targetSize.x * 3;
+
+            changeBodySprite();
             
+
+        }
+
+        private void changeBodySprite()
+        {
+            if (currentFoodValue < foodValueForStageTwo)
+            {
+                //stage 1
+                return;
+            }
+
+            if (currentFoodValue < foodValueForStageThree)
+            {
+                //stage 2
+                bodySprite.sprite = stageTwoSprite;
+                bodyOutlineSprite.sprite = stageTwoOutlineSprite;
+            }
+            else if (currentFoodValue < foodValueForStageFour)
+            {
+                //stage 3
+                bodySprite.sprite = stageThreeSprite;
+                bodyOutlineSprite.sprite = stageThreeOutlineSprite;
+            }
+            else
+            {
+                //stage 4
+                bodySprite.sprite = stageFourSprite;
+                bodyOutlineSprite.sprite = stageFourOutlineSprite;
+            }
         }
 
         private void changeColor()
@@ -369,6 +431,7 @@ namespace TeamSquidward.Eric
                 return;
             }
             animatorAnimal.SetTrigger("StressEvent");
+            
             isStressed = true;
             if (farmerInRange != null)
             {

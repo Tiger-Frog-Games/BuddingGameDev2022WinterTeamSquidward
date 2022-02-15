@@ -8,6 +8,7 @@ namespace TeamSquidward.Eric
     
     public enum FOODTYPE { APPLE, CARROT, DADELION, GRAPES, OATS, STARBERRIES, BADPLANT, NONE }
 
+    [SelectionBase]
     public class FoodPickup : MonoBehaviour
     {
         #region Variables
@@ -21,6 +22,8 @@ namespace TeamSquidward.Eric
         [SerializeField] private FOODTYPE foodType;
         [SerializeField] private float FoodValue;
 
+        public PooledObject pObj;
+
         #endregion
 
         #region Unity Methods
@@ -32,8 +35,12 @@ namespace TeamSquidward.Eric
         public void eatFood()
         {
             //sprite.enabled = false;
-            gameObject.SetActive(false);
-            
+            if (pObj == null)
+            {
+                gameObject.SetActive(false);
+                return;
+            }
+            pObj.returnToPool();
         }
 
         public FOODTYPE getFoodType()

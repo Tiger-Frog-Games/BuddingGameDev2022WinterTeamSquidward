@@ -68,6 +68,7 @@ namespace TeamSquidward.Eric
         {
             OnNightCleanUp.OnEvent += OnNightCleanUp_OnEvent;
             petButton.Enable();
+            
         }
 
         private void OnDisable()
@@ -80,6 +81,16 @@ namespace TeamSquidward.Eric
             enabled = newGameState == GameState.Gameplay;
             //squidMovement.enabled = newGameState == GameState.Gameplay;
             charMovement.Pause(!(newGameState == GameState.Gameplay));
+
+            if (newGameState == GameState.Gameplay)
+            {
+                farmerAnimation.speed = 1;
+            }
+            else
+            {
+                farmerAnimation.speed = 0;
+            }
+            
         }
 
         private void OnCollisionEnter(Collision collision)

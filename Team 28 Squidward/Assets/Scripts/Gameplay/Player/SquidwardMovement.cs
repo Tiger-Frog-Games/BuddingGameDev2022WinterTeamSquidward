@@ -57,14 +57,14 @@ namespace TeamSquidward.Eric
             if (GetVelocity().x > .1)
             {
                 Vector3 temp = visualGameObject.transform.localScale;
-                temp.x = -.5f;
+                temp.x = -1f;
                 visualGameObject.transform.localScale = temp;
 
             }
             if (GetVelocity().x < -.1)
             {
                 Vector3 temp = visualGameObject.transform.localScale;
-                temp.x = .5f;
+                temp.x = 1f;
                 visualGameObject.transform.localScale = temp;
 
             }
