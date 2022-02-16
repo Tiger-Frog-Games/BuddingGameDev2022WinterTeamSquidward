@@ -79,6 +79,7 @@ namespace TeamSquidward.Eric
             {
                 pGO.returnToPool();
             }
+            allFoodAndObsticals.Clear();
         }
 
 

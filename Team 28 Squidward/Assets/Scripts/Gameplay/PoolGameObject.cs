@@ -20,7 +20,7 @@ namespace TeamSquidward.Eric
         public PoolType poolType;
 
         // Collection checks will throw errors if we try to release an item that is already in the pool.
-        public bool collectionChecks = true;
+        public bool collectionChecks = false;
         public int maxPoolSize = 10;
 
         IObjectPool<GameObject> m_Pool;

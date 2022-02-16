@@ -24,8 +24,13 @@ namespace TeamSquidward.Eric
             if (pool == null)
             {
                 gameObject.SetActive(false);
+                return;
             }
-            pool.Release(gameObject);
+            if (gameObject.activeInHierarchy == true)
+            {
+                pool.Release(gameObject);
+            }
+            
         }
     }
 }

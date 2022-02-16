@@ -15,6 +15,19 @@ namespace TeamSquidward.Rat
 
     public class TimeManager : MonoBehaviour
     {
+        private static TimeManager _instance;
+        public static TimeManager Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new TimeManager();
+                }
+                return _instance;
+            }
+        }
+
         #region Variables
 
         [SerializeField] private int startHour;
@@ -26,7 +39,9 @@ namespace TeamSquidward.Rat
         [SerializeField] private int endHour;
         [SerializeField] private int endMin;
 
-        private float startingTime;
+        public int startingTime { get; private set; }
+        [SerializeField] public int noonTime;
+        public int nightTime { get; private set; }
 
         /// <summary>
         /// DO NOT SET THIS IN INSPECTOR this is public for now just to see the current time.
@@ -61,15 +76,7 @@ namespace TeamSquidward.Rat
 
         #region Unity Methods
         //Ignore this method
-        private void Start()
-        {
-            if (gameRate <= 0)
-            {
-                Debug.LogError("Game rate can not be zero or negative");
-            }
 
-            currentTime_RealTime = (((startHour * 3600) + (startMin * 60)) / gameRate);
-        }
 
         /// <summary>
         /// 
@@ -85,9 +92,9 @@ namespace TeamSquidward.Rat
         private void Update()
         {
             //this sets the current time 
-            currentTime_RealTime += Time.deltaTime;
+            currentTime_RealTime += Time.deltaTime * gameRate;
             //Convert current real time to game time
-            currentTime_InGame = currentTime_RealTime * gameRate;
+            currentTime_InGame = currentTime_RealTime ;
 
             int alreadyBroadCastedMin = currentMin_InGame;
             int alreadyBroadCastedHour = currentHour_InGame;
@@ -118,8 +125,17 @@ namespace TeamSquidward.Rat
         //Ignore this method
         private void Awake()
         {
+            _instance = this;
+
             TeamSquidward.Eric.GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
             OnTimerReset.OnEvent += ResetTimer;
+
+            if (gameRate <= 0)
+            {
+                Debug.LogError("Game rate can not be zero or negative");
+            }
+
+            ResetTimer();
         }
         //Ignore this method
         private void OnDestroy()
@@ -140,7 +156,9 @@ namespace TeamSquidward.Rat
         //reset currentTime to start a new day *Hint it is only one line*
         private void ResetTimer()
         {
-            currentTime_RealTime = (((startHour * 3600) + (startMin * 60)) / gameRate);
+            startingTime = (int)(((startHour * 3600) + (startMin * 60))/60 );
+            nightTime = (int)(((endHour * 3600) + (endMin * 60))/60 );
+            currentTime_RealTime = (((startHour * 3600) + (startMin * 60)) );
         }
 
         #endregion
