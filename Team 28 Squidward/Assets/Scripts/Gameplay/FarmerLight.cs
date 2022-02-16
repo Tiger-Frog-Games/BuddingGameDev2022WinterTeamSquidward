@@ -33,7 +33,7 @@ namespace TeamSquidward.Eric
 
         private void OnMinChange_OnEvent(int minChange)
         {
-            print($"{turnOffMin} - {minChange} - {turnOffMax}");
+            //print($"{turnOffMin} - {minChange} - {turnOffMax}");
 
             if ( turnOffMin < minChange && minChange < turnOffMax )
             {

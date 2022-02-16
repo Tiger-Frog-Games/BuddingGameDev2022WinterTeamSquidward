@@ -65,7 +65,7 @@ namespace TeamSquidward.Eric
             noonTime = TeamSquidward.Rat.TimeManager.Instance.noonTime;
             nightTime = TeamSquidward.Rat.TimeManager.Instance.nightTime;
 
-            print($"{startTime} - {noonTime} - {nightTime} ");
+            //print($"{startTime} - {noonTime} - {nightTime} ");
 
         }
 
