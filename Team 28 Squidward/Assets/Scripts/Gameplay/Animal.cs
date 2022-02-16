@@ -449,6 +449,14 @@ namespace TeamSquidward.Eric
             rb.AddForce(new Vector3(stressEventForce * x, 0, stressEventForce * y));
         }
 
+        /// <summary>
+        ///  Called from rock adds stress to animal!
+        /// </summary>
+        public void addStress()
+        {
+
+        }
+
         private void OnThirstEvent()
         {
 
