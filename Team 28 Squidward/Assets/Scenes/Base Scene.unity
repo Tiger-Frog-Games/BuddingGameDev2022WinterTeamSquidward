@@ -328,6 +328,7 @@ MonoBehaviour:
   OnNightTimeCleanUp: {fileID: 11400000, guid: 77e67c43176b53845bc518bf52aac04e, type: 2}
   holeRadius: 5
   diskRadius: 250
+  startLocation: {fileID: 1193303216}
   groundCollider: {fileID: 1933282753}
 --- !u!1001 &28213380
 PrefabInstance:

@@ -20,6 +20,8 @@ namespace TeamSquidward.Eric
         [SerializeField] private float holeRadius = 1.0f;
         [SerializeField] private float diskRadius = 2.5f;
 
+        [SerializeField] private GameObject startLocation;
+
         [SerializeField] private MeshCollider groundCollider;
         #endregion
 
@@ -69,14 +71,13 @@ namespace TeamSquidward.Eric
         private Vector3 posToSpawn = new Vector3();
         public Vector3 FindPosToSpawn()
         {
-            posToSpawn.x = Random.Range(groundCollider.bounds.extents.x - 10, -groundCollider.bounds.extents.x +10);
-            posToSpawn.z = Random.Range(groundCollider.bounds.extents.z - 10, -groundCollider.bounds.extents.z +10);
+            do
+            {
+                posToSpawn.x = Random.Range(groundCollider.bounds.extents.x - 10, -groundCollider.bounds.extents.x + 10);
+                posToSpawn.z = Random.Range(groundCollider.bounds.extents.z - 10, -groundCollider.bounds.extents.z + 10);
+            } while (startLocation != null && Vector3.Distance(posToSpawn, startLocation.transform.position) < 20);
 
             return posToSpawn;
-            //Vector3 pos = Random.insideUnitCircle;
-            //pos = new Vector3(pos.x, 0, pos.y); // Lay the circle down flat on the ground
-            //pos = pos.normalized * (holeRadius + pos.magnitude * (diskRadius - holeRadius));
-            //return pos;
         }
 
         private void CleanUpAllFoodAndObsticals()
