@@ -5,12 +5,12 @@ using UnityEngine;
 namespace TeamSquidward.Rat
 {
     /// <summary>
-    /// The point of this class is to run the game clock logic. It will broad cast an event whenever a minitue or an hour rolls over. 
-    /// 
+    /// The point of this class is to run the game clock logic. It will broad cast an event whenever a minitue or an hour rolls over.
+    ///
     /// It will reset when you reach a new day (Ive set up an empty method for is the only thing for you to fill out) OnNewDayStart()
     /// It will pause when you are in a pause menu (dont worry about this Ill do this)
-    /// 
-    /// 
+    ///
+    ///
     /// </summary>
 
     public class TimeManager : MonoBehaviour
@@ -72,19 +72,19 @@ namespace TeamSquidward.Rat
         }
 
         /// <summary>
-        /// 
+        ///
         /// Time.deltaTime is real time seconds
-        /// 
+        ///
         /// currentTime is the raw value of time in real time seconds of the game
-        /// 
-        /// So you need to find a way to change 
-        /// 
+        ///
+        /// So you need to find a way to change
+        ///
         /// </summary>
 
-        
+
         private void Update()
         {
-            //this sets the current time 
+            //this sets the current time
             currentTime_RealTime += Time.deltaTime;
             //Convert current real time to game time
             currentTime_InGame = currentTime_RealTime * gameRate;
@@ -136,7 +136,7 @@ namespace TeamSquidward.Rat
         {
             enabled = newGameState == TeamSquidward.Eric.GameState.Gameplay;
         }
-        
+
         //reset currentTime to start a new day *Hint it is only one line*
         private void ResetTimer()
         {
