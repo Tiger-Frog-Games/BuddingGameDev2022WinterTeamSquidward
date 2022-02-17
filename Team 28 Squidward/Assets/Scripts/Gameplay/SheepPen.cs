@@ -1,98 +1,136 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace TeamSquidward.Eric
 {
     public class SheepPen : MonoBehaviour
     {
+        private static SheepPen _instance;
+        public static SheepPen Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new SheepPen();
+                }
+                return _instance;
+            }
+        }
+
+
         #region Variables
         [Header("Events")]
 
         [SerializeField]
-        private EventChannelSO OnDayOverEvent;
+        private EventChannelSO NightTimeCleanUp;
 
 
         [Header("Inspector")]
-        [SerializeField]
-        private GameObject SheepPrefab;
-        [SerializeField]
-        private Animator SpawnSheepAnimation;
+        [SerializeField] private GameObject SheepPrefab;
+        [SerializeField] private Animator SpawnSheepAnimation;
 
-        [SerializeField]
-        private GameObject sheepSpawnLocation;
+        [SerializeField] private GameObject sheepSpawnLocation;
+
+        [SerializeField] private TMP_InputField sheepNameText;
+        [SerializeField] private string[] DefaultSheepName;
+
+        [SerializeField] private Transform SheepUIContainer;
+        [SerializeField] private GameObject sheepUIPrefab;
 
         private List<Animal> AllTheSheeps = new List<Animal>();
         private List<Animal> ActiveSheep = new List<Animal>();
+        private Dictionary<Animal,GameObject> sheepUIBlocks = new Dictionary<Animal,GameObject>();
+
         #endregion
 
         #region Unity Methods
 
+        private void Awake()
+        {
+            _instance = this; 
+        }
+
         private void OnEnable()
         {
-            OnDayOverEvent.OnEvent += OnDayOver;
+            NightTimeCleanUp.OnEvent += OnNightTimeCleanUP_Event;
         }
 
         private void OnDisable()
         {
-            OnDayOverEvent.OnEvent -= OnDayOver;
-        }
-
-        private void OnCollisionEnter(Collision collision)
-        {
-            print(collision.gameObject.name);
+            NightTimeCleanUp.OnEvent -= OnNightTimeCleanUP_Event;
         }
 
         #endregion
 
         #region Methods
 
-        private void OnDayOver()
+        private void OnNightTimeCleanUP_Event()
         {
-            foreach(Animal animal in ActiveSheep)
+            foreach (Animal animal in ActiveSheep)
             {
                 animal.gameObject.SetActive(false);
+                if (sheepUIBlocks.TryGetValue(animal,out GameObject obj))
+                {
+                    obj.SetActive(true);
+                }
             }
             ActiveSheep.Clear();
         }
 
         public void FarmerInRange()
         {
-            SpawnSheepAnimation.SetTrigger("SpawnSheep");
-            //later will spawn a specific sheep you want
-            //for now just spawn the first sheep of AllSheep;
-           
+            UIAnimator.Instance.OnSheepPenOpen();
         }
 
+        private Animal spawningSheep;
         public void SpawnAnimationOver()
         {
-            if (AllTheSheeps.Count == 0)
-            {
-                spawnSheep(-1);
-            }
-            else
-            {
-                spawnSheep(AllTheSheeps.Count);
-            }
+            spawningSheep.transform.position = sheepSpawnLocation.transform.position;
+            spawningSheep.enabled = true;
+            spawningSheep.LaunchSheep();
         }
 
-        private void spawnSheep(int indexOfSheep = -1)
+        public void spawnNewSheep()
         {
-            SpawnSheepAnimation.ResetTrigger("SpawnSheep");
-            if (indexOfSheep == -1 || ActiveSheep.Count == AllTheSheeps.Count)
+            spawningSheep = Instantiate(SheepPrefab, sheepSpawnLocation.transform.position, sheepSpawnLocation.gameObject.transform.rotation, null).GetComponent<Animal>();
+            
+            if (string.Compare(sheepNameText.text, "") == 0)
             {
-                Animal temp = Instantiate(SheepPrefab, sheepSpawnLocation.transform.position,sheepSpawnLocation.gameObject.transform.rotation,null).GetComponent<Animal>();
-                AllTheSheeps.Add(temp);
-                ActiveSheep.Add(temp);
+                spawningSheep.setName( DefaultSheepName[ Random.Range( 0, DefaultSheepName.Length-1) ] );
             }
             else
             {
-                if (AllTheSheeps.Count > indexOfSheep && indexOfSheep > 0) {
-                    Animal AnimalToSpawnFromPen = AllTheSheeps[indexOfSheep];
-                    AnimalToSpawnFromPen.transform.position = this.transform.position;
-                }
-              
+                spawningSheep.setName(sheepNameText.text);
             }
+            sheepNameText.text = "";
+            //spawningSheep.GetComponent<Rigidbody>().AddForce(Vector3.up * 100);
+
+            AllTheSheeps.Add(spawningSheep);
+            ActiveSheep.Add(spawningSheep);
+            
+            //create a ui method
+
+            GameObject uiBlock = Instantiate(sheepUIPrefab,SheepUIContainer);
+            uiBlock.GetComponent<SheepUIBlockHelper>().setUp(spawningSheep);
+            uiBlock.SetActive(false);
+
+            sheepUIBlocks.Add(spawningSheep, uiBlock);
+
+           
+            UIAnimator.Instance.CloseSheepPen();
+            SpawnSheepAnimation.SetTrigger("SpawnSheep");
+        }
+        
+        public void spawnExistingSheep(Animal animalIn)
+        {
+            spawningSheep = animalIn;
+            ActiveSheep.Add(spawningSheep);
+
+            UIAnimator.Instance.CloseSheepPen();
+            SpawnSheepAnimation.SetTrigger("SpawnSheep");
         }
 
         #endregion

@@ -9,6 +9,7 @@ namespace TeamSquidward.Eric
     {
         Gameplay,
         Night,
+        InMenu,
         Paused
     }
 

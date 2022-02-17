@@ -37,7 +37,7 @@ namespace TeamSquidward.Eric
 
         [Header("Stats")]
 
-        [SerializeField] private string Name;
+        [SerializeField] private string sheepName;
 
         [SerializeField] public StatData StressData;
         [SerializeField] public StatData MuddyData;
@@ -91,8 +91,6 @@ namespace TeamSquidward.Eric
             SheepCamera.gameObject.transform.SetParent(null);
             SheepCamera.transform.Rotate(90, 0, 0);
 
-            rb = GetComponent<Rigidbody>();
-
             resetStats();
 
             SheepBodyTexture.color = baseColor;
@@ -137,6 +135,8 @@ namespace TeamSquidward.Eric
             OnNightTimeCleanUp.OnEvent += OnNightTimeCleanUpEvent;
 
             farmerDetector.OnLostDetection.AddListener(OnFarmerLeaveRange);
+
+            rb = GetComponent<Rigidbody>();
         }
 
         private void OnDestroy()
@@ -443,10 +443,33 @@ namespace TeamSquidward.Eric
 
         public void OnStressEventRollAnimationDone()
         {
-            float x = Random.Range(-1, 1);
-            float y = Random.Range(-1, 1);
+            LaunchSheep(true);
+        }
 
-            rb.AddForce(new Vector3(stressEventForce * x, 0, stressEventForce * y));
+        private Vector3 stressEventDirection = new Vector3();
+        private Vector2 stressEventDirectionHelper = new Vector2();
+        public void LaunchSheep(bool fullRange = false)
+        {
+            if (fullRange == true)
+            {
+                stressEventDirectionHelper.x = Random.Range(-1f, 1f);
+                stressEventDirectionHelper.y = Random.Range(-1f, 1f);
+            }
+            else
+            {
+                stressEventDirectionHelper.x = Random.Range(-.75f, .75f);
+                stressEventDirectionHelper.y = Random.Range(0f, 1f);
+            }
+            
+            
+            stressEventDirectionHelper = stressEventDirectionHelper.normalized;
+
+            stressEventDirection.x = stressEventDirectionHelper.x * stressEventForce;
+            stressEventDirection.y = .5f;
+            stressEventDirection.z = stressEventDirectionHelper.y * stressEventForce;
+
+
+            rb.AddForce(stressEventDirection );
         }
 
         /// <summary>
@@ -480,6 +503,17 @@ namespace TeamSquidward.Eric
             {
                 StressData.changeValue(-stressRemovedFromPetting);
             }
+        }
+
+        public void setName(string nameIn )
+        {
+            name = "Sheep - " + nameIn;
+            sheepName = nameIn;
+        }
+
+        public string getSheepName()
+        {
+            return sheepName;
         }
 
         #endregion

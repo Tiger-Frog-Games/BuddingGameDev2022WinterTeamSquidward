@@ -25,6 +25,7 @@ namespace TeamSquidward.Eric
         [SerializeField] private EventChannelSO OnNightCleanUp;
 
         [SerializeField] private Animator farmerAnimation;
+        
         private Animal currentAnimalPushing;
 
         private bool holdingBrush;
@@ -79,6 +80,7 @@ namespace TeamSquidward.Eric
         private void OnGameStateChanged( GameState newGameState )
         {
             enabled = newGameState == GameState.Gameplay;
+            squidMovement.enabled = newGameState == GameState.Gameplay;
             //squidMovement.enabled = newGameState == GameState.Gameplay;
             charMovement.Pause(!(newGameState == GameState.Gameplay));
 

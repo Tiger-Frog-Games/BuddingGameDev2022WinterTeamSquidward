@@ -7,6 +7,18 @@ namespace TeamSquidward.Eric
 {
     public class UIAnimator : MonoBehaviour
     {
+        private static UIAnimator _instance;
+        public static UIAnimator Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new UIAnimator();
+                }
+                return _instance;
+            }
+        }
         #region Variables
         [SerializeField]
         private InputActionAsset actions;
@@ -22,6 +34,8 @@ namespace TeamSquidward.Eric
         [SerializeField] private GameObject Timer;
         [SerializeField] private GameObject OptionsMenu;
         [SerializeField] private GameObject RequestPanel;
+        [SerializeField] private GameObject sheepPenMenu;
+        
 
         [SerializeField] private EventChannelSO OnDayStart;
         [SerializeField] private EventChannelSO OnDayOver;
@@ -33,6 +47,7 @@ namespace TeamSquidward.Eric
 
         private void Awake()
         {
+            _instance = this;
             openMenuButton = actions.FindAction("Open Menu");
             if (openMenuButton != null)
             {
@@ -73,6 +88,14 @@ namespace TeamSquidward.Eric
                 return;
             }
 
+            if (sheepPenMenu.gameObject.activeSelf == true)
+            {
+                ScreenGrayer.SetActive(false);
+                sheepPenMenu.SetActive(false);
+                GameStateManager.Instance.SetState(GameState.Gameplay);
+                return;
+            }
+
             if (SheepMenuHolder.gameObject.activeSelf == false)
             {
                 menuAnimator.SetTrigger("OnMenuShow");
@@ -86,6 +109,8 @@ namespace TeamSquidward.Eric
             }
 
         }
+
+
 
         private void OnMenuHidingAndDoneAnimating()
         {
@@ -105,6 +130,21 @@ namespace TeamSquidward.Eric
             GameStateManager.Instance.SetState(GameState.Gameplay);
         }
 
+        public void OnSheepPenOpen()
+        {
+            ScreenGrayer.SetActive(true);
+            sheepPenMenu.SetActive(true);
+            GameStateManager.Instance.SetState(GameState.InMenu);
+
+        }
+
+        public void CloseSheepPen()
+        {
+            ScreenGrayer.SetActive(false);
+            sheepPenMenu.SetActive(false);
+            GameStateManager.Instance.SetState(GameState.Gameplay);
+        }
+
         private void OnDayOver_OnEvent()
         {
             if (menuAnimator.GetCurrentAnimatorStateInfo(0).IsName("IdleInGamePauseMenu") )
@@ -115,6 +155,7 @@ namespace TeamSquidward.Eric
             {
                 menuAnimator.SetTrigger("OnDayOver");
             }
+            sheepPenMenu.SetActive(false);
             LargeSheepImage.SetActive(true);
             RequestPanel.SetActive(true);
 
