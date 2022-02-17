@@ -1355,7 +1355,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1906823550383396886
 Transform:
   m_ObjectHideFlags: 0
@@ -1403,6 +1403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42271d9c46243f34da69f3911675a81c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 1906823550383396888}
   farmerDetector: {fileID: 1332003208}
   animatorAnimal: {fileID: 213904343}
   bodySprite: {fileID: 1339916156}
@@ -1415,7 +1416,7 @@ MonoBehaviour:
   OnNightTimeCleanUp: {fileID: 11400000, guid: 77e67c43176b53845bc518bf52aac04e, type: 2}
   OnHourChange: {fileID: 11400000, guid: 9c23afd5aadbbcd459d9916b75702e5e, type: 2}
   OnMinChange: {fileID: 11400000, guid: daa9472ece108124aa7cb997509eee9b, type: 2}
-  Name: Betty
+  sheepName: 
   StressData:
     min: 0
     max: 100

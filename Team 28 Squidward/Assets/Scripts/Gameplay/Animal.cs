@@ -14,7 +14,7 @@ namespace TeamSquidward.Eric
     {
         #region Variables
 
-        private Rigidbody rb;
+        [SerializeField] private Rigidbody rb;
         private PlayerLogic farmerInRange;
 
         [SerializeField] private RangeSensor farmerDetector;
@@ -136,7 +136,7 @@ namespace TeamSquidward.Eric
 
             farmerDetector.OnLostDetection.AddListener(OnFarmerLeaveRange);
 
-            rb = GetComponent<Rigidbody>();
+            
         }
 
         private void OnDestroy()
@@ -145,6 +145,14 @@ namespace TeamSquidward.Eric
             OnNightTimeCleanUp.OnEvent -= OnNightTimeCleanUpEvent;
 
             farmerDetector.OnLostDetection.RemoveListener(OnFarmerLeaveRange);
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (isStressed == true && collision.gameObject.TryGetComponent<PlayerLogic>(out PlayerLogic pl))
+            {
+                rb.isKinematic = true;
+            }
         }
 
         private Vector3 velocityBeforePause;
@@ -443,33 +451,33 @@ namespace TeamSquidward.Eric
 
         public void OnStressEventRollAnimationDone()
         {
-            LaunchSheep(true);
+            LaunchSheep(stressEventForce, true);
         }
 
-        private Vector3 stressEventDirection = new Vector3();
-        private Vector2 stressEventDirectionHelper = new Vector2();
-        public void LaunchSheep(bool fullRange = false)
+        private Vector3 launchVector = new Vector3();
+        private Vector2 launchVectorHelper = new Vector2();
+        public void LaunchSheep(float power, bool fullRange = false)
         {
             if (fullRange == true)
             {
-                stressEventDirectionHelper.x = Random.Range(-1f, 1f);
-                stressEventDirectionHelper.y = Random.Range(-1f, 1f);
+                launchVectorHelper.x = Random.Range(-1f, 1f);
+                launchVectorHelper.y = Random.Range(-1f, 1f);
             }
             else
             {
-                stressEventDirectionHelper.x = Random.Range(-.75f, .75f);
-                stressEventDirectionHelper.y = Random.Range(0f, 1f);
+                launchVectorHelper.x = Random.Range(-.75f, .75f);
+                launchVectorHelper.y = Random.Range(0f, 1f);
             }
             
             
-            stressEventDirectionHelper = stressEventDirectionHelper.normalized;
+            launchVectorHelper = launchVectorHelper.normalized;
 
-            stressEventDirection.x = stressEventDirectionHelper.x * stressEventForce;
-            stressEventDirection.y = .5f;
-            stressEventDirection.z = stressEventDirectionHelper.y * stressEventForce;
+            launchVector.x = launchVectorHelper.x * power;
+            launchVector.y = .5f;
+            launchVector.z = launchVectorHelper.y * power;
 
-
-            rb.AddForce(stressEventDirection );
+            
+            rb.AddForce(launchVector );
         }
 
         /// <summary>
@@ -497,6 +505,8 @@ namespace TeamSquidward.Eric
             if (isStressed)
             {
                 StressData.reset();
+                rb.isKinematic = false;
+
                 isStressed = false;
             }
             else

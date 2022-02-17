@@ -89,8 +89,8 @@ namespace TeamSquidward.Eric
         public void SpawnAnimationOver()
         {
             spawningSheep.transform.position = sheepSpawnLocation.transform.position;
-            spawningSheep.enabled = true;
-            spawningSheep.LaunchSheep();
+            spawningSheep.gameObject.SetActive(true);
+            spawningSheep.LaunchSheep(500);
         }
 
         public void spawnNewSheep()
