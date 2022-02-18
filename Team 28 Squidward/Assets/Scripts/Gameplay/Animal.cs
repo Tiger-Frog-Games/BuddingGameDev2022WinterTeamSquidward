@@ -182,11 +182,19 @@ namespace TeamSquidward.Eric
 
         }
 
+        private float lastHitRockTime = 0;
         private void OnCollisionEnter(Collision collision)
         {
             if (isStressed == true && collision.gameObject.TryGetComponent<PlayerLogic>(out PlayerLogic pl))
             {
                 rb.isKinematic = true;
+            }
+
+            if (lastHitRockTime + 5 < Time.time && collision.gameObject.TryGetComponent<Rockscript>(out Rockscript rock))
+            {
+                lastHitRockTime = Time.time;
+
+                StressData.changeValue(stressRaisedOnRockHit);
             }
         }
 
@@ -292,14 +300,6 @@ namespace TeamSquidward.Eric
             if ( other.TryGetComponent<FoodPickup>(out FoodPickup eatingFood) )
             {
                 eatFood(eatingFood);
-            }
-        }
-
-        private void OnCollisionEnter(Collision enter)
-        {
-            if (enter.gameObject.TryGetComponent<Rockscript>(out Rockscript rock) ) 
-            {
-                StressData.changeValue(stressRaisedOnRockHit);
             }
         }
 
@@ -438,8 +438,8 @@ namespace TeamSquidward.Eric
 
         private void ChangeTargetSize()
         {
-            targetSize.x = currentFoodValue;
-            targetSize.y = currentFoodValue;
+            targetSize.x = currentFoodValue + ((sizeForTasks - 1) * .25f);
+            targetSize.y = currentFoodValue + ((sizeForTasks - 1) * .25f);
         }
 
        // private Vector3 ChangeSizeHelper = new Vector3();\
@@ -471,33 +471,31 @@ namespace TeamSquidward.Eric
 
         private void changeBodySprite()
         {
-            if (currentFoodValue < foodValueForStageTwo)
-            {
-                //stage 1
-                sizeForTasks = 1;
-                return;
-            }
-
-            if (currentFoodValue < foodValueForStageThree)
+            
+            if (sizeForTasks == 1 && currentFoodValue > foodValueForStageTwo)
             {
                 //stage 2
                 bodySprite.sprite = stageTwoSprite;
                 bodyOutlineSprite.sprite = stageTwoOutlineSprite;
                 sizeForTasks = 2;
+                ChangeTargetSize();
             }
-            else if (currentFoodValue < foodValueForStageFour)
+            else if (sizeForTasks == 2 && currentFoodValue > foodValueForStageThree)
             {
                 //stage 3
                 bodySprite.sprite = stageThreeSprite;
                 bodyOutlineSprite.sprite = stageThreeOutlineSprite;
                 sizeForTasks = 3;
+                ChangeTargetSize();
             }
-            else
+            else if(sizeForTasks == 3 && currentFoodValue > foodValueForStageFour)
             {
                 //stage 4
                 bodySprite.sprite = stageFourSprite;
                 bodyOutlineSprite.sprite = stageFourOutlineSprite;
+                SheepCollider.layer = 11;
                 sizeForTasks = 4;
+                ChangeTargetSize();
             }
         }
 

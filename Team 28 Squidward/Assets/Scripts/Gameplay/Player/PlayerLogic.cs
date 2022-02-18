@@ -27,8 +27,8 @@ namespace TeamSquidward.Eric
         [SerializeField] private Animator farmerAnimation;
         
         private Animal currentAnimalPushing;
-
-        private bool holdingBrush;
+        private Animal lastAnimalPushed;
+        
 
 
         #endregion
@@ -115,6 +115,7 @@ namespace TeamSquidward.Eric
             if ( currentAnimalPushing != null && obj == currentAnimalPushing )
             {
                 currentAnimalPushing.removeActiveCamera();
+                lastAnimalPushed = currentAnimalPushing;
                 currentAnimalPushing = null;
             }            
         }
@@ -129,17 +130,12 @@ namespace TeamSquidward.Eric
             if (currentAnimalPushing != null)
             {
                 moveMent.Disable();
-                if (holdingBrush == false)
-                {
-                    //PET THE SHEEP
-                    farmerAnimation.SetTrigger("Petting");
-                    currentAnimalPushing.Pet();
-                }
-                else
-                {
-                    //brush the sheep
-                }
+
+                //PET THE SHEEP
+                farmerAnimation.SetTrigger("Petting");
+                currentAnimalPushing.Pet();
             }
+                
         }
 
         public void DonePettingSheep()

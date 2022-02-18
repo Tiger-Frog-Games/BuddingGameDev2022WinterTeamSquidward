@@ -11088,7 +11088,7 @@ MonoBehaviour:
     min: 0
     max: 100
     start: 0
-    current: 81
+    current: 0
   MuddyData:
     min: 0
     max: 100
