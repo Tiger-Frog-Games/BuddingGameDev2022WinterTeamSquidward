@@ -5,18 +5,21 @@ using UnityEngine;
 
 namespace TeamSquidward.Eric
 {
+    
+    public enum FOODTYPE { APPLE, CARROT, DADELION, GRAPES, OATS, STARBERRIES, BADPLANT, NONE }
+
     public class FoodPickup : MonoBehaviour
     {
         #region Variables
 
-        [SerializeField]
-        private SpriteRenderer sprite;
-        
+        //[SerializeField]
+        //private SpriteRenderer sprite;
+
         /// <summary>
         /// How much it is worth for the sheep to eat the food
         /// </summary>
-        [SerializeField]
-        private float FoodValue;
+        [SerializeField] private FOODTYPE foodType;
+        [SerializeField] private float FoodValue;
 
         #endregion
 
@@ -28,16 +31,20 @@ namespace TeamSquidward.Eric
 
         public void eatFood()
         {
-            sprite.enabled = false;
+            //sprite.enabled = false;
             gameObject.SetActive(false);
             
+        }
+
+        public FOODTYPE getFoodType()
+        {
+            return foodType;
         }
 
         public float getFoodValue()
         {
             return FoodValue;
         }
-
         #endregion
     }
 }

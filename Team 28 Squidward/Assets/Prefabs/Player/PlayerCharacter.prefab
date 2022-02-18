@@ -9,9 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2535576885128654181}
-  - component: {fileID: 2535576885128654180}
   - component: {fileID: 2535576885128654179}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Sheep Detector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33,20 +32,6 @@ Transform:
   m_Father: {fileID: 2535576885602110417}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &2535576885128654180
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2535576885128654182}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2535576885128654179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,6 +86,7 @@ GameObject:
   - component: {fileID: 2535576885410793023}
   - component: {fileID: 2535576885410793152}
   - component: {fileID: 2535576885410793153}
+  - component: {fileID: 2048433026}
   m_Layer: 6
   m_Name: PlayerCharacter
   m_TagString: Untagged
@@ -235,6 +221,29 @@ MonoBehaviour:
   _standingDownwardForceScale: 1
   _useRootMotion: 0
   _camera: {fileID: 0}
+  farmerAnimation: {fileID: 2105069968}
+  sheepLayer:
+    serializedVersion: 2
+    m_Bits: 128
+--- !u!114 &2048433026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2535576885410793159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcc101ab6b7b70d48ad02b31e930c205, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actions: {fileID: -944628639613478452, guid: c4cfb4c340609f1479a7adf971878a3e, type: 3}
+  startPosition: {fileID: 0}
+  squidMovement: {fileID: 2535576885410793153}
+  charMovement: {fileID: 2535576885410793152}
+  sheepDetector: {fileID: 2535576885128654179}
+  OnNightCleanUp: {fileID: 11400000, guid: 77e67c43176b53845bc518bf52aac04e, type: 2}
+  farmerAnimation: {fileID: 2105069968}
 --- !u!1 &2535576885582895111
 GameObject:
   m_ObjectHideFlags: 0
@@ -245,8 +254,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2535576885582895110}
   - component: {fileID: 2535576885582895109}
-  m_Layer: 6
-  m_Name: Sprite
+  - component: {fileID: 2105069968}
+  - component: {fileID: 2105069971}
+  m_Layer: 0
+  m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -261,7 +272,7 @@ Transform:
   m_GameObject: {fileID: 2535576885582895111}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.87, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2535576885602110417}
@@ -308,7 +319,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2ad31480e87b7da43950492ffcd7845d, type: 3}
+  m_Sprite: {fileID: -598449168, guid: 1dfc434c87e799a409e5a084b55217d6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -319,3 +330,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &2105069968
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2535576885582895111}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 180a4ccb10a209c40ac075c0aff3e675, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2105069971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2535576885582895111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 851b69f8b11ae4f4fad02533c668f1f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pl: {fileID: 2048433026}
