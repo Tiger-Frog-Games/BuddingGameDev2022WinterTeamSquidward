@@ -1,7 +1,9 @@
+using ECM2.Components;
 using Micosmo.SensorToolkit;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace TeamSquidward.Eric
 {
@@ -10,17 +12,74 @@ namespace TeamSquidward.Eric
         #region Variables
 
         [SerializeField]
-        private RangeSensor sheepDetector;
+        private InputActionAsset actions;
+        private InputAction petButton;
+        private InputAction moveMent;
 
+        [SerializeField] private Transform startPosition;
+        [SerializeField] private SquidwardMovement squidMovement;
+        [SerializeField] private CharacterMovement charMovement;
+
+        [SerializeField] private RangeSensor sheepDetector;
+
+        [SerializeField] private EventChannelSO OnNightCleanUp;
+
+        [SerializeField] private Animator farmerAnimation;
         private Animal currentAnimalPushing;
+
+        private bool holdingBrush;
+
 
         #endregion
 
         #region Unity Methods
 
+        private void Awake()
+        {
+            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+            OnNightCleanUp.OnEvent += OnNightCleanUp_OnEvent;
+            
+            petButton = actions.FindAction("Pet");
+            if (petButton != null)
+            {
+                petButton.performed += OnPetSheepButtonPress;
+            }
+            moveMent = actions.FindAction("moveMent");
+
+        }
+
+        private void OnDestroy()
+        {
+            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+            OnNightCleanUp.OnEvent -= OnNightCleanUp_OnEvent;
+
+            if (petButton != null)
+            {
+                petButton.performed -= OnPetSheepButtonPress;
+            }
+        }
+
         private void Start()
         {
-            sheepDetector.OnLostDetection.AddListener(onSheepOutOfRange);
+            //sheepDetector.OnLostDetection.AddListener(onSheepOutOfRange);
+        }
+
+        private void OnEnable()
+        {
+            OnNightCleanUp.OnEvent += OnNightCleanUp_OnEvent;
+            petButton.Enable();
+        }
+
+        private void OnDisable()
+        {
+            OnNightCleanUp.OnEvent -= OnNightCleanUp_OnEvent;
+            petButton.Disable();
+        }
+        private void OnGameStateChanged( GameState newGameState )
+        {
+            enabled = newGameState == GameState.Gameplay;
+            //squidMovement.enabled = newGameState == GameState.Gameplay;
+            charMovement.Pause(!(newGameState == GameState.Gameplay));
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -28,7 +87,7 @@ namespace TeamSquidward.Eric
             if (currentAnimalPushing == null && collision.gameObject.TryGetComponent<Animal>(out Animal animal))
             {
                 currentAnimalPushing = animal;
-                currentAnimalPushing.setActiveCamera();
+                currentAnimalPushing.setActiveCamera( this );
             }
         }
 
@@ -36,15 +95,54 @@ namespace TeamSquidward.Eric
 
         #region Methods
 
-        private void onSheepOutOfRange(GameObject obj, Sensor sens)
+        //called from animal when a sheep leaves the farmer's range
+        public void onSheepOutOfRange(Animal obj)
         {
-            if ( currentAnimalPushing != null && obj.transform.parent?.gameObject == currentAnimalPushing.gameObject )
+           
+            if ( currentAnimalPushing != null && obj == currentAnimalPushing )
             {
                 currentAnimalPushing.removeActiveCamera();
                 currentAnimalPushing = null;
             }            
         }
 
+        private void OnNightCleanUp_OnEvent()
+        {
+            this.transform.position = startPosition.transform.position;
+        }
+
+        private void OnPetSheepButtonPress(InputAction.CallbackContext obj)
+        {
+            if (currentAnimalPushing != null)
+            {
+                moveMent.Disable();
+                if (holdingBrush == false)
+                {
+                    //PET THE SHEEP
+                    farmerAnimation.SetTrigger("Petting");
+                    currentAnimalPushing.Pet();
+                }
+                else
+                {
+                    //brush the sheep
+                }
+            }
+        }
+
+        public void DonePettingSheep()
+        {
+            moveMent.Enable();
+        }
+
+        public void DoneBrushingSheep()
+        {
+            moveMent.Enable();
+        }
+
+        public void knockback(Vector3 sheepPosition)
+        {
+            squidMovement.knockBack(sheepPosition);
+        }
         #endregion
     }
 }
