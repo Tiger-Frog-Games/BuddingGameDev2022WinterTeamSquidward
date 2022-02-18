@@ -17,9 +17,6 @@ namespace TeamSquidward.Eric
 
         private List<PooledObject> allFoodAndObsticals;
 
-        [SerializeField] private float holeRadius = 1.0f;
-        [SerializeField] private float diskRadius = 2.5f;
-
         [SerializeField] private GameObject startLocation;
 
         [SerializeField] private MeshCollider groundCollider;

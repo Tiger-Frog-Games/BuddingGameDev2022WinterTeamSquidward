@@ -34,6 +34,7 @@ namespace TeamSquidward.Eric
         [SerializeField] private GameObject Timer;
         [SerializeField] private GameObject OptionsMenu;
         [SerializeField] private GameObject RequestPanel;
+        [SerializeField] private GameObject SellingSheepPanel;
         [SerializeField] private GameObject sheepPenMenu;
         
 
@@ -96,6 +97,14 @@ namespace TeamSquidward.Eric
                 return;
             }
 
+            if (RequestPanel.gameObject.activeSelf == true)
+            {
+                ScreenGrayer.SetActive(false);
+                RequestPanel.SetActive(false);
+                GameStateManager.Instance.SetState(GameState.Gameplay);
+                return;
+            }
+
             if (SheepMenuHolder.gameObject.activeSelf == false)
             {
                 menuAnimator.SetTrigger("OnMenuShow");
@@ -127,6 +136,7 @@ namespace TeamSquidward.Eric
             OnDayStart.RaiseEvent();
             LargeSheepImage.SetActive(false);
             RequestPanel.SetActive(false);
+            ScreenGrayer.SetActive(false);
             GameStateManager.Instance.SetState(GameState.Gameplay);
         }
 
@@ -155,10 +165,37 @@ namespace TeamSquidward.Eric
             {
                 menuAnimator.SetTrigger("OnDayOver");
             }
+
             sheepPenMenu.SetActive(false);
             LargeSheepImage.SetActive(true);
             RequestPanel.SetActive(true);
+            NextDayButton.SetActive(true);
 
+        }
+        [SerializeField] private GameObject requestPannelButtonCloser;
+        [SerializeField] private GameObject NextDayButton;
+        public void showRequestPanelFromInGame()
+        {
+            SheepTaskManager.Instance.checkSheepToSell();
+
+            RequestPanel.SetActive(true);
+            ScreenGrayer.SetActive(true);
+
+            requestPannelButtonCloser.SetActive(true);
+            NextDayButton.SetActive(false);
+
+            GameStateManager.Instance.SetState(GameState.InMenu);
+        }
+
+        public void hideRequestPanelFromInGame()
+        {
+            RequestPanel.SetActive(false);
+            ScreenGrayer.SetActive(false);
+
+            requestPannelButtonCloser.SetActive(false);
+            NextDayButton.SetActive(true);
+
+            GameStateManager.Instance.SetState(GameState.Gameplay);
         }
 
         public void BroadCastNightTimeCleanUp()
@@ -166,7 +203,52 @@ namespace TeamSquidward.Eric
             OnNightTimeCleanUp.RaiseEvent();
         }
 
-        
+        public void showSheepSellScreen()
+        {
+            RequestPanel.SetActive(false);
+            SellingSheepPanel.SetActive(true);
+            if (GameStateManager.Instance.CurrentGameState == GameState.InMenu)
+            {
+                ScreenGrayer.SetActive(true);
+            }
+        }
+
+        public void hideSellSheep()
+        {
+            SellingSheepPanel.SetActive(false);
+            if (GameStateManager.Instance.CurrentGameState == GameState.Night)
+            {
+                RequestPanel.SetActive(true);
+            }
+            else
+            {
+                ScreenGrayer.SetActive(false);
+            }
+        }
+
+        private bool isGrayScreenActive;
+        public void SellSheepAnimationStart()
+        {
+            isGrayScreenActive = ScreenGrayer.activeInHierarchy;
+            ScreenGrayer.SetActive(false);
+            SellingSheepPanel.SetActive(false);
+            if (GameStateManager.Instance.CurrentGameState == GameState.Night)
+            {
+                LargeSheepImage.SetActive(false);
+            }
+
+        }
+
+        public void SellSheepAnimationOver()
+        {
+            ScreenGrayer.SetActive(isGrayScreenActive);
+            RequestPanel.SetActive(true);
+            if (GameStateManager.Instance.CurrentGameState == GameState.Night)
+            {
+                LargeSheepImage.SetActive(true);
+            }
+           
+        }
 
         #endregion
     }

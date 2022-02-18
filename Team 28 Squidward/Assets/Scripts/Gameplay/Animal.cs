@@ -26,6 +26,7 @@ namespace TeamSquidward.Eric
 
         [SerializeField] private SpriteRenderer SheepBodyTexture;
         [SerializeField] private GameObject SheepBody;
+        [SerializeField] private GameObject SheepShadow;
         [SerializeField] private GameObject SheepCollider;
         [SerializeField] private GameObject visualGameObject;
 
@@ -77,6 +78,10 @@ namespace TeamSquidward.Eric
         [SerializeField] private Color baseColor;
         [SerializeField] private List<foodColorData> foodColorValues;
 
+        [SerializeField] private ParticleSystem[] tearParticlesLeft;
+        [SerializeField] private ParticleSystem[] tearParticlesRight;
+        private float tearEmmisionRate = 0;
+
         //task varibales
         private bool isPristine = false;
         private int sizeForTasks = 1;
@@ -99,13 +104,23 @@ namespace TeamSquidward.Eric
             targetSize = new Vector3(currentFoodValue, currentFoodValue, 1);
             changeBodySprite();
 
-
+            foreach (ParticleSystem tears in tearParticlesLeft)
+            {
+                var em = tears.emission;
+                em.rateOverTime = 0;
+            }
+            foreach (ParticleSystem tears in tearParticlesRight)
+            {
+                var em = tears.emission;
+                em.rateOverTime = 0;
+            }
         }
 
         private void Update()
         {
             updateAnimator();
-
+            updateExpressions();
+            updateParticles();
             changeSize(Time.deltaTime);
         }
 
@@ -117,6 +132,8 @@ namespace TeamSquidward.Eric
             StressData.OnMaxValueEvent += OnStressEvent;
             ThirstData.OnMaxValueEvent += OnThirstEvent;
             MuddyData.OnMaxValueEvent += OnMudEvent;
+
+            SheepCamera.enabled = true;
         }
 
         private void OnDisable()
@@ -127,6 +144,11 @@ namespace TeamSquidward.Eric
             StressData.OnMaxValueEvent -= OnStressEvent;
             ThirstData.OnMaxValueEvent -= OnThirstEvent;
             MuddyData.OnMaxValueEvent -= OnMudEvent;
+
+            if (SheepCamera != null)
+            {
+                SheepCamera.enabled = false;
+            }
         }
 
         private void Awake()
@@ -145,6 +167,11 @@ namespace TeamSquidward.Eric
             OnNightTimeCleanUp.OnEvent -= OnNightTimeCleanUpEvent;
 
             farmerDetector.OnLostDetection.RemoveListener(OnFarmerLeaveRange);
+            if (SheepCamera != null)
+            {
+                Destroy(SheepCamera.gameObject);
+            }
+            
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -231,7 +258,7 @@ namespace TeamSquidward.Eric
 
         #region Methods
         
-        private void updateAnimator()
+        public void updateAnimator()
         {
             
             animatorAnimal.SetFloat("Speed", rb.velocity.magnitude);
@@ -259,6 +286,57 @@ namespace TeamSquidward.Eric
                 temp.x = -1;
                 visualGameObject.transform.localScale = temp;
                 
+            }
+        }
+
+        private void updateExpressions()
+        {
+
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        private void updateParticles()
+        {
+            //print(StressData.getCurrentPercentage());
+            if (StressData.getCurrentPercentage() == 1f)
+            {
+                foreach (ParticleSystem tears in tearParticlesLeft)
+                {
+                    var em = tears.emission;
+                    em.rateOverTime = 20;
+                }
+                foreach (ParticleSystem tears in tearParticlesRight)
+                {
+                    var em = tears.emission;
+                    em.rateOverTime = 20;
+                }
+            }
+            else if (StressData.getCurrentPercentage() >= .8f) 
+            {
+                foreach (ParticleSystem tears in tearParticlesLeft)
+                {
+                    var em = tears.emission;
+                    em.rateOverTime = 4;
+                }
+                foreach (ParticleSystem tears in tearParticlesRight)
+                {
+                    var em = tears.emission;
+                    em.rateOverTime = 4;
+                }
+            }
+            else
+            {
+                foreach (ParticleSystem tears in tearParticlesLeft)
+                {
+                    var em = tears.emission;
+                    em.rateOverTime = 0;
+                }
+                foreach (ParticleSystem tears in tearParticlesRight)
+                {
+                    var em = tears.emission;
+                    em.rateOverTime = 0;
+                }
             }
         }
 
@@ -294,8 +372,7 @@ namespace TeamSquidward.Eric
         {       
             currentSize = Vector3.Lerp(SheepBody.gameObject.transform.localScale, targetSize, sheepScaleSpeed * deltaTime).x;
             SheepBody.gameObject.transform.localScale = Vector3.Lerp(SheepBody.gameObject.transform.localScale, targetSize, sheepScaleSpeed * deltaTime);
-            //ChangeSizeHelper.x = targetSize.x;
-            //ChangeSizeHelper.z = targetSize.y;
+            SheepShadow.gameObject.transform.localScale = Vector3.Lerp(SheepBody.gameObject.transform.localScale, targetSize, sheepScaleSpeed * deltaTime);
 
             SheepCollider.gameObject.transform.localScale = Vector3.Lerp(SheepCollider.gameObject.transform.localScale, targetSize, sheepScaleSpeed * deltaTime);
             
@@ -314,6 +391,7 @@ namespace TeamSquidward.Eric
             if (currentFoodValue < foodValueForStageTwo)
             {
                 //stage 1
+                sizeForTasks = 1;
                 return;
             }
 
@@ -322,18 +400,21 @@ namespace TeamSquidward.Eric
                 //stage 2
                 bodySprite.sprite = stageTwoSprite;
                 bodyOutlineSprite.sprite = stageTwoOutlineSprite;
+                sizeForTasks = 2;
             }
             else if (currentFoodValue < foodValueForStageFour)
             {
                 //stage 3
                 bodySprite.sprite = stageThreeSprite;
                 bodyOutlineSprite.sprite = stageThreeOutlineSprite;
+                sizeForTasks = 3;
             }
             else
             {
                 //stage 4
                 bodySprite.sprite = stageFourSprite;
                 bodyOutlineSprite.sprite = stageFourOutlineSprite;
+                sizeForTasks = 4;
             }
         }
 
@@ -429,7 +510,7 @@ namespace TeamSquidward.Eric
 
         private void OnNightTimeCleanUpEvent()
         {
-
+            removeActiveCamera();
         }
 
         private void OnStressEvent()
@@ -524,6 +605,11 @@ namespace TeamSquidward.Eric
         public string getSheepName()
         {
             return sheepName;
+        }
+
+        public bool doesFullfillTask(Task taskToCheck )
+        {
+            return true;
         }
 
         #endregion

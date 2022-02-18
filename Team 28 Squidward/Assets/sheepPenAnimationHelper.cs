@@ -6,9 +6,14 @@ namespace TeamSquidward.Eric
 {
     public class sheepPenAnimationHelper : MonoBehaviour
     {
-        public void OnAnimationOver()
+        public void OnSpawnAnimationOver()
         {
             SheepPen.Instance.SpawnAnimationOver();
+        }
+
+        public void EndSellSheepAnimation()
+        {
+            SheepPen.Instance.sellSheepAnimationOver();
         }
     }
 

@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -31,6 +32,8 @@ namespace TeamSquidward.Eric
         [Header("Inspector")]
         [SerializeField] private GameObject SheepPrefab;
         [SerializeField] private Animator SpawnSheepAnimation;
+        [SerializeField] private Transform hookPosition;
+        [SerializeField] private CinemachineVirtualCamera penCamera;
 
         [SerializeField] private GameObject sheepSpawnLocation;
 
@@ -133,6 +136,58 @@ namespace TeamSquidward.Eric
             SpawnSheepAnimation.SetTrigger("SpawnSheep");
         }
 
+        public List<Animal> CheckForValidSheep( Task task  )
+        {
+            List<Animal> animalsThatFulfillTheTask = new List<Animal>();
+
+            foreach(Animal animal in AllTheSheeps)
+            {
+                if (animal.doesFullfillTask(task))
+                {
+                    animalsThatFulfillTheTask.Add(animal);
+                }
+            }
+            return animalsThatFulfillTheTask;
+        }
+
+        private Animal animalToSell;
+        public void sellSheep( Animal animalToSellIN )
+        {
+            
+            animalToSell = animalToSellIN;
+            penCamera.Priority = 10;
+
+            UIAnimator.Instance.SellSheepAnimationStart();
+
+            SpawnSheepAnimation.SetTrigger("SellSheep");
+            
+            animalToSell.transform.parent = hookPosition;
+
+            animalToSell.StressData.setRandomInRange();
+            animalToSell.updateAnimator();
+
+            animalToSell.enabled = false;
+            animalToSell.gameObject.SetActive(true);
+            animalToSell.gameObject.transform.localPosition = Vector3.zero;
+
+            if (AllTheSheeps.Contains(animalToSell))
+            {
+                AllTheSheeps.Remove(animalToSell);
+            }
+            
+        }
+
+        public void sellSheepAnimationOver()
+        {
+            animalToSell.gameObject.SetActive(false);
+            animalToSell.transform.parent = null;
+            penCamera.Priority = 0;
+            UIAnimator.Instance.SellSheepAnimationOver();
+            //hookPosition.gameObject.SetActive(false);
+            //grand a boon
+
+        }
+        
         #endregion
     }
 }

@@ -41,9 +41,19 @@ namespace TeamSquidward.Eric
             }
         }
 
+        public float getCurrentPercentage()
+        {
+            return (current/max);
+        }
+
         public void reset()
         {
             current = start;
+        }
+
+        public void setRandomInRange()
+        {
+            current = UnityEngine.Random.Range(0, max);
         }
 
     }
