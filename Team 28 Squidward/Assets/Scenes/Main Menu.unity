@@ -909,7 +909,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91743fd03d6d20044b125e894c5cf730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstlevel: placegamescene
+  firstlevel: Base Scene
   optionsScreen: {fileID: 2082151369}
   creditsScreen: {fileID: 1970791062}
 --- !u!114 &336837250
