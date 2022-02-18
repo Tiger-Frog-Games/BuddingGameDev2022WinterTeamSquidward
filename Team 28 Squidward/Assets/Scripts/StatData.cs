@@ -56,6 +56,10 @@ namespace TeamSquidward.Eric
             current = UnityEngine.Random.Range(0, max);
         }
 
+        internal void changeMax(float i)
+        {
+            max += i;
+        }
     }
 
 

@@ -105,6 +105,14 @@ namespace TeamSquidward.Eric
                 return;
             }
 
+            if (SellingSheepPanel.gameObject.activeSelf == true)
+            {
+                SellingSheepPanel.SetActive(false);
+                ScreenGrayer.SetActive(false);
+                GameStateManager.Instance.SetState(GameState.Gameplay);
+                return;
+            }
+
             if (SheepMenuHolder.gameObject.activeSelf == false)
             {
                 menuAnimator.SetTrigger("OnMenuShow");

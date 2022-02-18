@@ -52,6 +52,7 @@ namespace TeamSquidward.Eric
             _instance = this;
 
             OnDayOver.OnEvent += OnDayOver_OnEvent;
+
             buttonOne.onClick.AddListener(ButtonOnePressed);
             buttonTwo.onClick.AddListener(ButtonTwoPressed);
             buttonThree.onClick.AddListener(ButtonThreePressed);
@@ -63,12 +64,14 @@ namespace TeamSquidward.Eric
                 currentTasks[i] = new Task();
                 populateUI(currentTasks[i], i);
             }
+
             OnDayOver_OnEvent();
         }
 
         private void OnDestroy()
         {
             OnDayOver.OnEvent -= OnDayOver_OnEvent;
+
             buttonOne.onClick.RemoveListener(ButtonOnePressed);
             buttonTwo.onClick.RemoveListener(ButtonTwoPressed);
             buttonThree.onClick.RemoveListener(ButtonThreePressed);

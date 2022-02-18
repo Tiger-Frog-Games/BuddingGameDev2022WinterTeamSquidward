@@ -63,6 +63,16 @@ namespace TeamSquidward.Eric
                 foodToSpawn.transform.position = FindPosToSpawn();
                 allFoodAndObsticals.Add(foodToSpawn.GetComponent<PooledObject>());
             }
+
+            for (int i = 0; i < numOfFruitToSpawn; i++)
+            {
+                // you will have to create a rock prefab then add a reference to the top of this script
+                //fill in this method
+                //instiate the rock prefab then place it somewhere 
+                //*Hint using FindPosToSpawn() will tell you where it goes*
+
+            }
+
         }
 
         private Vector3 posToSpawn = new Vector3();

@@ -17,6 +17,8 @@ namespace TeamSquidward.Eric
         [SerializeField] private Rigidbody rb;
         private PlayerLogic farmerInRange;
 
+        [SerializeField] private LayerMask MudLayer;
+
         [SerializeField] private RangeSensor farmerDetector;
         [SerializeField] private Animator animatorAnimal;
         [SerializeField] private SpriteRenderer bodySprite;
@@ -43,7 +45,7 @@ namespace TeamSquidward.Eric
         [SerializeField] public StatData StressData;
         [SerializeField] public StatData MuddyData;
         [SerializeField] public StatData ThirstData;
-        
+
 
         [Header("Tuning")]
 
@@ -66,8 +68,8 @@ namespace TeamSquidward.Eric
         [SerializeField] private Sprite stageFourOutlineSprite;
 
         private Vector3 targetSize;
-        
-        [SerializeField] private float sheepScaleSpeed =2;
+
+        [SerializeField] private float sheepScaleSpeed = 2;
         private float currentFoodValue;
         [SerializeField] private float startingFoodValue = 1;
         [SerializeField] private float minPristineValue = 10;
@@ -81,6 +83,9 @@ namespace TeamSquidward.Eric
         [SerializeField] private ParticleSystem[] tearParticlesLeft;
         [SerializeField] private ParticleSystem[] tearParticlesRight;
         private float tearEmmisionRate = 0;
+
+        [SerializeField] private ParticleSystem mudParticles;
+        private bool isInMudThisFrame = false;
 
         //task varibales
         private bool isPristine = false;
@@ -118,6 +123,8 @@ namespace TeamSquidward.Eric
 
         private void Update()
         {
+            updateMudStatus();
+
             updateAnimator();
             updateExpressions();
             updateParticles();
@@ -158,7 +165,7 @@ namespace TeamSquidward.Eric
 
             farmerDetector.OnLostDetection.AddListener(OnFarmerLeaveRange);
 
-            
+
         }
 
         private void OnDestroy()
@@ -167,11 +174,12 @@ namespace TeamSquidward.Eric
             OnNightTimeCleanUp.OnEvent -= OnNightTimeCleanUpEvent;
 
             farmerDetector.OnLostDetection.RemoveListener(OnFarmerLeaveRange);
+
             if (SheepCamera != null)
             {
                 Destroy(SheepCamera.gameObject);
             }
-            
+
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -182,13 +190,24 @@ namespace TeamSquidward.Eric
             }
         }
 
+
+        private void OnTriggerStay(Collider other)
+        {
+            if((MudLayer.value & (1 << other.gameObject.layer)) > 0)
+            {
+                isInMudThisFrame = true;
+            }
+        }
+
+
+
         private Vector3 velocityBeforePause;
         private Vector3 angluarVelocityBeforePause;
 
         private void OnGameStateChanged(GameState newGameState)
         {
             enabled = newGameState == GameState.Gameplay;
-            if(newGameState == GameState.Gameplay)
+            if (newGameState == GameState.Gameplay)
             {
                 rb.isKinematic = false;
                 if (velocityBeforePause != null)
@@ -209,7 +228,7 @@ namespace TeamSquidward.Eric
                     rb.angularVelocity = Vector3.zero;
                 }
 
-            }else if (newGameState == GameState.Night)
+            } else if (newGameState == GameState.Night)
             {
                 rb.isKinematic = true;
                 velocityBeforePause = Vector3.zero;
@@ -217,7 +236,7 @@ namespace TeamSquidward.Eric
                 rb.velocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
             }
-            else if(newGameState == GameState.Paused)
+            else if (newGameState == GameState.Paused)
             {
                 velocityBeforePause = rb.velocity;
                 angluarVelocityBeforePause = rb.angularVelocity;
@@ -237,6 +256,28 @@ namespace TeamSquidward.Eric
                 animatorAnimal.speed = 0;
             }
 
+        }
+
+        private void updateMudStatus()
+        {
+            if(isInMudThisFrame == true)
+            {
+                MuddyData.changeValue(100 * Time.deltaTime);
+            }
+            else
+            {
+                MuddyData.changeValue(-(40 * Time.deltaTime));
+            }
+            isInMudThisFrame = false;
+
+            if (MuddyData.getCurrentPercentage() > .8f )
+            {
+                rb.mass = 1.85f;
+            }
+            else
+            {
+                rb.mass = 1;
+            }
         }
 
         private void resetStats()
@@ -299,6 +340,28 @@ namespace TeamSquidward.Eric
         private void updateParticles()
         {
             //print(StressData.getCurrentPercentage());
+            if (MuddyData.getCurrentPercentage() == 1f)
+            {
+                  
+                var em = mudParticles.emission;
+                em.rateOverTime = 40;
+                
+            }
+            else if (MuddyData.getCurrentPercentage() >= .6f) 
+            {
+                var em = mudParticles.emission;
+                em.rateOverTime = 5;
+            }
+            else
+            {
+                var em = mudParticles.emission;
+                em.rateOverTime = 0;
+                if (mudParticles.isEmitting == true)
+                {
+                    mudParticles.Clear();
+                }
+            }
+
             if (StressData.getCurrentPercentage() == 1f)
             {
                 foreach (ParticleSystem tears in tearParticlesLeft)
@@ -312,7 +375,7 @@ namespace TeamSquidward.Eric
                     em.rateOverTime = 20;
                 }
             }
-            else if (StressData.getCurrentPercentage() >= .8f) 
+            else if (StressData.getCurrentPercentage() >= .8f)
             {
                 foreach (ParticleSystem tears in tearParticlesLeft)
                 {
@@ -338,6 +401,9 @@ namespace TeamSquidward.Eric
                     em.rateOverTime = 0;
                 }
             }
+
+
+
         }
 
         private void eatFood( FoodPickup foodIn )
@@ -356,7 +422,9 @@ namespace TeamSquidward.Eric
 
             changeColor();
             ChangeTargetSize();
-            
+
+            MuddyData.changeMax(foodIn.getFoodValue() * 2);
+
             foodIn.eatFood();
         }
 
@@ -371,8 +439,15 @@ namespace TeamSquidward.Eric
         private void changeSize(float deltaTime)
         {       
             currentSize = Vector3.Lerp(SheepBody.gameObject.transform.localScale, targetSize, sheepScaleSpeed * deltaTime).x;
-            SheepBody.gameObject.transform.localScale = Vector3.Lerp(SheepBody.gameObject.transform.localScale, targetSize, sheepScaleSpeed * deltaTime);
-            SheepShadow.gameObject.transform.localScale = Vector3.Lerp(SheepBody.gameObject.transform.localScale, targetSize, sheepScaleSpeed * deltaTime);
+            
+            Vector3 temp = Vector3.Lerp(SheepBody.gameObject.transform.localScale, targetSize, sheepScaleSpeed * deltaTime);
+
+            SheepBody.gameObject.transform.localScale = temp;
+            SheepShadow.gameObject.transform.localScale = temp;
+
+             
+            var em = mudParticles.shape;
+            em.radius = 2 * currentSize;
 
             SheepCollider.gameObject.transform.localScale = Vector3.Lerp(SheepCollider.gameObject.transform.localScale, targetSize, sheepScaleSpeed * deltaTime);
             
@@ -381,9 +456,9 @@ namespace TeamSquidward.Eric
             //be more clever about this?
             farmerDetector.Sphere.Radius = targetSize.x * 3;
 
-            changeBodySprite();
             
 
+            changeBodySprite();
         }
 
         private void changeBodySprite()

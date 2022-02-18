@@ -145,6 +145,11 @@ namespace TeamSquidward.Eric
                 if (animal.doesFullfillTask(task))
                 {
                     animalsThatFulfillTheTask.Add(animal);
+                    if (sheepUIBlocks.TryGetValue(animal, out GameObject uiBlock) )
+                    {
+                        sheepUIBlocks.Remove(animal);
+                        Destroy(uiBlock);
+                    }
                 }
             }
             return animalsThatFulfillTheTask;
@@ -173,6 +178,7 @@ namespace TeamSquidward.Eric
             if (AllTheSheeps.Contains(animalToSell))
             {
                 AllTheSheeps.Remove(animalToSell);
+                
             }
             
         }
