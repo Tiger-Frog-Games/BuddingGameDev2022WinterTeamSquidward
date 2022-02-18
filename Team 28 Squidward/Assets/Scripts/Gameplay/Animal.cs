@@ -295,6 +295,14 @@ namespace TeamSquidward.Eric
             }
         }
 
+        private void OnCollisionEnter(Collision enter)
+        {
+            if (enter.gameObject.TryGetComponent<Rockscript>(out Rockscript rock) ) 
+            {
+                StressData.changeValue(stressRaisedOnRockHit);
+            }
+        }
+
         #endregion
 
         #region Methods
