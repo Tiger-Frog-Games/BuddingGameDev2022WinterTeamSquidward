@@ -78,9 +78,11 @@ namespace TeamSquidward.Eric
 
                 // I created a rock prefab for you. Right now all the rocks spawn at 0,0,0; 
                 GameObject obsticalToSpawn = obsticalPools[ran].getPoolObject();
+                obsticalToSpawn.transform.position = FindPosToSpawn();
+                allFoodAndObsticals.Add(obsticalToSpawn.GetComponent<PooledObject>());
                 //fill in this rest of this
                 //method
-                
+
                 // I want you to spawn them in the correct spots. Similiar to how food is spawned. 
                 //*Hint using FindPosToSpawn() will tell you where it goes*
 
@@ -104,6 +106,7 @@ namespace TeamSquidward.Eric
             return posToSpawn;
         }
 
+        [SerializeField] private LayerMask fruitandobstaclemask;
         private bool vailidatePlaceMent()
         {
             
@@ -113,14 +116,21 @@ namespace TeamSquidward.Eric
                 return false;
             }
 
-            //Vector3Int helper = new Vector3Int((int)posToSpawn.x, (int)posToSpawn.z, 0);
-            //print(helper);
-            //Checks to see if it lands on a mud tile
-            //print(tileMap.GetTile(helper));
-            //if (tileMap.GetTile(helper ) == mudTile )
+            /// don't spawn objects that overlap over each other
+
+            // / print(posToSpawn);
+            ///if (Physics.CheckSphere(posToSpawn, -200f, fruitandobstaclemask))
             //{
             //    return false;
             //}
+
+            foreach (PooledObject pGO in allFoodAndObsticals)
+            {
+                if (Vector3.Distance(posToSpawn, pGO.gameObject.transform.position) < 10)
+                {
+                    return false;
+                }
+            }
 
             //passed all checks
             return true;
