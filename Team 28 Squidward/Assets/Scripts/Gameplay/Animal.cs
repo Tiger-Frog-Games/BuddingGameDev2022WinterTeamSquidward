@@ -728,7 +728,7 @@ namespace TeamSquidward.Eric
         private float timeSinceBeingPet;
         public void Pet()
         {
-            animatorAnimal.SetTrigger("PetEvent");
+            //animatorAnimal.SetTrigger("PetEvent");
             timeSinceBeingPet = Time.time;
             if (isStressed)
             {

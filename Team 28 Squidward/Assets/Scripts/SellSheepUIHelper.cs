@@ -34,6 +34,7 @@ namespace TeamSquidward.Eric
         public void SellAnimal()
         {
             SheepPen.Instance.sellSheep(animal);
+            UIAnimator.Instance.unlockAHat();
             SheepTaskManager.Instance.ClearTask(taskNumber);
         }
         #endregion
