@@ -127,7 +127,10 @@ namespace TeamSquidward.Eric
 
         }
 
-
+        public void OnCloseOptionsMenu()
+        {
+            menuAnimator.SetTrigger("OnMenuShow");
+        }
 
         private void OnMenuHidingAndDoneAnimating()
         {

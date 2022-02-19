@@ -71,17 +71,23 @@ namespace TeamSquidward.Eric
                 allFoodAndObsticals.Add(foodToSpawn.GetComponent<PooledObject>());
             }
 
-            //fill in this method
+           
             for (int i = 0; i < numOfObsticlesToSpawn; i++)
             {
                 int ran = Random.Range(0, obsticalPools.Length);
 
-                GameObject obsticalToSpawn = obsticalPools[ran].getPoolObject();
-
                 // I created a rock prefab for you. Right now all the rocks spawn at 0,0,0; 
+                GameObject obsticalToSpawn = obsticalPools[ran].getPoolObject();
+                //fill in this rest of this
+                //method
+                
                 // I want you to spawn them in the correct spots. Similiar to how food is spawned. 
                 //*Hint using FindPosToSpawn() will tell you where it goes*
 
+
+
+
+                //end of fill area
             }
 
         }
