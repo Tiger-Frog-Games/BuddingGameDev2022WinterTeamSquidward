@@ -99,7 +99,8 @@ namespace TeamSquidward.Eric
         public void spawnNewSheep()
         {
             spawningSheep = Instantiate(SheepPrefab, sheepSpawnLocation.transform.position, sheepSpawnLocation.gameObject.transform.rotation, null).GetComponent<Animal>();
-            
+            spawningSheep.setHat( UIAnimator.Instance.getSheepHat() );
+
             if (string.Compare(sheepNameText.text, "") == 0)
             {
                 spawningSheep.setName( DefaultSheepName[ Random.Range( 0, DefaultSheepName.Length-1) ] );

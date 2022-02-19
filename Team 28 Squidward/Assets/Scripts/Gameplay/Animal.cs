@@ -28,6 +28,7 @@ namespace TeamSquidward.Eric
 
         [SerializeField] private SpriteRenderer SheepBodyTexture;
         [SerializeField] private SpriteRenderer expresionSpriteRenderer;
+        [SerializeField] private SpriteRenderer hatSpriteRenderer;
 
         [SerializeField] private Sprite expressionNormal;
         [SerializeField] private Sprite expressionEating;
@@ -790,6 +791,14 @@ namespace TeamSquidward.Eric
             }
 
             return true;
+        }
+
+        public void setHat( Sprite hat )
+        {
+            if (hat != null)
+            {
+                hatSpriteRenderer.sprite = hat;
+            }
         }
 
         #endregion

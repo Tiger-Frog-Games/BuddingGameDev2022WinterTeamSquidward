@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace TeamSquidward.Eric
 {
@@ -155,12 +156,91 @@ namespace TeamSquidward.Eric
             GameStateManager.Instance.SetState(GameState.Gameplay);
         }
 
+
+        [SerializeField] private Image hatImage;
+        [SerializeField] private GameObject hatHolder;
+        [SerializeField] private List<Sprite> hatSprites;
+        private int activeHat;
+        private int unlockedHats = 1;
         public void OnSheepPenOpen()
         {
+            RefreshHatsAvailiable();
             ScreenGrayer.SetActive(true);
             sheepPenMenu.SetActive(true);
             GameStateManager.Instance.SetState(GameState.InMenu);
 
+        }
+
+        public void RefreshHatsAvailiable()
+        {
+            if (unlockedHats == 1)
+            {
+                hatHolder.SetActive(false);
+            }
+            else
+            {
+                changeHatSprite();
+                hatHolder.SetActive(true);
+            }
+        }
+
+        public void NextHat()
+        {
+            activeHat++;
+
+
+            if (activeHat > hatSprites.Count - 1 || activeHat > unlockedHats - 1 )
+            {
+                activeHat = 0;
+            }
+            changeHatSprite();
+        }
+
+        public void PrevHat()
+        {
+            activeHat--;
+            if (activeHat < 0)
+            {
+                if (unlockedHats > hatSprites.Count - 1)
+                {
+                    activeHat = hatSprites.Count - 1;
+                }
+                else
+                {
+                    activeHat = unlockedHats - 1;
+                }
+            }
+            changeHatSprite();
+        }
+
+        private void changeHatSprite()
+        {
+            if (activeHat == 0)
+            {
+                hatImage.gameObject.SetActive(false);
+
+            }
+            else
+            {
+                hatImage.gameObject.SetActive(true);
+                hatImage.sprite = hatSprites[activeHat];
+            }
+        }
+
+        [ContextMenu("Do something")]
+        public void unlockAHat()
+        {
+            unlockedHats++;
+        }
+
+        public Sprite getSheepHat()
+        {
+            if (activeHat == 0)
+            {
+                return null;
+            }
+
+            return hatSprites[activeHat];
         }
 
         public void CloseSheepPen()
