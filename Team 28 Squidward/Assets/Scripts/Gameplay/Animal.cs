@@ -27,6 +27,13 @@ namespace TeamSquidward.Eric
         [SerializeField] private CinemachineVirtualCamera SheepCamera;
 
         [SerializeField] private SpriteRenderer SheepBodyTexture;
+        [SerializeField] private SpriteRenderer expresionSpriteRenderer;
+
+        [SerializeField] private Sprite expressionNormal;
+        [SerializeField] private Sprite expressionEating;
+        [SerializeField] private Sprite expressionFrustrated;
+        [SerializeField] private Sprite expressionHappy;
+
         [SerializeField] private GameObject SheepBody;
         [SerializeField] private GameObject SheepShadow;
         [SerializeField] private GameObject SheepCollider;
@@ -85,6 +92,7 @@ namespace TeamSquidward.Eric
         private float tearEmmisionRate = 0;
 
         [SerializeField] private ParticleSystem mudParticles;
+        [SerializeField] private ParticleSystem foodParticles;
         private bool isInMudThisFrame = false;
 
         //task varibales
@@ -165,7 +173,7 @@ namespace TeamSquidward.Eric
 
             farmerDetector.OnLostDetection.AddListener(OnFarmerLeaveRange);
 
-
+            lastAteTime = float.MinValue;
         }
 
         private void OnDestroy()
@@ -182,11 +190,19 @@ namespace TeamSquidward.Eric
 
         }
 
+        private float lastHitRockTime = 0;
         private void OnCollisionEnter(Collision collision)
         {
             if (isStressed == true && collision.gameObject.TryGetComponent<PlayerLogic>(out PlayerLogic pl))
             {
                 rb.isKinematic = true;
+            }
+
+            if (lastHitRockTime + 5 < Time.time && collision.gameObject.TryGetComponent<Rockscript>(out Rockscript rock))
+            {
+                lastHitRockTime = Time.time;
+
+                StressData.changeValue(stressRaisedOnRockHit);
             }
         }
 
@@ -295,14 +311,6 @@ namespace TeamSquidward.Eric
             }
         }
 
-        private void OnCollisionEnter(Collision enter)
-        {
-            if (enter.gameObject.TryGetComponent<Rockscript>(out Rockscript rock) ) 
-            {
-                StressData.changeValue(stressRaisedOnRockHit);
-            }
-        }
-
         #endregion
 
         #region Methods
@@ -338,9 +346,45 @@ namespace TeamSquidward.Eric
             }
         }
 
+        private float lastExpressionWasSetToHappy;
+        private float lastExpresionChange;
+
         private void updateExpressions()
         {
+            if (lastExpresionChange + .2f > Time.time)
+            {
+                return;
+            }
 
+            //duration gottem from 
+            if (  lastAteTime + 1.5f > Time.time && ( Mathf.Sin( Time.time * 15 )) > .8f )
+            {
+                expresionSpriteRenderer.sprite = expressionEating;
+                lastExpresionChange = Time.time;
+                return;
+            }
+            if ( StressData.getCurrentPercentage() > .8f || MuddyData.getCurrentPercentage() > .8f )
+            {
+                expresionSpriteRenderer.sprite = expressionFrustrated;
+                lastExpresionChange = Time.time;
+                return;
+            }
+         
+            if ( lastExpressionWasSetToHappy + 10 < Time.time || Random.Range(0,100) < 2f )
+            {
+                expresionSpriteRenderer.sprite = expressionHappy;
+                lastExpresionChange = Time.time;
+                
+                if (lastExpressionWasSetToHappy + 20 > Time.time)
+                {
+                    lastExpressionWasSetToHappy = Time.time;
+                }
+                return;
+            }
+
+            expresionSpriteRenderer.sprite = expressionNormal;
+            lastExpresionChange = Time.time;
+            
         }
         /// <summary>
         /// 
@@ -414,10 +458,15 @@ namespace TeamSquidward.Eric
 
         }
 
+        private float lastAteTime;
         private void eatFood( FoodPickup foodIn )
         {
             currentFoodValue += foodIn.getFoodValue() * foodMultiplier;
-            
+
+            foodParticles.Play();
+
+            lastAteTime = Time.time;
+
             FOODTYPE toAdd = foodIn.getFoodType();
             foreach ( foodColorData foodData in foodColorValues)
             {
@@ -438,8 +487,8 @@ namespace TeamSquidward.Eric
 
         private void ChangeTargetSize()
         {
-            targetSize.x = currentFoodValue;
-            targetSize.y = currentFoodValue;
+            targetSize.x = currentFoodValue + ((sizeForTasks - 1) * .25f);
+            targetSize.y = currentFoodValue + ((sizeForTasks - 1) * .25f);
         }
 
        // private Vector3 ChangeSizeHelper = new Vector3();\
@@ -471,33 +520,31 @@ namespace TeamSquidward.Eric
 
         private void changeBodySprite()
         {
-            if (currentFoodValue < foodValueForStageTwo)
-            {
-                //stage 1
-                sizeForTasks = 1;
-                return;
-            }
-
-            if (currentFoodValue < foodValueForStageThree)
+            
+            if (sizeForTasks == 1 && currentFoodValue > foodValueForStageTwo)
             {
                 //stage 2
                 bodySprite.sprite = stageTwoSprite;
                 bodyOutlineSprite.sprite = stageTwoOutlineSprite;
                 sizeForTasks = 2;
+                ChangeTargetSize();
             }
-            else if (currentFoodValue < foodValueForStageFour)
+            else if (sizeForTasks == 2 && currentFoodValue > foodValueForStageThree)
             {
                 //stage 3
                 bodySprite.sprite = stageThreeSprite;
                 bodyOutlineSprite.sprite = stageThreeOutlineSprite;
                 sizeForTasks = 3;
+                ChangeTargetSize();
             }
-            else
+            else if(sizeForTasks == 3 && currentFoodValue > foodValueForStageFour)
             {
                 //stage 4
                 bodySprite.sprite = stageFourSprite;
                 bodyOutlineSprite.sprite = stageFourOutlineSprite;
+                SheepCollider.layer = 11;
                 sizeForTasks = 4;
+                ChangeTargetSize();
             }
         }
 
@@ -692,6 +739,40 @@ namespace TeamSquidward.Eric
 
         public bool doesFullfillTask(Task taskToCheck )
         {
+            if (sizeForTasks < (int)taskToCheck.taskSize  )
+            {
+                return false;
+            }
+
+            if(taskToCheck.taskQuality == TASKCOLORQUIALITY.PRISTINE)
+            {
+                if(isPristine == false)
+                {
+                    return false;
+                }
+                if (foodColorValues[0].type != taskToCheck.requiredFood)
+                {
+                    return false;
+                }
+            }
+            if (taskToCheck.taskQuality == TASKCOLORQUIALITY.PRIME)
+            {
+                if (foodColorValues[0].type != taskToCheck.requiredFood)
+                {
+                    return false;
+                }
+            }
+            if (taskToCheck.taskQuality == TASKCOLORQUIALITY.PUDDLE)
+            {
+                //not 100% sure this is working
+                if (!(foodColorValues[0].type == taskToCheck.requiredFood ||
+                    foodColorValues[1].type == taskToCheck.requiredFood ||
+                    foodColorValues[2].type == taskToCheck.requiredFood))
+                {
+                    return false;
+                }
+            }
+
             return true;
         }
 

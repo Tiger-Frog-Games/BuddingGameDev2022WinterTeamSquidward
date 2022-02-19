@@ -4,16 +4,18 @@ using UnityEngine;
 
 namespace TeamSquidward.Eric
 {
-    public enum TASKTYPE { SIZE, COLOR }
+    public enum TASKSIZE { BIG = 2, BIGGER = 3, GARGAGUENT = 4}
 
-    public enum TASKRARITY { EASY,MEDIUM,HARD,PRISTINE}
+    public enum TASKCOLORQUIALITY { PUDDLE, PRIME,PRISTINE}
 
     public class Task 
     {
         #region Variables
 
-        public TASKTYPE taskType;
-        public TASKRARITY taskRarity;
+        public TASKSIZE taskSize;
+        public TASKCOLORQUIALITY taskQuality;
+        public FOODTYPE requiredFood;
+
         private int timeLeft;
 
         public bool isSoldThisTurn = false;
@@ -25,16 +27,20 @@ namespace TeamSquidward.Eric
         {
             timeLeft = Random.Range(3, 5);
 
-            System.Type type = typeof(TASKTYPE);
+            System.Type type = typeof(TASKSIZE);
             System.Array values = type.GetEnumValues();
 
-            taskType = (TASKTYPE)values.GetValue(Random.Range(0, values.Length));
+            taskSize = (TASKSIZE)values.GetValue(Random.Range(0, values.Length));
 
-            System.Type typeRare = typeof(TASKRARITY);
-            System.Array valuesRare = type.GetEnumValues();
+            System.Type typeRare = typeof(TASKCOLORQUIALITY);
+            System.Array valuesRare = typeRare.GetEnumValues();
 
-            taskRarity = (TASKRARITY)values.GetValue(Random.Range(0, values.Length));
+            taskQuality = (TASKCOLORQUIALITY)valuesRare.GetValue(Random.Range(0, valuesRare.Length));
 
+            System.Type typeFood = typeof(FOODTYPE);
+            System.Array valuesFood = typeFood.GetEnumValues();
+
+            requiredFood = (FOODTYPE)valuesFood.GetValue(Random.Range(0, valuesFood.Length));
 
         }
 
@@ -56,7 +62,7 @@ namespace TeamSquidward.Eric
         
         public string getDescription()
         {
-            return "Look I am still makig this";
+            return $"I am looking for a {taskSize} {taskQuality} {requiredFood}";
         }
         #endregion
     }
