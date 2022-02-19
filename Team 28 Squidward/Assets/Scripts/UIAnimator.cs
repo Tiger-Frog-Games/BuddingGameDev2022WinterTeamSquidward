@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace TeamSquidward.Eric
 {
@@ -30,13 +32,15 @@ namespace TeamSquidward.Eric
 
         [SerializeField] private GameObject SheepMenuHolder;
         [SerializeField] private GameObject ScreenGrayer;
+        [SerializeField] private GameObject ScreenBlackout;
         [SerializeField] private GameObject LargeSheepImage;
         [SerializeField] private GameObject Timer;
         [SerializeField] private GameObject OptionsMenu;
         [SerializeField] private GameObject RequestPanel;
         [SerializeField] private GameObject SellingSheepPanel;
         [SerializeField] private GameObject sheepPenMenu;
-        
+        [SerializeField] private GameObject exitGameMenu;
+
 
         [SerializeField] private EventChannelSO OnDayStart;
         [SerializeField] private EventChannelSO OnDayOver;
@@ -237,6 +241,19 @@ namespace TeamSquidward.Eric
             }
         }
 
+        public void showEndGameScreen()
+        {
+            ScreenBlackout.SetActive(true);
+
+            RequestPanel.SetActive(false);
+            LargeSheepImage.SetActive(false);
+            Timer.SetActive(false);
+
+
+
+            exitGameMenu.SetActive(true);
+        }
+
         private bool isGrayScreenActive;
         public void SellSheepAnimationStart()
         {
@@ -259,6 +276,11 @@ namespace TeamSquidward.Eric
                 LargeSheepImage.SetActive(true);
             }
            
+        }
+
+        public void exitGame()
+        {
+            SceneManager.LoadScene("Main Menu");
         }
 
         #endregion

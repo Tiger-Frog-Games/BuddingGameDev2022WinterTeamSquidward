@@ -239,7 +239,8 @@ namespace TeamSquidward.Eric
                         livesLeft--;
                         if (livesLeft <= 0)
                         {
-                            print("Game Over");
+                            UIAnimator.Instance.showEndGameScreen();
+                            return;
                         }
                     }
                   
