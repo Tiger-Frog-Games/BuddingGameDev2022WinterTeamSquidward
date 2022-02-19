@@ -123,6 +123,12 @@ namespace TeamSquidward.Eric
         private void OnNightCleanUp_OnEvent()
         {
             this.transform.position = startPosition.transform.position;
+            if (currentAnimalPushing != null)
+            {
+                currentAnimalPushing.removeActiveCamera();
+            }
+            lastAnimalPushed = null;
+            currentAnimalPushing = null;
         }
 
         private void OnPetSheepButtonPress(InputAction.CallbackContext obj)

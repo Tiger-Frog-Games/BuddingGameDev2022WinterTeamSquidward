@@ -93,6 +93,8 @@ namespace TeamSquidward.Eric
 
         [SerializeField] private ParticleSystem mudParticles;
         [SerializeField] private ParticleSystem foodParticles;
+        [SerializeField] private ParticleSystem upgradeParticles;
+        [SerializeField] private ParticleSystem prestineParticles;
         private bool isInMudThisFrame = false;
 
         //task varibales
@@ -351,7 +353,13 @@ namespace TeamSquidward.Eric
 
         private void updateExpressions()
         {
-            if (lastExpresionChange + .2f > Time.time)
+            if (timeSinceBeingPet + 2f > Time.time)
+            {
+                expresionSpriteRenderer.sprite = expressionHappy;
+                return;
+            }
+
+            if (lastExpresionChange + .05f > Time.time)
             {
                 return;
             }
@@ -527,6 +535,7 @@ namespace TeamSquidward.Eric
                 bodySprite.sprite = stageTwoSprite;
                 bodyOutlineSprite.sprite = stageTwoOutlineSprite;
                 sizeForTasks = 2;
+                upgradeParticles.Play();
                 ChangeTargetSize();
             }
             else if (sizeForTasks == 2 && currentFoodValue > foodValueForStageThree)
@@ -535,6 +544,7 @@ namespace TeamSquidward.Eric
                 bodySprite.sprite = stageThreeSprite;
                 bodyOutlineSprite.sprite = stageThreeOutlineSprite;
                 sizeForTasks = 3;
+                upgradeParticles.Play();
                 ChangeTargetSize();
             }
             else if(sizeForTasks == 3 && currentFoodValue > foodValueForStageFour)
@@ -544,6 +554,7 @@ namespace TeamSquidward.Eric
                 bodyOutlineSprite.sprite = stageFourOutlineSprite;
                 SheepCollider.layer = 11;
                 sizeForTasks = 4;
+                upgradeParticles.Play();
                 ChangeTargetSize();
             }
         }
@@ -582,8 +593,12 @@ namespace TeamSquidward.Eric
                 SheepBodyTexture.color = first.color;
                 if (currentFoodValue > numberOfTotalFoodTillPristineEligable)
                 {
-                    print("What a pristine color sheep");
-                    isPristine = true;
+                    if (isPristine == false)
+                    {
+                        //print("What a pristine color sheep");
+                        prestineParticles.Play();
+                        isPristine = true;
+                    }
                 }
                 else
                 {
@@ -709,10 +724,11 @@ namespace TeamSquidward.Eric
 
         }
         
+        private float timeSinceBeingPet;
         public void Pet()
         {
             animatorAnimal.SetTrigger("PetEvent");
-            
+            timeSinceBeingPet = Time.time;
             if (isStressed)
             {
                 StressData.reset();

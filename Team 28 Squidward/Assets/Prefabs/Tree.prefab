@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3244852740638399642}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -24.62, y: 0, z: 8.52}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -76,8 +76,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.93, y: 1, z: 3.27}
-  m_Center: {x: 0, y: 0, z: 0.35}
+  m_Size: {x: 2.51, y: 1, z: 1.86}
+  m_Center: {x: 0, y: 0, z: -2.55}
 --- !u!114 &3760493307768388424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,6 +101,9 @@ MonoBehaviour:
   tileMap: {fileID: 0}
   mudTile: {fileID: 11400000, guid: bc2763a4e1505ad44948db62a6badc88, type: 2}
   safeDistanceToStart: 20
+  fruitandobstaclemask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &3244852741857888018
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,7 +129,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3244852741857888018}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.08, y: -2.92, z: -0.04}
+  m_LocalPosition: {x: -0.08, y: 0, z: -0.04}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -210,7 +213,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3760493307521683306}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.08, y: -2.44, z: -3.68}
+  m_LocalPosition: {x: -0.08, y: 0, z: -3.68}
   m_LocalScale: {x: 0.82, y: 0.52, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

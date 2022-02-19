@@ -95,18 +95,21 @@ namespace TeamSquidward.Eric
         }
 
         private Vector3 posToSpawn = new Vector3();
+        
         public Vector3 FindPosToSpawn()
         {
+            
             do
             {
                 posToSpawn.x = Random.Range(groundCollider.bounds.extents.x - 10, -groundCollider.bounds.extents.x + 10);
                 posToSpawn.z = Random.Range(groundCollider.bounds.extents.z - 10, -groundCollider.bounds.extents.z + 10);
+                
             } while ( vailidatePlaceMent() == false );
 
             return posToSpawn;
         }
 
-        [SerializeField] private LayerMask fruitandobstaclemask;
+        //[SerializeField] private LayerMask fruitandobstaclemask;
         private bool vailidatePlaceMent()
         {
             
