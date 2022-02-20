@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 30114914}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.051, y: -0.233, z: -0}
+  m_LocalPosition: {x: -0.025, y: -0.045, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -72,13 +72,13 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 80
-  m_Sprite: {fileID: 21300000, guid: 6ae3ccdcc115349439e08ed937c0a005, type: 3}
+  m_SortingOrder: 72
+  m_Sprite: {fileID: 21300000, guid: e79d04c239f6c4d4fa63c05dd86d7ae8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 6.29, y: 3.48}
+  m_Size: {x: 1.17, y: 1.17}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -11082,9 +11082,9 @@ MonoBehaviour:
   expresionSpriteRenderer: {fileID: 30114916}
   hatSpriteRenderer: {fileID: 2002823940}
   expressionNormal: {fileID: 21300000, guid: e79d04c239f6c4d4fa63c05dd86d7ae8, type: 3}
-  expressionEating: {fileID: 21300000, guid: 6585adf5edc7b224b8cce521a3e4184f, type: 3}
+  expressionEating: {fileID: 21300000, guid: 7fdab706356604240b16430ec6cfe4fb, type: 3}
   expressionFrustrated: {fileID: 21300000, guid: 9a4497f5225a17549b2f183a3e6d958b, type: 3}
-  expressionHappy: {fileID: 21300000, guid: 6ae3ccdcc115349439e08ed937c0a005, type: 3}
+  expressionHappy: {fileID: 21300000, guid: e2e8314bb7ca7404197696e6d1f3fefb, type: 3}
   SheepBody: {fileID: 62842689}
   SheepShadow: {fileID: 1536405136346480468}
   SheepCollider: {fileID: 639361393}

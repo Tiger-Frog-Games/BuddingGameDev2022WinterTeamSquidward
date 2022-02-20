@@ -177,6 +177,7 @@ namespace TeamSquidward.Eric
             farmerDetector.OnLostDetection.AddListener(OnFarmerLeaveRange);
 
             lastAteTime = float.MinValue;
+            lastExpressionWasSetToHappy = float.MinValue;
         }
 
         private void OnDestroy()
@@ -379,12 +380,12 @@ namespace TeamSquidward.Eric
                 return;
             }
          
-            if ( lastExpressionWasSetToHappy + 10 < Time.time || Random.Range(0,100) < 2f )
+            if ( lastExpressionWasSetToHappy + 3 > Time.time || Random.Range(0,100) < .7f )
             {
                 expresionSpriteRenderer.sprite = expressionHappy;
                 lastExpresionChange = Time.time;
                 
-                if (lastExpressionWasSetToHappy + 20 > Time.time)
+                if (lastExpressionWasSetToHappy + 3.2 < Time.time)
                 {
                     lastExpressionWasSetToHappy = Time.time;
                 }
