@@ -42,9 +42,12 @@ namespace TeamSquidward.Eric
         private List<Animal> validSheepForTaskTwo = new List<Animal>();
         private List<Animal> validSheepForTaskThree = new List<Animal>();
 
-
+        [SerializeField] private Image[] awardMedals;
 
         private Task[] currentTasks = new Task[3];
+
+        [SerializeField] private Color activeColor;
+        [SerializeField] private Color DeActiveColor;
 
 
         private void Start()
@@ -58,6 +61,8 @@ namespace TeamSquidward.Eric
             buttonThree.onClick.AddListener(ButtonThreePressed);
 
             livesLeft = 3;
+
+            populateMedals();
 
             for (int i = 0; i < 3; i++)
             {
@@ -151,8 +156,10 @@ namespace TeamSquidward.Eric
         {
             activeTask = buttonPressed;
 
+            populateMedals();
+
             //delete ui elements 
-            foreach(Transform child in sellSheepUIHolder)
+            foreach (Transform child in sellSheepUIHolder)
             {
                 //I Dont like this but w/e
                 Destroy( child.gameObject);
@@ -205,6 +212,20 @@ namespace TeamSquidward.Eric
             }
         }
 
+        private void populateMedals()
+        {
+            for (int i = 0; i < awardMedals.Length; i++)
+            {
+                if (i < livesLeft)
+                {
+                    awardMedals[i].color = activeColor;
+                }
+                else
+                {
+                    awardMedals[i].color = DeActiveColor;
+                }
+            }
+        }
         private void cleanUI(int i)
         {
             if (i == 0)
