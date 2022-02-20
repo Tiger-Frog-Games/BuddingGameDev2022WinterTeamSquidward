@@ -24,6 +24,8 @@ namespace TeamSquidward.Eric
 
         [SerializeField] private int livesLeft;
 
+        [SerializeField] private GameObject requestPanel;
+
         [SerializeField] private EventChannelSO OnDayOver;
         [SerializeField] private Animator CanvasAnimator;
 
@@ -91,7 +93,7 @@ namespace TeamSquidward.Eric
             activeTask = -1;
 
             checkSheepToSell();
-
+            populateMedals();
         }
 
         public void checkSheepToSell()
@@ -251,6 +253,8 @@ namespace TeamSquidward.Eric
         public void OnNextDayButton()
         {
 
+            requestPanel.SetActive(false);
+
             for (int i = 0; i < 3; i++)
             {
                 if( currentTasks[i].isTaskOver() || currentTasks[i].isSoldThisTurn )
@@ -258,6 +262,7 @@ namespace TeamSquidward.Eric
                     if (! currentTasks[i].isSoldThisTurn)
                     {
                         livesLeft--;
+                        populateMedals();
                         if (livesLeft <= 0)
                         {
                             UIAnimator.Instance.showEndGameScreen();

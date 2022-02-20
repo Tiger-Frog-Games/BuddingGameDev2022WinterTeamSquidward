@@ -136,7 +136,8 @@ namespace TeamSquidward.Eric
 
         public void OnCloseOptionsMenu()
         {
-            menuAnimator.SetTrigger("OnMenuShow");
+            menuAnimator.SetTrigger("OnMenuHide");
+            menuAnimator.ResetTrigger("OnMenuShow");
         }
 
         private void OnMenuHidingAndDoneAnimating()
@@ -265,8 +266,7 @@ namespace TeamSquidward.Eric
 
             sheepPenMenu.SetActive(false);
             LargeSheepImage.SetActive(true);
-            RequestPanel.SetActive(true);
-            NextDayButton.SetActive(true);
+            
 
         }
         [SerializeField] private GameObject requestPannelButtonCloser;
@@ -290,13 +290,15 @@ namespace TeamSquidward.Eric
             ScreenGrayer.SetActive(false);
 
             requestPannelButtonCloser.SetActive(false);
-            NextDayButton.SetActive(true);
+            //NextDayButton.SetActive(true);
 
             GameStateManager.Instance.SetState(GameState.Gameplay);
         }
 
-        public void BroadCastNightTimeCleanUp()
+        public void BigSheepDoneShowing()
         {
+            RequestPanel.SetActive(true);
+            NextDayButton.SetActive(true);
             OnNightTimeCleanUp.RaiseEvent();
         }
 
