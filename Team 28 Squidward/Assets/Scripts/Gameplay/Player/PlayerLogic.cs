@@ -146,7 +146,7 @@ namespace TeamSquidward.Eric
 
         public void DonePettingSheep()
         {
-            print("uh i should be able to move again");
+            
             moveMent.Enable();
         }
 
