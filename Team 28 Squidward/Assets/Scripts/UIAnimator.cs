@@ -121,13 +121,15 @@ namespace TeamSquidward.Eric
             if (SheepMenuHolder.gameObject.activeSelf == false)
             {
                 menuAnimator.SetTrigger("OnMenuShow");
+                menuAnimator.ResetTrigger("OnMenuHide");
                 SheepMenuHolder.SetActive(true);
                 ScreenGrayer.SetActive(true);
                 GameStateManager.Instance.SetState(GameState.Paused);
             }
             else //if (1== 2)
             {
-                menuAnimator.SetTrigger("OnMenuShow");
+                menuAnimator.SetTrigger("OnMenuHide");
+                menuAnimator.ResetTrigger("OnMenuShow");
             }
 
         }
