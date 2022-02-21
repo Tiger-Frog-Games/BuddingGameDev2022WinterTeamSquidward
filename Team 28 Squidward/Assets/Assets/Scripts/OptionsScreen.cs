@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Audio;
 
 public class OptionsScreen : MonoBehaviour
 {
@@ -12,6 +13,13 @@ public class OptionsScreen : MonoBehaviour
     private int selectedResolution;
 
     public TMP_Text resolutionLabel;
+
+    public AudioMixer theMixer;
+
+    public TMP_Text mastLabel, musicLabel, sfxLabel;
+    public Slider mastSlider, musicSlider, sfxSlider;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -29,9 +37,9 @@ public class OptionsScreen : MonoBehaviour
         // Display current resolution being used in options menu
 
         bool foundRes = false;
-        for(int i = 0; i < resolutions.Count; i++)
+        for (int i = 0; i < resolutions.Count; i++)
         {
-            if(Screen.width == resolutions[i].horizontal && Screen.height == resolutions[i].vertical) 
+            if (Screen.width == resolutions[i].horizontal && Screen.height == resolutions[i].vertical)
             {
                 foundRes = true;
 
@@ -43,17 +51,31 @@ public class OptionsScreen : MonoBehaviour
 
         // If current resolution is not in options list, create a new resolution to add to list, working in editor but not in build?
 
-        if(!foundRes)
-        {
-            ResItem newRes = new ResItem();
-            newRes.horizontal = Screen.width;
-            newRes.vertical = Screen.height;
+        //if(!foundRes)
+        //{
+        //    ResItem newRes = new ResItem();
+        //    newRes.horizontal = Screen.width;
+        //    newRes.vertical = Screen.height;
 
-            resolutions.Add(newRes);
-            selectedResolution = resolutions.Count - 1;
+        //    resolutions.Add(newRes);
+        //    selectedResolution = resolutions.Count - 1;
 
-            UpdateResLabel();
-        }
+        //    UpdateResLabel();
+        //}
+
+        float vol = 0f;
+        theMixer.GetFloat("MasterVol", out vol);
+        mastSlider.value = vol;
+        theMixer.GetFloat("MusicVol", out vol);
+        musicSlider.value = vol;
+        theMixer.GetFloat("SFXVol", out vol);
+        sfxSlider.value = vol;
+
+        mastLabel.text = Mathf.RoundToInt(mastSlider.value + 80).ToString();
+        musicLabel.text = Mathf.RoundToInt(musicSlider.value + 80).ToString();
+        sfxLabel.text = Mathf.RoundToInt(sfxSlider.value + 80).ToString();
+
+
     }
 
     // Update is called once per frame
@@ -91,7 +113,7 @@ public class OptionsScreen : MonoBehaviour
 
     public void ApplyGraphics()
     {
-        //Screen.fullScreen = fullscreenTog.isOn;
+        Screen.fullScreen = fullscreenTog.isOn;
 
         if (vsyncTog.isOn)
         {
@@ -103,6 +125,33 @@ public class OptionsScreen : MonoBehaviour
         }
 
         Screen.SetResolution(resolutions[selectedResolution].horizontal, resolutions[selectedResolution].vertical, fullscreenTog.isOn);
+    }
+
+    public void SetMasterVol()
+    {
+        mastLabel.text = Mathf.RoundToInt(mastSlider.value + 80).ToString();
+
+        theMixer.SetFloat("MasterVol", mastSlider.value);
+
+        PlayerPrefs.SetFloat("MasterVol", mastSlider.value);
+    }
+
+    public void SetMusicVol()
+    {
+        musicLabel.text = Mathf.RoundToInt(musicSlider.value + 80).ToString();
+
+        theMixer.SetFloat("MusicVol", musicSlider.value);
+
+        PlayerPrefs.SetFloat("MusicVol", musicSlider.value);
+    }
+
+    public void SetSFXVol()
+    {
+        sfxLabel.text = Mathf.RoundToInt(sfxSlider.value + 80).ToString();
+
+        theMixer.SetFloat("SFXVol", sfxSlider.value);
+
+        PlayerPrefs.SetFloat("SFXVol", sfxSlider.value);
     }
 }
 [System.Serializable]
