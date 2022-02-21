@@ -9,7 +9,6 @@ namespace TeamSquidward.Eric
     {
         Gameplay,
         Night,
-        InMenu,
         Paused
     }
 
@@ -28,9 +27,10 @@ namespace TeamSquidward.Eric
             }
         }
 
+        //initially setting the game play to paused in the UIAnimator
         private GameStateManager()
         {
-
+            
         }
 
         public GameState CurrentGameState { get; private set; }

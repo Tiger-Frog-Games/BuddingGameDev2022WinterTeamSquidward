@@ -56,8 +56,8 @@ namespace TeamSquidward.Eric
             }
             if (newGameState == GameState.Gameplay && prevGameState == GameState.Night)
             {
-                gameTheme.Stop();
-                nightTheme.Play();
+                nightTheme.Stop();
+                gameTheme.Play();
             }
             prevGameState = newGameState;
 

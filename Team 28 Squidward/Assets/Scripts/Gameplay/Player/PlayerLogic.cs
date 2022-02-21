@@ -69,7 +69,8 @@ namespace TeamSquidward.Eric
         {
             OnNightCleanUp.OnEvent += OnNightCleanUp_OnEvent;
             petButton.Enable();
-            
+            squidMovement.enabled = false;
+
         }
 
         private void OnDisable()

@@ -135,6 +135,7 @@ namespace TeamSquidward.Rat
                 Debug.LogError("Game rate can not be zero or negative");
             }
 
+            enabled = false;
             ResetTimer();
         }
         //Ignore this method

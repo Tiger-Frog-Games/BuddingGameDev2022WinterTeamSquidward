@@ -41,6 +41,7 @@ namespace TeamSquidward.Eric
         [SerializeField] private GameObject SellingSheepPanel;
         [SerializeField] private GameObject sheepPenMenu;
         [SerializeField] private GameObject tutorialPanel;
+        [SerializeField] private GameObject optionsPanel;
         [SerializeField] private GameObject exitGameMenu;
 
 
@@ -60,6 +61,14 @@ namespace TeamSquidward.Eric
             {
                 openMenuButton.performed += OnOpenMenuButtonPress;
             }
+            tutorialPanel.SetActive(true);
+        }
+
+        private void Start()
+        {
+            GameStateManager.Instance.SetState(GameState.Paused);
+            Timer.SetActive(false);
+
         }
 
         private void OnDestroy()
@@ -95,6 +104,12 @@ namespace TeamSquidward.Eric
                 return;
             }
 
+            if (tutorialPanel.gameObject.activeSelf == true) 
+            {
+                hideTutorial();
+                return;
+            }
+
             if (sheepPenMenu.gameObject.activeSelf == true)
             {
                 ScreenGrayer.SetActive(false);
@@ -118,6 +133,16 @@ namespace TeamSquidward.Eric
                 GameStateManager.Instance.SetState(GameState.Gameplay);
                 return;
             }
+
+            
+
+            if (optionsPanel.gameObject.activeSelf == true)
+            {
+                optionsPanel.SetActive(false);
+               
+                return;
+            }
+
 
             if (SheepMenuHolder.gameObject.activeSelf == false)
             {
@@ -171,7 +196,7 @@ namespace TeamSquidward.Eric
             RefreshHatsAvailiable();
             ScreenGrayer.SetActive(true);
             sheepPenMenu.SetActive(true);
-            GameStateManager.Instance.SetState(GameState.InMenu);
+            GameStateManager.Instance.SetState(GameState.Paused);
 
         }
 
@@ -282,7 +307,7 @@ namespace TeamSquidward.Eric
             requestPannelButtonCloser.SetActive(true);
             NextDayButton.SetActive(false);
 
-            GameStateManager.Instance.SetState(GameState.InMenu);
+            GameStateManager.Instance.SetState(GameState.Paused);
         }
 
         public void hideRequestPanelFromInGame()
@@ -307,7 +332,7 @@ namespace TeamSquidward.Eric
         {
             RequestPanel.SetActive(false);
             SellingSheepPanel.SetActive(true);
-            if (GameStateManager.Instance.CurrentGameState == GameState.InMenu)
+            if (GameStateManager.Instance.CurrentGameState == GameState.Paused)
             {
                 ScreenGrayer.SetActive(true);
             }
@@ -367,9 +392,27 @@ namespace TeamSquidward.Eric
             tutorialPanel.gameObject.SetActive(true);
         }
 
+        private bool firstTimeClosed = false;
         public void hideTutorial()
         {
             tutorialPanel.gameObject.SetActive(false);
+            
+            if (firstTimeClosed == false)
+            {
+                GameStateManager.Instance.SetState(GameState.Gameplay);
+                Timer.SetActive(true);
+                firstTimeClosed = true;
+            }
+        }
+
+        public void showOptions()
+        {
+            optionsPanel.gameObject.SetActive(true);
+        }
+
+        public void hideOptions()
+        {
+            optionsPanel.gameObject.SetActive(false);
         }
 
         public void exitGame()

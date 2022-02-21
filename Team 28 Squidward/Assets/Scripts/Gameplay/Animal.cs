@@ -93,7 +93,7 @@ namespace TeamSquidward.Eric
         [SerializeField] private ParticleSystem[] tearParticlesRight;
         private Vector3[] locationsOfRightTears;
 
-        private float tearEmmisionRate = 0;
+        //private float tearEmmisionRate = 0;
 
         [SerializeField] private ParticleSystem mudParticles;
         [SerializeField] private ParticleSystem foodParticles;

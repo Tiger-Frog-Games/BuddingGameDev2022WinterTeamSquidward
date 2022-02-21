@@ -40,7 +40,7 @@ namespace TeamSquidward.Eric
             System.Type typeFood = typeof(FOODTYPE);
             System.Array valuesFood = typeFood.GetEnumValues();
 
-            requiredFood = (FOODTYPE)valuesFood.GetValue(Random.Range(0, valuesFood.Length));
+            requiredFood = (FOODTYPE)valuesFood.GetValue(Random.Range(0, valuesFood.Length -1 ));
 
         }
 
