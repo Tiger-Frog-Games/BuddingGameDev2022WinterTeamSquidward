@@ -62,7 +62,7 @@ namespace TeamSquidward.Eric
         
         public string getDescription()
         {
-            return $"I am looking for a {taskSize} {taskQuality} {requiredFood}";
+            return $"I am looking for a {taskSize}, {taskQuality} {requiredFood}!";
         }
         #endregion
     }

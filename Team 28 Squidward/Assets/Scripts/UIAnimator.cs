@@ -121,7 +121,9 @@ namespace TeamSquidward.Eric
             if (RequestPanel.gameObject.activeSelf == true)
             {
                 ScreenGrayer.SetActive(false);
+                requestPannelButtonCloser.SetActive(false);
                 RequestPanel.SetActive(false);
+
                 GameStateManager.Instance.SetState(GameState.Gameplay);
                 return;
             }
