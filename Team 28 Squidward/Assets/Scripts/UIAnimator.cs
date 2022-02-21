@@ -40,6 +40,7 @@ namespace TeamSquidward.Eric
         [SerializeField] private GameObject RequestPanel;
         [SerializeField] private GameObject SellingSheepPanel;
         [SerializeField] private GameObject sheepPenMenu;
+        [SerializeField] private GameObject tutorialPanel;
         [SerializeField] private GameObject exitGameMenu;
 
 
@@ -359,7 +360,16 @@ namespace TeamSquidward.Eric
             {
                 LargeSheepImage.SetActive(true);
             }
-           
+        }
+
+        public void showTutorial()
+        {
+            tutorialPanel.gameObject.SetActive(true);
+        }
+
+        public void hideTutorial()
+        {
+            tutorialPanel.gameObject.SetActive(false);
         }
 
         public void exitGame()

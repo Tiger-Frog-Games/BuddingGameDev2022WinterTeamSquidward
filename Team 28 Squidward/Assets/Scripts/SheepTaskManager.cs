@@ -45,6 +45,7 @@ namespace TeamSquidward.Eric
         private List<Animal> validSheepForTaskThree = new List<Animal>();
 
         [SerializeField] private Image[] awardMedals;
+        [SerializeField] private SpriteRenderer[] awardMedalsInGame;
 
         private Task[] currentTasks = new Task[3];
 
@@ -221,10 +222,12 @@ namespace TeamSquidward.Eric
                 if (i < livesLeft)
                 {
                     awardMedals[i].color = activeColor;
+                    awardMedalsInGame[i].color = activeColor;
                 }
                 else
                 {
                     awardMedals[i].color = DeActiveColor;
+                    awardMedalsInGame[i].color = DeActiveColor;
                 }
             }
         }
