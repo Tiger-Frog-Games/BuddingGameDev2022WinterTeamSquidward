@@ -40,6 +40,7 @@ namespace TeamSquidward.Eric
         [SerializeField] private GameObject RequestPanel;
         [SerializeField] private GameObject SellingSheepPanel;
         [SerializeField] private GameObject sheepPenMenu;
+        [SerializeField] private GameObject tutorialPanel;
         [SerializeField] private GameObject exitGameMenu;
 
 
@@ -121,20 +122,23 @@ namespace TeamSquidward.Eric
             if (SheepMenuHolder.gameObject.activeSelf == false)
             {
                 menuAnimator.SetTrigger("OnMenuShow");
+                menuAnimator.ResetTrigger("OnMenuHide");
                 SheepMenuHolder.SetActive(true);
                 ScreenGrayer.SetActive(true);
                 GameStateManager.Instance.SetState(GameState.Paused);
             }
             else //if (1== 2)
             {
-                menuAnimator.SetTrigger("OnMenuShow");
+                menuAnimator.SetTrigger("OnMenuHide");
+                menuAnimator.ResetTrigger("OnMenuShow");
             }
 
         }
 
         public void OnCloseOptionsMenu()
         {
-            menuAnimator.SetTrigger("OnMenuShow");
+            menuAnimator.SetTrigger("OnMenuHide");
+            menuAnimator.ResetTrigger("OnMenuShow");
         }
 
         private void OnMenuHidingAndDoneAnimating()
@@ -263,8 +267,7 @@ namespace TeamSquidward.Eric
 
             sheepPenMenu.SetActive(false);
             LargeSheepImage.SetActive(true);
-            RequestPanel.SetActive(true);
-            NextDayButton.SetActive(true);
+            
 
         }
         [SerializeField] private GameObject requestPannelButtonCloser;
@@ -288,13 +291,15 @@ namespace TeamSquidward.Eric
             ScreenGrayer.SetActive(false);
 
             requestPannelButtonCloser.SetActive(false);
-            NextDayButton.SetActive(true);
+            //NextDayButton.SetActive(true);
 
             GameStateManager.Instance.SetState(GameState.Gameplay);
         }
 
-        public void BroadCastNightTimeCleanUp()
+        public void BigSheepDoneShowing()
         {
+            RequestPanel.SetActive(true);
+            NextDayButton.SetActive(true);
             OnNightTimeCleanUp.RaiseEvent();
         }
 
@@ -355,7 +360,16 @@ namespace TeamSquidward.Eric
             {
                 LargeSheepImage.SetActive(true);
             }
-           
+        }
+
+        public void showTutorial()
+        {
+            tutorialPanel.gameObject.SetActive(true);
+        }
+
+        public void hideTutorial()
+        {
+            tutorialPanel.gameObject.SetActive(false);
         }
 
         public void exitGame()

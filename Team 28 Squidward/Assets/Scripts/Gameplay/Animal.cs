@@ -89,7 +89,10 @@ namespace TeamSquidward.Eric
         [SerializeField] private List<foodColorData> foodColorValues;
 
         [SerializeField] private ParticleSystem[] tearParticlesLeft;
+        private Vector3[] locationsOfLeftTears;
         [SerializeField] private ParticleSystem[] tearParticlesRight;
+        private Vector3[] locationsOfRightTears;
+
         private float tearEmmisionRate = 0;
 
         [SerializeField] private ParticleSystem mudParticles;
@@ -120,16 +123,25 @@ namespace TeamSquidward.Eric
             targetSize = new Vector3(currentFoodValue, currentFoodValue, 1);
             changeBodySprite();
 
-            foreach (ParticleSystem tears in tearParticlesLeft)
+            locationsOfLeftTears = new Vector3[tearParticlesLeft.Length];
+            locationsOfRightTears = new Vector3[tearParticlesRight.Length];
+
+            for (int i = 0; i < tearParticlesLeft.Length; i++)
             {
-                var em = tears.emission;
+                var em = tearParticlesLeft[i].emission;
                 em.rateOverTime = 0;
+
+                locationsOfLeftTears[i] = tearParticlesLeft[i].transform.localPosition; 
             }
-            foreach (ParticleSystem tears in tearParticlesRight)
+
+            for (int i = 0; i < tearParticlesRight.Length ; i++)
             {
-                var em = tears.emission;
+                var em = tearParticlesLeft[i].emission;
                 em.rateOverTime = 0;
+
+                locationsOfRightTears[i] = tearParticlesRight[i].transform.localPosition;
             }
+
         }
 
         private void Update()
@@ -177,6 +189,7 @@ namespace TeamSquidward.Eric
             farmerDetector.OnLostDetection.AddListener(OnFarmerLeaveRange);
 
             lastAteTime = float.MinValue;
+            lastExpressionWasSetToHappy = float.MinValue;
         }
 
         private void OnDestroy()
@@ -332,20 +345,31 @@ namespace TeamSquidward.Eric
             }
             
             //print();
-
+            
             if (rb.velocity.x > .1)
             {
                 Vector3 temp = visualGameObject.transform.localScale;
                 temp.x = 1;
                 visualGameObject.transform.localScale = temp;
-                
+
+                for (int i = 0; i < tearParticlesLeft.Length; i++)
+                {
+                    tearParticlesLeft[i].transform.localPosition = locationsOfLeftTears[i];
+                    tearParticlesRight[i].transform.localPosition = locationsOfRightTears[i];
+                }
             }
             if (rb.velocity.x < - .1)
             {
                 Vector3 temp = visualGameObject.transform.localScale;
                 temp.x = -1;
                 visualGameObject.transform.localScale = temp;
-                
+
+                for (int i = 0; i < tearParticlesLeft.Length; i++)
+                {
+                    tearParticlesLeft[i].transform.localPosition = locationsOfRightTears[i];
+                    tearParticlesRight[i].transform.localPosition = locationsOfLeftTears[i];
+                }
+
             }
         }
 
@@ -379,12 +403,12 @@ namespace TeamSquidward.Eric
                 return;
             }
          
-            if ( lastExpressionWasSetToHappy + 10 < Time.time || Random.Range(0,100) < 2f )
+            if ( lastExpressionWasSetToHappy + 3 > Time.time || Random.Range(0,100) < .7f )
             {
                 expresionSpriteRenderer.sprite = expressionHappy;
                 lastExpresionChange = Time.time;
                 
-                if (lastExpressionWasSetToHappy + 20 > Time.time)
+                if (lastExpressionWasSetToHappy + 3.2 < Time.time)
                 {
                     lastExpressionWasSetToHappy = Time.time;
                 }

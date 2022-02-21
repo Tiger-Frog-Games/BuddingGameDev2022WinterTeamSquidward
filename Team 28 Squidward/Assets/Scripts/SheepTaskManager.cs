@@ -24,6 +24,8 @@ namespace TeamSquidward.Eric
 
         [SerializeField] private int livesLeft;
 
+        [SerializeField] private GameObject requestPanel;
+
         [SerializeField] private EventChannelSO OnDayOver;
         [SerializeField] private Animator CanvasAnimator;
 
@@ -42,9 +44,13 @@ namespace TeamSquidward.Eric
         private List<Animal> validSheepForTaskTwo = new List<Animal>();
         private List<Animal> validSheepForTaskThree = new List<Animal>();
 
-
+        [SerializeField] private Image[] awardMedals;
+        [SerializeField] private SpriteRenderer[] awardMedalsInGame;
 
         private Task[] currentTasks = new Task[3];
+
+        [SerializeField] private Color activeColor;
+        [SerializeField] private Color DeActiveColor;
 
 
         private void Start()
@@ -58,6 +64,8 @@ namespace TeamSquidward.Eric
             buttonThree.onClick.AddListener(ButtonThreePressed);
 
             livesLeft = 3;
+
+            populateMedalsVisuals();
 
             for (int i = 0; i < 3; i++)
             {
@@ -86,7 +94,7 @@ namespace TeamSquidward.Eric
             activeTask = -1;
 
             checkSheepToSell();
-
+            populateMedalsVisuals();
         }
 
         public void checkSheepToSell()
@@ -151,8 +159,10 @@ namespace TeamSquidward.Eric
         {
             activeTask = buttonPressed;
 
+            populateMedalsVisuals();
+
             //delete ui elements 
-            foreach(Transform child in sellSheepUIHolder)
+            foreach (Transform child in sellSheepUIHolder)
             {
                 //I Dont like this but w/e
                 Destroy( child.gameObject);
@@ -205,6 +215,22 @@ namespace TeamSquidward.Eric
             }
         }
 
+        private void populateMedalsVisuals()
+        {
+            for (int i = 0; i < awardMedals.Length; i++)
+            {
+                if (i < livesLeft)
+                {
+                    awardMedals[i].color = activeColor;
+                    awardMedalsInGame[i].color = activeColor;
+                }
+                else
+                {
+                    awardMedals[i].color = DeActiveColor;
+                    awardMedalsInGame[i].color = DeActiveColor;
+                }
+            }
+        }
         private void cleanUI(int i)
         {
             if (i == 0)
@@ -225,10 +251,27 @@ namespace TeamSquidward.Eric
             cleanUI(i);
             currentTasks[i].isSoldThisTurn = true;
             checkSheepToSell();
+            populateMedalsVisuals();
+        }
+
+        public void taskComplete()
+        {
+            livesLeft = Mathf.Clamp(livesLeft+1 ,0, 5);
+
+        }
+
+        public void sellSheep(int taskNumber, Animal animal )
+        {
+            SheepPen.Instance.sellSheep(animal);
+            UIAnimator.Instance.unlockAHat();
+            taskComplete();
+            SheepTaskManager.Instance.ClearTask(taskNumber);
         }
 
         public void OnNextDayButton()
         {
+
+            requestPanel.SetActive(false);
 
             for (int i = 0; i < 3; i++)
             {
@@ -237,6 +280,7 @@ namespace TeamSquidward.Eric
                     if (! currentTasks[i].isSoldThisTurn)
                     {
                         livesLeft--;
+                        populateMedalsVisuals();
                         if (livesLeft <= 0)
                         {
                             UIAnimator.Instance.showEndGameScreen();

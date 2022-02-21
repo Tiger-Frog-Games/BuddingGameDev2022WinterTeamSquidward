@@ -10,15 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
-  m_Name: WaterTile
+  m_Name: wat Base
   m_EditorClassIdentifier: 
   m_AnimatedSprites:
-  - {fileID: 950467866, guid: 457725d39ec0b4049b154df25e1b19cf, type: 3}
-  - {fileID: 950467866, guid: 457725d39ec0b4049b154df25e1b19cf, type: 3}
-  - {fileID: 950467866, guid: 457725d39ec0b4049b154df25e1b19cf, type: 3}
-  - {fileID: 950467866, guid: 457725d39ec0b4049b154df25e1b19cf, type: 3}
-  m_MinSpeed: 1
-  m_MaxSpeed: 1
+  - {fileID: 120822088, guid: 43b770a952ba41646a447003a2c5e35e, type: 3}
+  - {fileID: -947222248, guid: 43b770a952ba41646a447003a2c5e35e, type: 3}
+  - {fileID: -229269183, guid: 43b770a952ba41646a447003a2c5e35e, type: 3}
+  m_MinSpeed: 5
+  m_MaxSpeed: 5
   m_AnimationStartTime: 0
   m_AnimationStartFrame: 0
   m_TileColliderType: 0
