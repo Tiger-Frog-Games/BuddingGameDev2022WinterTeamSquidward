@@ -65,7 +65,7 @@ namespace TeamSquidward.Eric
 
             livesLeft = 3;
 
-            populateMedals();
+            populateMedalsVisuals();
 
             for (int i = 0; i < 3; i++)
             {
@@ -94,7 +94,7 @@ namespace TeamSquidward.Eric
             activeTask = -1;
 
             checkSheepToSell();
-            populateMedals();
+            populateMedalsVisuals();
         }
 
         public void checkSheepToSell()
@@ -159,7 +159,7 @@ namespace TeamSquidward.Eric
         {
             activeTask = buttonPressed;
 
-            populateMedals();
+            populateMedalsVisuals();
 
             //delete ui elements 
             foreach (Transform child in sellSheepUIHolder)
@@ -215,7 +215,7 @@ namespace TeamSquidward.Eric
             }
         }
 
-        private void populateMedals()
+        private void populateMedalsVisuals()
         {
             for (int i = 0; i < awardMedals.Length; i++)
             {
@@ -251,6 +251,21 @@ namespace TeamSquidward.Eric
             cleanUI(i);
             currentTasks[i].isSoldThisTurn = true;
             checkSheepToSell();
+            populateMedalsVisuals();
+        }
+
+        public void taskComplete()
+        {
+            livesLeft = Mathf.Clamp(livesLeft+1 ,0, 5);
+
+        }
+
+        public void sellSheep(int taskNumber, Animal animal )
+        {
+            SheepPen.Instance.sellSheep(animal);
+            UIAnimator.Instance.unlockAHat();
+            taskComplete();
+            SheepTaskManager.Instance.ClearTask(taskNumber);
         }
 
         public void OnNextDayButton()
@@ -265,7 +280,7 @@ namespace TeamSquidward.Eric
                     if (! currentTasks[i].isSoldThisTurn)
                     {
                         livesLeft--;
-                        populateMedals();
+                        populateMedalsVisuals();
                         if (livesLeft <= 0)
                         {
                             UIAnimator.Instance.showEndGameScreen();
