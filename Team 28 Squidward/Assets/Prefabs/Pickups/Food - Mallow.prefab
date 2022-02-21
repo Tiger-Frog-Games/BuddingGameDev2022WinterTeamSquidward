@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 8743198313707058941}
   - component: {fileID: 2110910454}
   m_Layer: 8
-  m_Name: Food - BADPlant
+  m_Name: Food - Mallow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

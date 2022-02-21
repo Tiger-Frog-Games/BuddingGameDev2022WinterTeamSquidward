@@ -273,7 +273,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 48
+  controlID: 114
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -431,21 +431,21 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: a0c9f0fff2c9f0ff32d1f0ffe8d2f0ff5e00f5ffde8ef5ff448ff5ff5a8ff5ff4690faff9694faffa096faff889bfaff8c9dfaff829ffaff5ca4faff86abfaffd4abfaff66b0faff1eb2faff74bbfaff92c9faffe0c9faff0cd1faffc2d2faff2ca8fbff2aacfbff9016feff481bfefffe1bfeffbc20feff2a66feffe066feff4a69feff54f2ffff30f6ffffb2f9fffff4fffffff87400009a7a00004e7c0000827e0000c6de000030df0000e8eb00003ef8000094f900003e930100f49401002a970100b6d40100a6d501007ce30100d2e3010064f60100fcf70100f4070200080802008408020008090200260902003009020072090200fa090200400b0200520b0200700b0200ee0b0200300c02000a0d0200620d0200740d0200de0d0200e40d0200
+      m_ExpandedIDs: 60ebffffaeebfffff6f2ffffacf4ffff0efbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Hat (1)
-        m_OriginalName: Hat (1)
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -934100
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 8}
       m_SearchString: 
@@ -554,7 +554,7 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
-      snapOffset: {x: 0, y: 0}
+      snapOffset: {x: 0, y: 25}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: unity-transform-toolbar
@@ -702,9 +702,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 1085.5925, y: 622.50494, z: 1180.9723}
+    m_Target: {x: -1.7925925, y: 0.1692295, z: 4.0359936}
     speed: 2
-    m_Value: {x: 1085.5925, y: 622.50494, z: 1180.9723}
+    m_Value: {x: -1.7925925, y: 0.1692295, z: 4.0359936}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -751,13 +751,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.441
   m_Rotation:
-    m_Target: {x: -0.01830492, y: 0.00599832, z: -0.00010152792, w: -0.9998289}
+    m_Target: {x: -0.54993707, y: -0.007511189, z: 0.004959595, w: -0.8351751}
     speed: 2
-    m_Value: {x: -0.018304482, y: 0.007497948, z: -0.00012898332, w: -0.9998043}
+    m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 821.22296
+    m_Target: 5.246955
     speed: 2
-    m_Value: 821.22296
+    m_Value: 5.246955
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -908,7 +908,7 @@ MonoBehaviour:
     m_CachedPref: 228
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: 133626
+  m_LastInspectedObjectInstanceID: -1
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
@@ -956,23 +956,23 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Assets/Sprites/Sheep/Hats
+    - Assets/Prefabs/Pickups
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Assets/Sprites/Sheep/Hats
+  - Assets/Prefabs/Pickups
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\frogg\Documents\GitHub\BuddingGameDev2022WinterTeamSquidward\Team
     28 Squidward
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: 6c8f0000
-    m_LastClickedID: 36716
-    m_ExpandedIDs: 00000000ea770000ec770000ee770000f0770000f2770000f4770000f6770000f8770000fa770000a67900003692000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 152}
+    m_SelectedIDs: f4800000
+    m_LastClickedID: 33012
+    m_ExpandedIDs: 00000000c4800000c6800000c8800000ca800000cc800000ce800000d0800000d2800000d480000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1000,7 +1000,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000ea770000ec770000ee770000f0770000f2770000f4770000f6770000f8770000fa770000
+    m_ExpandedIDs: 00000000c4800000c6800000c8800000ca800000cc800000ce800000d0800000d2800000d4800000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1027,7 +1027,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c62300005a730000a6720000a27200003870000006970000c8a40000baa40000ea760000b2760000b87600002af300001ab90000c6060300f8460200000000001e740000ec7500001a8b00000a750000c28e000038770000347500008036010034d1010002da01001eeb01005a7500009a760000c2760000a4760000ae790000de790000723a0000363a0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1114,7 +1114,7 @@ MonoBehaviour:
     m_SaveData: []
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 133626
+  m_LastSelectedObjectID: 178836
 --- !u!114 &23
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1292,7 +1292,7 @@ MonoBehaviour:
     m_CachedPref: -285
     m_ControlHash: 1412526313
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: 133626
+  m_LastInspectedObjectInstanceID: -1
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 1

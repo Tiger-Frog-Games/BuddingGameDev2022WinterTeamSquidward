@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace TeamSquidward.Eric
 {
-    public enum TASKSIZE { BIG = 2, BIGGER = 3, GARGAGUENT = 4}
+    public enum TASKSIZE { BIG = 2, LARGE = 3, GARGANTUAN = 4}
 
-    public enum TASKCOLORQUIALITY { PUDDLE, PRIME,PRISTINE}
+    public enum TASKCOLORQUIALITY { PUDDLE, PRIME, PRISTINE}
 
     public class Task 
     {
@@ -62,7 +62,7 @@ namespace TeamSquidward.Eric
         
         public string getDescription()
         {
-            return $"I am looking for a {taskSize}, {taskQuality} {requiredFood}!";
+            return $"I am looking for a {taskSize}, {taskQuality} sheep, fed with {requiredFood}!";
         }
         #endregion
     }

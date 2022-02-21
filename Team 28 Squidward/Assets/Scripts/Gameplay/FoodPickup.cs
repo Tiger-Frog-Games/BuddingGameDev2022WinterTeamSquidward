@@ -6,7 +6,7 @@ using UnityEngine;
 namespace TeamSquidward.Eric
 {
     
-    public enum FOODTYPE { APPLE, CARROT, DADELION, GRAPES, OATS, STARBERRIES, BADPLANT, NONE }
+    public enum FOODTYPE { APPLE, CARROT, DANDELION, GRAPES, OATS, STRAWBERRIES, MALLOW, NONE }
 
     [SelectionBase]
     public class FoodPickup : MonoBehaviour
