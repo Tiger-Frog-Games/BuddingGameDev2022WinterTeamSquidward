@@ -100,6 +100,18 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -108,9 +120,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 3600
-        width: 400
-        height: 400
+        y: 2700
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,8 +130,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0bb68750402623741ae3d39e28e06dd8
-      internalID: 131994627
+      spriteID: 8e65017cfaedcdf4fad8e0e525aedf54
+      internalID: -1060168618
       vertices: []
       indices: 
       edges: []
@@ -128,10 +140,10 @@ TextureImporter:
       name: Petting Sprite Sheet_1
       rect:
         serializedVersion: 2
-        x: 400
-        y: 3600
-        width: 400
-        height: 400
+        x: 300
+        y: 2700
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -139,8 +151,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6221e81dfa24378479240abbcbe10ee5
-      internalID: -388889298
+      spriteID: b3fdd3f8c3618f14dba748cc0cddceed
+      internalID: 2080985426
       vertices: []
       indices: 
       edges: []
@@ -149,10 +161,10 @@ TextureImporter:
       name: Petting Sprite Sheet_2
       rect:
         serializedVersion: 2
-        x: 800
-        y: 3600
-        width: 400
-        height: 400
+        x: 600
+        y: 2700
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,8 +172,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 05020a1d6422f2045aa0d6f30e2b82a1
-      internalID: 622297311
+      spriteID: 9425145899fb0f149b1faef04deb5f54
+      internalID: -1586801643
       vertices: []
       indices: 
       edges: []
@@ -170,10 +182,10 @@ TextureImporter:
       name: Petting Sprite Sheet_3
       rect:
         serializedVersion: 2
-        x: 1200
-        y: 3600
-        width: 400
-        height: 400
+        x: 900
+        y: 2700
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,8 +193,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b7a82f3c7915fb34592fc187f9cdc67c
-      internalID: -958491418
+      spriteID: 53604f5787d6502488cb2f43ae4c3a25
+      internalID: -1897261069
       vertices: []
       indices: 
       edges: []
@@ -191,10 +203,10 @@ TextureImporter:
       name: Petting Sprite Sheet_4
       rect:
         serializedVersion: 2
-        x: 1600
-        y: 3600
-        width: 400
-        height: 400
+        x: 1200
+        y: 2700
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -202,8 +214,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 816e7a7423b133840ad85152fa81d846
-      internalID: 647413269
+      spriteID: a9e56ca81af990741b2e159e15b3298f
+      internalID: -1957449473
       vertices: []
       indices: 
       edges: []
@@ -213,9 +225,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 3200
-        width: 400
-        height: 400
+        y: 2400
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -223,8 +235,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d0e0565aab4a0f749ba4cafadc8cd3f6
-      internalID: 2019379003
+      spriteID: b915d48bfc5ce584fae801229fd2d646
+      internalID: -2021806710
       vertices: []
       indices: 
       edges: []
@@ -233,10 +245,10 @@ TextureImporter:
       name: Petting Sprite Sheet_6
       rect:
         serializedVersion: 2
-        x: 400
-        y: 3200
-        width: 400
-        height: 400
+        x: 300
+        y: 2400
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -244,8 +256,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f52bebdf50e03ea4f8e931904158e54a
-      internalID: -1571865847
+      spriteID: 6b3894a33f7178b418e2a26726d65a56
+      internalID: 551173930
       vertices: []
       indices: 
       edges: []
@@ -254,10 +266,10 @@ TextureImporter:
       name: Petting Sprite Sheet_7
       rect:
         serializedVersion: 2
-        x: 800
-        y: 3200
-        width: 400
-        height: 400
+        x: 600
+        y: 2400
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -265,8 +277,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 01480623e11bf084187a68fa118043ac
-      internalID: -453920230
+      spriteID: 89abbc4cfbefaf74283700f7194e9e3b
+      internalID: -1937235820
       vertices: []
       indices: 
       edges: []
@@ -275,10 +287,10 @@ TextureImporter:
       name: Petting Sprite Sheet_8
       rect:
         serializedVersion: 2
-        x: 1200
-        y: 3200
-        width: 400
-        height: 400
+        x: 900
+        y: 2400
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -286,8 +298,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a01139766e855d5459c87539f2980e4b
-      internalID: -1897867742
+      spriteID: 87f8eb30c1aab5b46979025629ce7867
+      internalID: 1357006248
       vertices: []
       indices: 
       edges: []
@@ -296,10 +308,10 @@ TextureImporter:
       name: Petting Sprite Sheet_9
       rect:
         serializedVersion: 2
-        x: 1600
-        y: 3200
-        width: 400
-        height: 400
+        x: 1200
+        y: 2400
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -307,8 +319,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 654a233074c8b394dbc605d98fe4e7f0
-      internalID: 701323232
+      spriteID: a1f96eb534ba244498459c5ffbdf6bc1
+      internalID: 702288763
       vertices: []
       indices: 
       edges: []
@@ -318,9 +330,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 2800
-        width: 400
-        height: 400
+        y: 2100
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -328,8 +340,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 25750acdce635c14daa376d095fd99c7
-      internalID: 1793311390
+      spriteID: afcf00555a92d30478c6b5da0c11962d
+      internalID: -1492398852
       vertices: []
       indices: 
       edges: []
@@ -338,10 +350,10 @@ TextureImporter:
       name: Petting Sprite Sheet_11
       rect:
         serializedVersion: 2
-        x: 400
-        y: 2800
-        width: 400
-        height: 400
+        x: 300
+        y: 2100
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -349,8 +361,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 02d559d4a9ccb0a46868281b6d4b02a0
-      internalID: -1464716238
+      spriteID: 4005bf5e43b20994dbf1a3fe2fd1a0d8
+      internalID: -971903253
       vertices: []
       indices: 
       edges: []
@@ -359,10 +371,10 @@ TextureImporter:
       name: Petting Sprite Sheet_12
       rect:
         serializedVersion: 2
-        x: 800
-        y: 2800
-        width: 400
-        height: 400
+        x: 600
+        y: 2100
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -370,8 +382,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 605efcd98b5aa414fae3d6ff20f20aa8
-      internalID: -1788705505
+      spriteID: 7d10a8876d1d78944a434d8abb0d32bf
+      internalID: -22415966
       vertices: []
       indices: 
       edges: []
@@ -380,10 +392,10 @@ TextureImporter:
       name: Petting Sprite Sheet_13
       rect:
         serializedVersion: 2
-        x: 1200
-        y: 2800
-        width: 400
-        height: 400
+        x: 900
+        y: 2100
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -391,8 +403,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fb6b6956eabab1b4fa92422d92bd977b
-      internalID: 1481697271
+      spriteID: 206b359215cbc024fa1594dc33beb6c2
+      internalID: -2043630509
       vertices: []
       indices: 
       edges: []
@@ -401,10 +413,10 @@ TextureImporter:
       name: Petting Sprite Sheet_14
       rect:
         serializedVersion: 2
-        x: 1600
-        y: 2800
-        width: 400
-        height: 400
+        x: 1200
+        y: 2100
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -412,8 +424,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b9a9518cfb65e1e48bf4d93024338884
-      internalID: -1349145158
+      spriteID: fc2fe0cbb7d80674bad9797c7da027fa
+      internalID: -2107560896
       vertices: []
       indices: 
       edges: []
@@ -423,9 +435,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 2400
-        width: 400
-        height: 400
+        y: 1800
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -433,8 +445,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cc7a96b65502ab546952fd939caf04b0
-      internalID: 1143334990
+      spriteID: 89a8008f1f79e4644b1252c0e5f26ead
+      internalID: 2017217875
       vertices: []
       indices: 
       edges: []
@@ -443,10 +455,10 @@ TextureImporter:
       name: Petting Sprite Sheet_16
       rect:
         serializedVersion: 2
-        x: 400
-        y: 2400
-        width: 400
-        height: 400
+        x: 300
+        y: 1800
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -454,8 +466,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2cde1dbbd3b3ed24885934224123710f
-      internalID: 644692099
+      spriteID: 06d66627c11894744866bcfa7fd113f9
+      internalID: -1858343329
       vertices: []
       indices: 
       edges: []
@@ -464,10 +476,10 @@ TextureImporter:
       name: Petting Sprite Sheet_17
       rect:
         serializedVersion: 2
-        x: 800
-        y: 2400
-        width: 400
-        height: 400
+        x: 600
+        y: 1800
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -475,8 +487,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 47ff29ee1d5461f4b8e8e0aae5ed27ee
-      internalID: 2028066092
+      spriteID: a9808a4516c81d248bf33d081a8b41e0
+      internalID: -1791150014
       vertices: []
       indices: 
       edges: []
@@ -485,10 +497,10 @@ TextureImporter:
       name: Petting Sprite Sheet_18
       rect:
         serializedVersion: 2
-        x: 1200
-        y: 2400
-        width: 400
-        height: 400
+        x: 900
+        y: 1800
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -496,8 +508,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9ff98935715d6f44a94adaa48f00fc73
-      internalID: -1403507416
+      spriteID: 36980a943ed068f4f8750efba6be6bd8
+      internalID: 387672629
       vertices: []
       indices: 
       edges: []
@@ -506,10 +518,10 @@ TextureImporter:
       name: Petting Sprite Sheet_19
       rect:
         serializedVersion: 2
-        x: 1600
-        y: 2400
-        width: 400
-        height: 400
+        x: 1200
+        y: 1800
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -517,8 +529,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 53ae88ba954ea2946a90f87faa07a47c
-      internalID: -765904452
+      spriteID: f90c2f75374281c4bb8906e0537c8ad5
+      internalID: -18068566
       vertices: []
       indices: 
       edges: []
@@ -528,9 +540,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 2000
-        width: 400
-        height: 400
+        y: 1500
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -538,8 +550,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2b3bf293e891b54469f694ee3ab8cc22
-      internalID: 1496748569
+      spriteID: 115e22e843b70ee45818cc0a2d768bf4
+      internalID: 1743938754
       vertices: []
       indices: 
       edges: []
@@ -548,10 +560,10 @@ TextureImporter:
       name: Petting Sprite Sheet_21
       rect:
         serializedVersion: 2
-        x: 400
-        y: 2000
-        width: 400
-        height: 400
+        x: 300
+        y: 1500
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -559,8 +571,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 880fd8527e70a2c49b927cd371fdd786
-      internalID: -259088475
+      spriteID: 16e080e6fcc1d0846b7680caaead37f5
+      internalID: 1923583990
       vertices: []
       indices: 
       edges: []
@@ -569,10 +581,10 @@ TextureImporter:
       name: Petting Sprite Sheet_22
       rect:
         serializedVersion: 2
-        x: 800
-        y: 2000
-        width: 400
-        height: 400
+        x: 600
+        y: 1500
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -580,8 +592,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 162c023da224f744d8f981757d24f80e
-      internalID: -1649614519
+      spriteID: 3556939783775ae4d9808ddca10859c6
+      internalID: -591320868
       vertices: []
       indices: 
       edges: []
@@ -590,10 +602,10 @@ TextureImporter:
       name: Petting Sprite Sheet_23
       rect:
         serializedVersion: 2
-        x: 1200
-        y: 2000
-        width: 400
-        height: 400
+        x: 900
+        y: 1500
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -601,8 +613,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3a9e338d237db5945ad6e3709606c7d7
-      internalID: 864892461
+      spriteID: feb4de845eeee4041a6c486a868238d3
+      internalID: -1972464245
       vertices: []
       indices: 
       edges: []
@@ -611,10 +623,10 @@ TextureImporter:
       name: Petting Sprite Sheet_24
       rect:
         serializedVersion: 2
-        x: 1600
-        y: 2000
-        width: 400
-        height: 400
+        x: 1200
+        y: 1500
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -622,8 +634,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 895ad05ce7f8d0e4eb223055a6ec4958
-      internalID: -2065095014
+      spriteID: 810050926e07eef42a0cde28822496f4
+      internalID: -1497172804
       vertices: []
       indices: 
       edges: []
@@ -633,9 +645,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1600
-        width: 400
-        height: 400
+        y: 1200
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -643,8 +655,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: adf69f1116abdda4396e35467df5fbe3
-      internalID: -2007779037
+      spriteID: 9bd606e5fbdcbee4a83898a4f29f579c
+      internalID: -1334066665
       vertices: []
       indices: 
       edges: []
@@ -653,10 +665,10 @@ TextureImporter:
       name: Petting Sprite Sheet_26
       rect:
         serializedVersion: 2
-        x: 400
-        y: 1600
-        width: 400
-        height: 400
+        x: 300
+        y: 1200
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -664,8 +676,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aa871c283fe09c048a8559aa7258af87
-      internalID: 1474914582
+      spriteID: f238e00089cb8804a9522d481e7a71c1
+      internalID: -615551360
       vertices: []
       indices: 
       edges: []
@@ -674,10 +686,10 @@ TextureImporter:
       name: Petting Sprite Sheet_27
       rect:
         serializedVersion: 2
-        x: 800
-        y: 1600
-        width: 400
-        height: 400
+        x: 600
+        y: 1200
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -685,8 +697,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c32f67e2feebd1a44a84495cc2f14fb0
-      internalID: -104195349
+      spriteID: 13f583fd51a169a47a58b31500c5e07c
+      internalID: -1016074717
       vertices: []
       indices: 
       edges: []
@@ -695,10 +707,10 @@ TextureImporter:
       name: Petting Sprite Sheet_28
       rect:
         serializedVersion: 2
-        x: 1200
-        y: 1600
-        width: 400
-        height: 400
+        x: 900
+        y: 1200
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -706,8 +718,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 27feec13da84d40468d8dc28baf4bca8
-      internalID: 1658550834
+      spriteID: 266d04beffec93b4ca0b550f0e99a43b
+      internalID: 1319272169
       vertices: []
       indices: 
       edges: []
@@ -716,10 +728,10 @@ TextureImporter:
       name: Petting Sprite Sheet_29
       rect:
         serializedVersion: 2
-        x: 1600
-        y: 1600
-        width: 400
-        height: 400
+        x: 1200
+        y: 1200
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -727,8 +739,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7b83655e8e3141d41b0de98d63cd90ab
-      internalID: 1225119560
+      spriteID: 4ab34adfbaefda943b4005ca0478212d
+      internalID: 691986560
       vertices: []
       indices: 
       edges: []
@@ -738,9 +750,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1200
-        width: 400
-        height: 400
+        y: 900
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -748,8 +760,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c27432c59d7040546bbec8a49251d447
-      internalID: 1040207618
+      spriteID: 91f879b5b42dad34f8744de1e5b92386
+      internalID: -1897655877
       vertices: []
       indices: 
       edges: []
@@ -758,10 +770,10 @@ TextureImporter:
       name: Petting Sprite Sheet_31
       rect:
         serializedVersion: 2
-        x: 400
-        y: 1200
-        width: 400
-        height: 400
+        x: 300
+        y: 900
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -769,8 +781,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c66febb5d9448d44186ea080c2081510
-      internalID: -1873868208
+      spriteID: cc1f3c19c776c5744a8fedddbce1cd5e
+      internalID: 850466815
       vertices: []
       indices: 
       edges: []
@@ -779,10 +791,10 @@ TextureImporter:
       name: Petting Sprite Sheet_32
       rect:
         serializedVersion: 2
-        x: 800
-        y: 1200
-        width: 400
-        height: 400
+        x: 600
+        y: 900
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -790,8 +802,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8191583336058bb438edcdd84f1b12f1
-      internalID: 2100735768
+      spriteID: 944f2541a908f6149a92224dc8c9acf0
+      internalID: -138448178
       vertices: []
       indices: 
       edges: []
@@ -800,10 +812,10 @@ TextureImporter:
       name: Petting Sprite Sheet_33
       rect:
         serializedVersion: 2
-        x: 1200
-        y: 1200
-        width: 400
-        height: 400
+        x: 900
+        y: 900
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -811,8 +823,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c6f607ff48acc640848436427088ca3
-      internalID: 543322753
+      spriteID: dfaaf4a3ed44d4e43966eb16920d45d3
+      internalID: -557575423
       vertices: []
       indices: 
       edges: []
@@ -821,10 +833,10 @@ TextureImporter:
       name: Petting Sprite Sheet_34
       rect:
         serializedVersion: 2
-        x: 1600
-        y: 1200
-        width: 400
-        height: 400
+        x: 1200
+        y: 900
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -832,8 +844,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b71c2bad7c6c05b43835586c224c3c2c
-      internalID: -519445379
+      spriteID: 86ecc7fa49fc41344bccde82657f2519
+      internalID: 1924861934
       vertices: []
       indices: 
       edges: []
@@ -843,9 +855,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 800
-        width: 400
-        height: 400
+        y: 600
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -853,8 +865,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b7c7c97872a95be498af0f89bd33bedb
-      internalID: -2078758106
+      spriteID: a24c5c3e77df71d449d9e0ea04605514
+      internalID: -291295423
       vertices: []
       indices: 
       edges: []
@@ -863,10 +875,10 @@ TextureImporter:
       name: Petting Sprite Sheet_36
       rect:
         serializedVersion: 2
-        x: 400
-        y: 800
-        width: 400
-        height: 400
+        x: 300
+        y: 600
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -874,8 +886,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c0cca36cee2961543bf39fd632df65eb
-      internalID: -1736417402
+      spriteID: b3860dbad46831d459527a1a083f58e6
+      internalID: 2141080723
       vertices: []
       indices: 
       edges: []
@@ -884,10 +896,10 @@ TextureImporter:
       name: Petting Sprite Sheet_37
       rect:
         serializedVersion: 2
-        x: 800
-        y: 800
-        width: 400
-        height: 400
+        x: 600
+        y: 600
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -895,8 +907,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b91c418088b2bda4a808dd705a15ee65
-      internalID: 505322056
+      spriteID: 7cb05432da92b9c48a96bd7dd6ebbde9
+      internalID: -2137264013
       vertices: []
       indices: 
       edges: []
@@ -905,10 +917,10 @@ TextureImporter:
       name: Petting Sprite Sheet_38
       rect:
         serializedVersion: 2
-        x: 1200
-        y: 800
-        width: 400
-        height: 400
+        x: 900
+        y: 600
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -916,8 +928,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7a5c6b649308f7d4dac9abb251cb10f6
-      internalID: -1731950690
+      spriteID: 4b7bf772bbeb1714392e82ad31f21690
+      internalID: 360541971
       vertices: []
       indices: 
       edges: []
@@ -926,10 +938,10 @@ TextureImporter:
       name: Petting Sprite Sheet_39
       rect:
         serializedVersion: 2
-        x: 1600
-        y: 800
-        width: 400
-        height: 400
+        x: 1200
+        y: 600
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -937,8 +949,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3cd98673010a9eb489e54f24cf05d77f
-      internalID: 1086019211
+      spriteID: 6d4b52a1d3aa3214281ab2df13f899fc
+      internalID: -1801551504
       vertices: []
       indices: 
       edges: []
@@ -948,9 +960,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 400
-        width: 400
-        height: 400
+        y: 300
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -958,8 +970,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7f023767af9c1664eabcbb559303ad28
-      internalID: 857531726
+      spriteID: 4ed3b2d43b299094da0dee88b527baaa
+      internalID: -1673069179
       vertices: []
       indices: 
       edges: []
@@ -968,10 +980,10 @@ TextureImporter:
       name: Petting Sprite Sheet_41
       rect:
         serializedVersion: 2
-        x: 400
-        y: 400
-        width: 400
-        height: 400
+        x: 300
+        y: 300
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -979,8 +991,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 559171bd17162104ca76abb8f83e1a4f
-      internalID: 1350326419
+      spriteID: 71bcdcad721ac1142a7dc13e5ef2aa5c
+      internalID: -1629655485
       vertices: []
       indices: 
       edges: []
@@ -989,10 +1001,10 @@ TextureImporter:
       name: Petting Sprite Sheet_42
       rect:
         serializedVersion: 2
-        x: 800
-        y: 400
-        width: 400
-        height: 400
+        x: 600
+        y: 300
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1000,8 +1012,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d74825d9b5f684647b5de687ad289d1a
-      internalID: 756037907
+      spriteID: 6fcac79b78d9c71478aedeb6a6b4fb3c
+      internalID: 1530612816
       vertices: []
       indices: 
       edges: []
@@ -1010,10 +1022,10 @@ TextureImporter:
       name: Petting Sprite Sheet_43
       rect:
         serializedVersion: 2
-        x: 1200
-        y: 400
-        width: 400
-        height: 400
+        x: 900
+        y: 300
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1021,8 +1033,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b5ca41dd697e2fc4ea520959066fbbbb
-      internalID: 2035409151
+      spriteID: 30dcd9fee071e64428230659784b6aaf
+      internalID: -320579412
       vertices: []
       indices: 
       edges: []
@@ -1031,10 +1043,10 @@ TextureImporter:
       name: Petting Sprite Sheet_44
       rect:
         serializedVersion: 2
-        x: 1600
-        y: 400
-        width: 400
-        height: 400
+        x: 1200
+        y: 300
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1042,8 +1054,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c26cd2685f8cbe84e993b00372157e7c
-      internalID: -125967480
+      spriteID: 6a2de48872531ea459def96b9fcfa1aa
+      internalID: 200685273
       vertices: []
       indices: 
       edges: []
@@ -1054,8 +1066,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 400
-        height: 400
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1063,8 +1075,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fcb0b7bc61ae3b148a0d90997e94e8f7
-      internalID: -430703742
+      spriteID: 3a4a7be3b4a1c20429df53e87de09931
+      internalID: -818281247
       vertices: []
       indices: 
       edges: []
@@ -1073,10 +1085,10 @@ TextureImporter:
       name: Petting Sprite Sheet_46
       rect:
         serializedVersion: 2
-        x: 400
+        x: 300
         y: 0
-        width: 400
-        height: 400
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1084,8 +1096,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f5289773406fbcb4d96dba5fc0452430
-      internalID: 1600313842
+      spriteID: a715dc1e732315b48bc9b36041839698
+      internalID: -1355625807
       vertices: []
       indices: 
       edges: []
@@ -1094,10 +1106,10 @@ TextureImporter:
       name: Petting Sprite Sheet_47
       rect:
         serializedVersion: 2
-        x: 800
+        x: 600
         y: 0
-        width: 400
-        height: 400
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1105,8 +1117,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 46d067eff102da5479ded6047c1196d1
-      internalID: -218332545
+      spriteID: 9fc5e7d184180b44e84b56f087ef4575
+      internalID: 1594480419
       vertices: []
       indices: 
       edges: []
@@ -1115,10 +1127,10 @@ TextureImporter:
       name: Petting Sprite Sheet_48
       rect:
         serializedVersion: 2
-        x: 1200
+        x: 900
         y: 0
-        width: 400
-        height: 400
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1126,8 +1138,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a47c2ea3031621f47ae791bcf7db9099
-      internalID: -1226988042
+      spriteID: 6b3901865ec6f5a48a6b9043535fd396
+      internalID: 144102014
       vertices: []
       indices: 
       edges: []
@@ -1136,10 +1148,10 @@ TextureImporter:
       name: Petting Sprite Sheet_49
       rect:
         serializedVersion: 2
-        x: 1600
+        x: 1200
         y: 0
-        width: 400
-        height: 400
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1147,8 +1159,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a98e7108425f6094bacd60009e826377
-      internalID: -2065921352
+      spriteID: d8cb801f7a70afe469e8c51a33eb3378
+      internalID: -16157805
       vertices: []
       indices: 
       edges: []
@@ -1164,56 +1176,56 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Petting Sprite Sheet_1: -388889298
-      Petting Sprite Sheet_48: -1226988042
-      Petting Sprite Sheet_16: 644692099
-      Petting Sprite Sheet_25: -2007779037
-      Petting Sprite Sheet_42: 756037907
-      Petting Sprite Sheet_9: 701323232
-      Petting Sprite Sheet_35: -2078758106
-      Petting Sprite Sheet_18: -1403507416
-      Petting Sprite Sheet_27: -104195349
-      Petting Sprite Sheet_43: 2035409151
-      Petting Sprite Sheet_29: 1225119560
-      Petting Sprite Sheet_32: 2100735768
-      Petting Sprite Sheet_39: 1086019211
-      Petting Sprite Sheet_30: 1040207618
-      Petting Sprite Sheet_24: -2065095014
-      Petting Sprite Sheet_17: 2028066092
-      Petting Sprite Sheet_0: 131994627
-      Petting Sprite Sheet_2: 622297311
-      Petting Sprite Sheet_12: -1788705505
-      Petting Sprite Sheet_21: -259088475
-      Petting Sprite Sheet_13: 1481697271
-      Petting Sprite Sheet_37: 505322056
-      Petting Sprite Sheet_36: -1736417402
-      Petting Sprite Sheet_14: -1349145158
-      Petting Sprite Sheet_8: -1897867742
-      Petting Sprite Sheet_23: 864892461
-      Petting Sprite Sheet_19: -765904452
-      Petting Sprite Sheet_15: 1143334990
-      Petting Sprite Sheet_20: 1496748569
-      Petting Sprite Sheet_22: -1649614519
-      Petting Sprite Sheet_28: 1658550834
-      Petting Sprite Sheet_5: 2019379003
-      Petting Sprite Sheet_10: 1793311390
-      Petting Sprite Sheet_34: -519445379
-      Petting Sprite Sheet_6: -1571865847
-      Petting Sprite Sheet_44: -125967480
-      Petting Sprite Sheet_31: -1873868208
-      Petting Sprite Sheet_49: -2065921352
-      Petting Sprite Sheet_47: -218332545
-      Petting Sprite Sheet_26: 1474914582
-      Petting Sprite Sheet_41: 1350326419
-      Petting Sprite Sheet_46: 1600313842
-      Petting Sprite Sheet_3: -958491418
-      Petting Sprite Sheet_45: -430703742
-      Petting Sprite Sheet_38: -1731950690
-      Petting Sprite Sheet_4: 647413269
-      Petting Sprite Sheet_11: -1464716238
-      Petting Sprite Sheet_33: 543322753
-      Petting Sprite Sheet_7: -453920230
-      Petting Sprite Sheet_40: 857531726
+      Petting Sprite Sheet_1: 2080985426
+      Petting Sprite Sheet_48: 144102014
+      Petting Sprite Sheet_16: -1858343329
+      Petting Sprite Sheet_25: -1334066665
+      Petting Sprite Sheet_42: 1530612816
+      Petting Sprite Sheet_9: 702288763
+      Petting Sprite Sheet_35: -291295423
+      Petting Sprite Sheet_18: 387672629
+      Petting Sprite Sheet_27: -1016074717
+      Petting Sprite Sheet_43: -320579412
+      Petting Sprite Sheet_29: 691986560
+      Petting Sprite Sheet_32: -138448178
+      Petting Sprite Sheet_39: -1801551504
+      Petting Sprite Sheet_30: -1897655877
+      Petting Sprite Sheet_24: -1497172804
+      Petting Sprite Sheet_17: -1791150014
+      Petting Sprite Sheet_0: -1060168618
+      Petting Sprite Sheet_2: -1586801643
+      Petting Sprite Sheet_12: -22415966
+      Petting Sprite Sheet_21: 1923583990
+      Petting Sprite Sheet_13: -2043630509
+      Petting Sprite Sheet_37: -2137264013
+      Petting Sprite Sheet_36: 2141080723
+      Petting Sprite Sheet_14: -2107560896
+      Petting Sprite Sheet_8: 1357006248
+      Petting Sprite Sheet_23: -1972464245
+      Petting Sprite Sheet_19: -18068566
+      Petting Sprite Sheet_15: 2017217875
+      Petting Sprite Sheet_20: 1743938754
+      Petting Sprite Sheet_22: -591320868
+      Petting Sprite Sheet_28: 1319272169
+      Petting Sprite Sheet_5: -2021806710
+      Petting Sprite Sheet_10: -1492398852
+      Petting Sprite Sheet_34: 1924861934
+      Petting Sprite Sheet_6: 551173930
+      Petting Sprite Sheet_44: 200685273
+      Petting Sprite Sheet_31: 850466815
+      Petting Sprite Sheet_49: -16157805
+      Petting Sprite Sheet_47: 1594480419
+      Petting Sprite Sheet_26: -615551360
+      Petting Sprite Sheet_41: -1629655485
+      Petting Sprite Sheet_46: -1355625807
+      Petting Sprite Sheet_3: -1897261069
+      Petting Sprite Sheet_45: -818281247
+      Petting Sprite Sheet_38: 360541971
+      Petting Sprite Sheet_4: -1957449473
+      Petting Sprite Sheet_11: -971903253
+      Petting Sprite Sheet_33: -557575423
+      Petting Sprite Sheet_7: -1937235820
+      Petting Sprite Sheet_40: -1673069179
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

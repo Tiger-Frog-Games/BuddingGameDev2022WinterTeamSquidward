@@ -44,6 +44,8 @@ namespace TeamSquidward.Eric
         [SerializeField] private GameObject optionsPanel;
         [SerializeField] private GameObject exitGameMenu;
 
+        [SerializeField] private GameObject[] hatHolderPauseMenu;
+        private int prevHat;
 
         [SerializeField] private EventChannelSO OnDayStart;
         [SerializeField] private EventChannelSO OnDayOver;
@@ -146,6 +148,15 @@ namespace TeamSquidward.Eric
 
             if (SheepMenuHolder.gameObject.activeSelf == false)
             {
+                if ( unlockedHats > 1 )
+                {
+                    if (hatHolderPauseMenu[prevHat].activeSelf == true)
+                    {
+                        hatHolderPauseMenu[prevHat].SetActive(false);
+                    }
+                    prevHat = activeHat;
+                    hatHolderPauseMenu[activeHat].SetActive(true);
+                }
                 menuAnimator.SetTrigger("OnMenuShow");
                 menuAnimator.ResetTrigger("OnMenuHide");
                 SheepMenuHolder.SetActive(true);
