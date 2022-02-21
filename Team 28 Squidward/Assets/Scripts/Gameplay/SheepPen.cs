@@ -124,7 +124,7 @@ namespace TeamSquidward.Eric
             sheepUIBlocks.Add(spawningSheep, uiBlock);
 
            
-            UIAnimator.Instance.CloseSheepPen();
+            UIAnimator.Instance.hideSheepPen();
             SpawnSheepAnimation.SetTrigger("SpawnSheep");
         }
         
@@ -133,7 +133,7 @@ namespace TeamSquidward.Eric
             spawningSheep = animalIn;
             ActiveSheep.Add(spawningSheep);
 
-            UIAnimator.Instance.CloseSheepPen();
+            UIAnimator.Instance.hideSheepPen();
             SpawnSheepAnimation.SetTrigger("SpawnSheep");
         }
 

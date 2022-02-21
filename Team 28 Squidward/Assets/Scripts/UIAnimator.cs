@@ -114,9 +114,7 @@ namespace TeamSquidward.Eric
 
             if (sheepPenMenu.gameObject.activeSelf == true)
             {
-                ScreenGrayer.SetActive(false);
-                sheepPenMenu.SetActive(false);
-                GameStateManager.Instance.SetState(GameState.Gameplay);
+                hideSheepPen();
                 return;
             }
 
@@ -211,6 +209,13 @@ namespace TeamSquidward.Eric
 
         }
 
+        public void hideSheepPen()
+        {
+            ScreenGrayer.SetActive(false);
+            sheepPenMenu.SetActive(false);
+            GameStateManager.Instance.SetState(GameState.Gameplay);
+        }
+
         public void RefreshHatsAvailiable()
         {
             if (unlockedHats == 1)
@@ -283,13 +288,7 @@ namespace TeamSquidward.Eric
             return hatSprites[activeHat];
         }
 
-        public void CloseSheepPen()
-        {
-            ScreenGrayer.SetActive(false);
-            sheepPenMenu.SetActive(false);
-            GameStateManager.Instance.SetState(GameState.Gameplay);
-        }
-
+        
         private void OnDayOver_OnEvent()
         {
             if (menuAnimator.GetCurrentAnimatorStateInfo(0).IsName("IdleInGamePauseMenu") )
@@ -358,7 +357,7 @@ namespace TeamSquidward.Eric
             }
             else
             {
-                ScreenGrayer.SetActive(false);
+                RequestPanel.SetActive(true);
             }
         }
 
