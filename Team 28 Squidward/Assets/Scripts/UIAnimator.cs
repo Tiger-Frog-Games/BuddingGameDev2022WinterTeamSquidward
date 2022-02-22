@@ -101,6 +101,8 @@ namespace TeamSquidward.Eric
 
         private void OnOpenMenuButtonPress(InputAction.CallbackContext obj)
         {
+
+
             if (GameStateManager.Instance.CurrentGameState == GameState.Night)
             {
                 return;

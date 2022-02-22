@@ -129,6 +129,17 @@
                 },
                 {
                     "name": "",
+                    "id": "fca80e6c-07a1-4bb2-a7de-b0b2d69f1366",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Touchscreen",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "e99b68d7-a666-4415-b1e4-43b6f510da27",
                     "path": "<Mouse>/position",
                     "interactions": "",
