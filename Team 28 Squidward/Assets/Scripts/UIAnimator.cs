@@ -101,6 +101,12 @@ namespace TeamSquidward.Eric
 
         private void OnOpenMenuButtonPress(InputAction.CallbackContext obj)
         {
+            OnPauseButtonPressed();
+
+        }
+
+        public void OnPauseButtonPressed()
+        {
 
 
             if (GameStateManager.Instance.CurrentGameState == GameState.Night)
@@ -108,7 +114,7 @@ namespace TeamSquidward.Eric
                 return;
             }
 
-            if (tutorialPanel.gameObject.activeSelf == true) 
+            if (tutorialPanel.gameObject.activeSelf == true)
             {
                 hideTutorial();
                 return;
@@ -138,19 +144,19 @@ namespace TeamSquidward.Eric
                 return;
             }
 
-            
+
 
             if (optionsPanel.gameObject.activeSelf == true)
             {
                 optionsPanel.SetActive(false);
-               
+
                 return;
             }
 
 
             if (SheepMenuHolder.gameObject.activeSelf == false)
             {
-                if ( unlockedHats > 1 )
+                if (unlockedHats > 1)
                 {
                     if (hatHolderPauseMenu[prevHat].activeSelf == true)
                     {
@@ -170,7 +176,6 @@ namespace TeamSquidward.Eric
                 menuAnimator.SetTrigger("OnMenuHide");
                 menuAnimator.ResetTrigger("OnMenuShow");
             }
-
         }
 
         public void OnCloseOptionsMenu()
