@@ -83,6 +83,8 @@ namespace TeamSquidward.Eric
             ActiveSheep.Clear();
         }
 
+
+
         public void FarmerInRange()
         {
             UIAnimator.Instance.OnSheepPenOpen();
@@ -123,7 +125,8 @@ namespace TeamSquidward.Eric
 
             sheepUIBlocks.Add(spawningSheep, uiBlock);
 
-           
+            
+
             UIAnimator.Instance.hideSheepPen();
             SpawnSheepAnimation.SetTrigger("SpawnSheep");
         }
@@ -132,6 +135,11 @@ namespace TeamSquidward.Eric
         {
             spawningSheep = animalIn;
             ActiveSheep.Add(spawningSheep);
+
+            if (sheepUIBlocks.TryGetValue(animalIn, out GameObject obj))
+            {
+                obj.SetActive(false);
+            }
 
             UIAnimator.Instance.hideSheepPen();
             SpawnSheepAnimation.SetTrigger("SpawnSheep");
@@ -146,11 +154,6 @@ namespace TeamSquidward.Eric
                 if (animal.doesFullfillTask(task))
                 {
                     animalsThatFulfillTheTask.Add(animal);
-                    if (sheepUIBlocks.TryGetValue(animal, out GameObject uiBlock) )
-                    {
-                        sheepUIBlocks.Remove(animal);
-                        Destroy(uiBlock);
-                    }
                 }
             }
             return animalsThatFulfillTheTask;
@@ -181,7 +184,13 @@ namespace TeamSquidward.Eric
                 AllTheSheeps.Remove(animalToSell);
                 
             }
-            
+
+            if (sheepUIBlocks.TryGetValue(animalToSellIN, out GameObject uiBlock))
+            {
+                sheepUIBlocks.Remove(animalToSellIN);
+                Destroy(uiBlock);
+            }
+
         }
 
         public void sellSheepAnimationOver()
